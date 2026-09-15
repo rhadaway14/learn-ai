@@ -2,6 +2,8 @@
 
 The capstone combines model access, retrieval, tools, evaluation, security, and operations into one defensible system.
 
+It is assembled throughout the curriculum rather than started from scratch in Lesson 35. See the [cumulative capstone path](../CAPSTONE_PATH.md) for lesson-by-lesson artifacts and readiness gates.
+
 ## Workbooks and executable slice
 
 - [Architecture workbook](ARCHITECTURE.md)
