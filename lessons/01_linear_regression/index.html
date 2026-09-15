@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 1 — How Machines Learn</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top">Learn AI</a>
+    <div class="progress-wrap" aria-label="Course progress">
+      <span>Lesson 1 of 35</span>
+      <div class="progress"><span></span></div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">FOUNDATIONS · NO CODING REQUIRED</p>
+        <h1>How can a machine learn?</h1>
+        <p class="lede">You will teach a simple model to discover a relationship from examples. By the end, words like <strong>model</strong>, <strong>loss</strong>, and <strong>gradient</strong> will describe things you have actually watched happen.</p>
+        <a class="button" href="#mental-model">Start the lesson</a>
+      </div>
+      <div class="hero-card" aria-label="Learning cycle">
+        <div class="cycle-step"><span>1</span><strong>Predict</strong><small>Use the current line</small></div>
+        <div class="cycle-arrow">↓</div>
+        <div class="cycle-step"><span>2</span><strong>Measure</strong><small>Find how wrong it is</small></div>
+        <div class="cycle-arrow">↓</div>
+        <div class="cycle-step"><span>3</span><strong>Adjust</strong><small>Move toward less error</small></div>
+        <div class="cycle-arrow">↺ repeat</div>
+      </div>
+    </section>
+
+    <nav class="lesson-nav" aria-label="Lesson sections">
+      <a href="#mental-model">Big idea</a>
+      <a href="#model">The model</a>
+      <a href="#loss">Measuring error</a>
+      <a href="#gradient">Learning</a>
+      <a href="#lab">Interactive lab</a>
+      <a href="#check">Knowledge check</a>
+    </nav>
+
+    <section id="mental-model" class="content-section">
+      <p class="section-number">01</p>
+      <h2>Programming rules versus learning patterns</h2>
+      <p>In ordinary programming, a person writes the rules. If a package weighs less than five pounds, charge one price; otherwise, charge another. The computer follows instructions that already exist.</p>
+      <div class="comparison">
+        <article>
+          <p class="tag">TRADITIONAL PROGRAMMING</p>
+          <h3>People provide the relationship</h3>
+          <div class="flow"><span>Rules</span><b>+</b><span>Data</span><b>→</b><span>Answer</span></div>
+          <p>Best when the rules are known and can be stated precisely.</p>
+        </article>
+        <article class="accent-card">
+          <p class="tag">MACHINE LEARNING</p>
+          <h3>Examples reveal the relationship</h3>
+          <div class="flow"><span>Examples</span><b>+</b><span>Answers</span><b>→</b><span>Model</span></div>
+          <p>Useful when a pattern exists but writing every rule would be difficult.</p>
+        </article>
+      </div>
+      <div class="callout"><strong>Learning does not mean understanding like a person.</strong> Here, learning means finding numerical settings that make predictions less wrong across many examples.</div>
+    </section>
+
+    <section class="content-section soft">
+      <p class="section-number">02</p>
+      <h2>The vocabulary, without the fog</h2>
+      <div class="term-grid">
+        <article><h3>Feature</h3><p>Information given to the model. In our lab, the feature is a number called <strong>x</strong>.</p><small>Example: square footage</small></article>
+        <article><h3>Label</h3><p>The correct answer in a training example. We call it <strong>y</strong>.</p><small>Example: actual sale price</small></article>
+        <article><h3>Model</h3><p>A mathematical rule that turns an input into a prediction.</p><small>Here: a movable straight line</small></article>
+        <article><h3>Prediction</h3><p>The answer produced by the model. It may differ from the known label.</p><small>Written as y-hat</small></article>
+        <article><h3>Training</h3><p>Repeatedly adjusting the model using examples with known answers.</p><small>The model is changing</small></article>
+        <article><h3>Inference</h3><p>Using a trained model to predict an answer for a new input.</p><small>The model is no longer changing</small></article>
+      </div>
+    </section>
+
+    <section id="model" class="content-section">
+      <p class="section-number">03</p>
+      <h2>Our model is a line we can move</h2>
+      <p>A straight line is enough to introduce learning. Its equation is shown below, but read it as a sentence before treating it as mathematics.</p>
+      <div class="equation-card">
+        <div class="equation"><span class="prediction">prediction</span> = <span class="weight">weight</span> × <span class="input">input</span> + <span class="bias">bias</span></div>
+        <div class="symbol-equation">ŷ = w × x + b</div>
+      </div>
+      <div class="parameter-explain">
+        <article><div class="line-icon slope"></div><h3>Weight (w) tilts the line</h3><p>If the weight is 3.5, increasing the input by 1 increases the prediction by 3.5. A negative weight tilts downward.</p></article>
+        <article><div class="line-icon intercept"></div><h3>Bias (b) moves the line</h3><p>The bias is the prediction where the input is zero. Increasing it moves the entire line upward without changing its tilt.</p></article>
+      </div>
+      <div class="worked-example">
+        <h3>Worked example</h3>
+        <p>If the weight is <strong>3.5</strong>, the input is <strong>4</strong>, and the bias is <strong>2</strong>:</p>
+        <div class="steps"><span>prediction = 3.5 × 4 + 2</span><span>prediction = 14 + 2</span><strong>prediction = 16</strong></div>
+      </div>
+      <div class="callout"><strong>Parameters versus controls:</strong> weight and bias are parameters the model learns. Settings such as learning rate and number of examples are experiment controls chosen by a person.</div>
+    </section>
+
+    <section id="loss" class="content-section soft">
+      <p class="section-number">04</p>
+      <h2>How do we measure “wrong”?</h2>
+      <p>For each example, the model makes a prediction. The difference between the prediction and the correct label is the <strong>residual error</strong>.</p>
+      <div class="mini-example">
+        <div><small>CORRECT LABEL</small><strong>10</strong></div><span>−</span><div><small>PREDICTION</small><strong>7</strong></div><span>=</span><div><small>ERROR SIZE</small><strong>3</strong></div>
+      </div>
+      <p>A dataset contains many errors, so we need one summary score. <strong>Mean squared error (MSE)</strong> does this in three understandable steps:</p>
+      <ol class="explain-steps">
+        <li><span>1</span><div><strong>Find every error</strong><p>Subtract the correct answer from each prediction.</p></div></li>
+        <li><span>2</span><div><strong>Square each error</strong><p>This makes every contribution positive and makes large mistakes matter more.</p></div></li>
+        <li><span>3</span><div><strong>Take the average</strong><p>One number now summarizes the model's error across all examples.</p></div></li>
+      </ol>
+      <div class="plain-formula"><strong>MSE</strong> = average of all (prediction − correct answer)²</div>
+      <p class="fine-print">Lower is better. Zero would mean every prediction exactly matched its label. MSE uses squared units, so compare it between runs on the same kind of data—not as if it were an ordinary error amount.</p>
+    </section>
+
+    <section id="gradient" class="content-section">
+      <p class="section-number">05</p>
+      <h2>How does the model improve?</h2>
+      <p>Imagine making a tiny change to the weight. If the loss becomes larger, that was the wrong direction. If it becomes smaller, that was the right direction. A <strong>gradient</strong> captures both the direction and the local sensitivity of loss to a parameter.</p>
+      <div class="gradient-grid">
+        <article><span class="big-sign">+</span><h3>Positive gradient</h3><p>Increasing the parameter would increase loss, so training decreases the parameter.</p></article>
+        <article><span class="big-sign">−</span><h3>Negative gradient</h3><p>Increasing the parameter would decrease loss, so training increases the parameter.</p></article>
+        <article><span class="big-sign">≈0</span><h3>Near-zero gradient</h3><p>A small local change has little effect. The model may be near the best setting available.</p></article>
+      </div>
+      <p><strong>Gradient descent</strong> repeats this adjustment for both weight and bias. The <strong>learning rate</strong> controls how large each adjustment is.</p>
+      <div class="learning-rate">
+        <article><span>tiny</span><h3>Too small</h3><p>Reliable but painfully slow.</p></article>
+        <article class="selected"><span>balanced</span><h3>Useful</h3><p>Moves steadily toward lower loss.</p></article>
+        <article><span>huge</span><h3>Too large</h3><p>Overshoots and may become unstable.</p></article>
+      </div>
+      <div class="callout"><strong>The key idea:</strong> the gradient does not reveal the final answer. It gives a useful next step. Learning emerges from taking many such steps.</div>
+    </section>
+
+    <section class="content-section soft">
+      <p class="section-number">06</p>
+      <h2>Why hide some data from training?</h2>
+      <p>If you study using an answer key and then take a test containing the same questions, a perfect score proves very little. Models have the same problem.</p>
+      <div class="split-visual">
+        <div class="train-block"><strong>80%</strong><span>Training data</span><small>Used to adjust weight and bias</small></div>
+        <div class="test-block"><strong>20%</strong><span>Test data</span><small>Hidden until final evaluation</small></div>
+      </div>
+      <p><strong>Generalization</strong> means performing well on new examples, not merely the examples used during training. Allowing test information to affect training is called <strong>data leakage</strong>; it makes results look better than they really are.</p>
+    </section>
+
+    <section id="lab" class="lab-section">
+      <div class="lab-heading">
+        <div><p class="eyebrow">INTERACTIVE LAB</p><h2>Teach the line</h2><p>Change one control at a time. Predict what will happen, then train the model and inspect the evidence.</p></div>
+        <button id="resetButton" class="secondary-button">Reset baseline</button>
+      </div>
+      <div class="lab-layout">
+        <aside class="controls">
+          <label>Learning rate <output id="learningRateValue">0.010</output><input id="learningRate" type="range" min="-4" max="-0.7" step="0.1" value="-2"></label>
+          <p class="control-help">Size of each adjustment. The scale is logarithmic.</p>
+          <label>Training steps <output id="epochsValue">500</output><input id="epochs" type="range" min="1" max="2000" step="1" value="500"></label>
+          <p class="control-help">How many times the model adjusts its parameters.</p>
+          <label>Number of examples <output id="samplesValue">100</output><input id="samples" type="range" min="10" max="500" step="10" value="100"></label>
+          <p class="control-help">How much evidence the model receives.</p>
+          <label>Noise <output id="noiseValue">1.5</output><input id="noise" type="range" min="0" max="8" step="0.5" value="1.5"></label>
+          <p class="control-help">Variation the input cannot explain.</p>
+          <label>Relationship<select id="relationship"><option value="linear">Straight-line data</option><option value="quadratic">Curved data</option></select></label>
+          <label class="toggle"><input id="outlier" type="checkbox"><span>Add one extreme outlier</span></label>
+          <button id="trainButton" class="button full">Train model</button>
+        </aside>
+        <div class="visuals">
+          <div class="metrics" aria-live="polite">
+            <article><small>LEARNED WEIGHT</small><strong id="weightMetric">0.000</strong></article>
+            <article><small>LEARNED BIAS</small><strong id="biasMetric">0.000</strong></article>
+            <article><small>TRAINING LOSS</small><strong id="trainLossMetric">—</strong></article>
+            <article><small>TEST LOSS</small><strong id="testLossMetric">—</strong></article>
+          </div>
+          <div class="chart-card"><h3>Examples and learned line</h3><canvas id="fitChart" width="760" height="430" aria-label="Plot of data and learned line"></canvas><div class="legend"><span class="train-dot">Training</span><span class="test-dot">Unseen test</span><span class="model-line">Learned line</span></div></div>
+          <div class="chart-card"><h3>Loss during training</h3><canvas id="lossChart" width="760" height="240" aria-label="Plot of loss during training"></canvas></div>
+          <div id="observation" class="observation">Press <strong>Train model</strong> to begin.</div>
+        </div>
+      </div>
+      <div class="experiment-prompts">
+        <h3>Guided experiments</h3>
+        <div class="prompt-grid">
+          <article><span>01</span><h4>Step size</h4><p>Move learning rate very low, then very high. How does the loss curve change?</p></article>
+          <article><span>02</span><h4>Evidence</h4><p>Compare 10 examples with 500. Reset and repeat. Which estimate is more stable?</p></article>
+          <article><span>03</span><h4>Uncertainty</h4><p>Increase noise. Can more training steps remove information the input never contained?</p></article>
+          <article><span>04</span><h4>Model capacity</h4><p>Select curved data. Can a straight-line model ever represent the curve perfectly?</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="check" class="content-section">
+      <p class="section-number">07</p>
+      <h2>Check your understanding</h2>
+      <div class="quiz" data-answer="b">
+        <h3>1. What does training change?</h3>
+        <button data-choice="a">The correct labels</button><button data-choice="b">The model's weight and bias</button><button data-choice="c">The test examples</button><p class="feedback"></p>
+      </div>
+      <div class="quiz" data-answer="c">
+        <h3>2. Why keep test data separate?</h3>
+        <button data-choice="a">To make the dataset smaller</button><button data-choice="b">To lower training loss</button><button data-choice="c">To measure performance on unseen examples</button><p class="feedback"></p>
+      </div>
+      <div class="quiz" data-answer="a">
+        <h3>3. What does a gradient provide?</h3>
+        <button data-choice="a">A direction and local sensitivity</button><button data-choice="b">The guaranteed final answer</button><button data-choice="c">More training examples</button><p class="feedback"></p>
+      </div>
+      <div class="completion">
+        <h3>You are ready for Lesson 2 when you can explain:</h3>
+        <ul><li>how a feature, label, prediction, and model differ;</li><li>why loss is needed;</li><li>how gradients and learning rate work together;</li><li>why unseen test data matters;</li><li>why a straight line cannot perfectly fit a curve.</li></ul>
+      </div>
+    </section>
+  </main>
+  <footer><strong>Learn AI</strong><span>Lesson 1 · Machine-learning foundations</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>
