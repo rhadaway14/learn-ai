@@ -4,7 +4,7 @@ A hands-on curriculum that starts with machine-learning fundamentals and builds 
 
 The complete path covers **35 lessons, five milestone projects, and one production-grade capstone**. See [CURRICULUM.md](CURRICULUM.md) for the phase-by-phase syllabus and estimated time commitment.
 
-The governing rule is simple: **learn the primitive before using the framework that automates it**.
+The governing rules are simple: **learn the primitive before using the framework that automates it**, and never require knowledge the course has not taught. See the [course teaching standard](COURSE_DESIGN.md) and [cumulative capstone path](CAPSTONE_PATH.md).
 
 ## Implemented curriculum
 
@@ -17,7 +17,7 @@ The governing rule is simple: **learn the primitive before using the framework t
 | Quality and production | 24–30 | Evaluate, tune, secure, serve, and operate AI systems |
 | Advanced systems and architecture | 31–35 | Analyze advanced models and deliver the capstone |
 
-All 35 lessons are implemented. Browse the [lesson index](lessons/README.md) or read the detailed [curriculum](CURRICULUM.md).
+All 35 lessons have implementation material. Lessons are being reviewed individually against the stricter [student-readiness gate](STUDENT_READINESS.md). Browse the [lesson index](lessons/README.md) or read the detailed [curriculum](CURRICULUM.md).
 
 ## Quick start
 
