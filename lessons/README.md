@@ -4,7 +4,7 @@ Use this page to navigate the implemented curriculum.
 
 | Lesson | Topic | Materials |
 |---:|---|---|
-| 01 | Machine Learning and Linear Regression | [Lesson](01_linear_regression/README.md) |
+| 01 | How Machines Learn: Linear Regression | [Interactive lesson](01_linear_regression/index.html) · [Reading](01_linear_regression/README.md) |
 | 02 | Vectors, Matrices, and Tensors | [Lesson](02_vectors_matrices_tensors/README.md) · [Exercises](02_vectors_matrices_tensors/exercises.py) · [Reference](02_vectors_matrices_tensors/solutions.py) |
 | 03 | Loss Functions and Optimization | [Lesson](lessons/03_loss_functions_and_optimization/README.md) · [Exercises](lessons/03_loss_functions_and_optimization/EXERCISES.md) · [Reference](lessons/03_loss_functions_and_optimization/SOLUTIONS.md) |
 | 04 | Probability and Statistics for ML | [Lesson](lessons/04_probability_and_statistics_for_ml/README.md) · [Exercises](lessons/04_probability_and_statistics_for_ml/EXERCISES.md) · [Reference](lessons/04_probability_and_statistics_for_ml/SOLUTIONS.md) |
