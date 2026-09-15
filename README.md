@@ -21,7 +21,19 @@ All 35 lessons are implemented. Browse the [lesson index](lessons/README.md) or 
 
 ## Quick start
 
-Python 3.11–3.13 is supported.
+### Learners starting Lesson 1
+
+No programming environment is required.
+
+1. Download the repository using GitHub's **Code → Download ZIP** option.
+2. Extract the ZIP file.
+3. Open `lessons/01_linear_regression/index.html` in Chrome, Edge, Firefox, or Safari.
+
+The complete lesson and interactive lab run locally in the browser without an account, terminal, installation, or internet connection.
+
+### Engineering environment for later lessons
+
+Python 3.11–3.13 is supported when the curriculum reaches programming labs.
 
 ### Windows PowerShell
 
@@ -47,10 +59,9 @@ pip install -e '.[dev]'
 pytest
 ```
 
-Run the labs:
+Later engineering labs use the installed environment:
 
 ```bash
-python lessons/01_linear_regression/train.py
 python lessons/02_vectors_matrices_tensors/lab.py
 python lessons/03_loss_functions_and_optimization/lab.py
 python -m learn_ai.course_labs 35
@@ -60,8 +71,8 @@ Plots are written to each lesson's `outputs/` directory, so the labs also work i
 
 ## How to use each lesson
 
-1. Read the lesson's `README.md`.
-2. Run the reference lab and predict the output before inspecting it.
+1. Complete the learner-facing lesson or guided reading.
+2. Run the interactive or reference lab and predict the result first.
 3. Complete `exercises.py` without reading `solutions.py`.
 4. Run that lesson's tests.
 5. Perform the experiments and answer the checkpoint questions in your own words.
@@ -87,7 +98,10 @@ learn-ai/
 ├── lessons/
 │   ├── 01_linear_regression/
 │   │   ├── README.md
-│   │   └── train.py
+│   │   ├── index.html
+│   │   ├── styles.css
+│   │   ├── app.js
+│   │   └── train.py (maintainer reference)
 │   ├── 02_vectors_matrices_tensors/
 │   ├── 03_loss_functions_optimization/
 │   └── ... through 35_capstone_production_grade_agentic_ai_platform/
