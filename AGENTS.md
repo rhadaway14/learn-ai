@@ -6,12 +6,17 @@ This repository is a cumulative, hands-on AI engineering curriculum. Preserve th
 
 ## Lesson standard
 
+Follow [COURSE_DESIGN.md](COURSE_DESIGN.md). A lesson is not student-ready merely because its files and lab exist.
+
 Every implemented lesson should contain:
 
-- `README.md` with motivation, theory, vocabulary, walkthrough, experiments, checkpoint questions, and modern-AI connection;
+- explicit prerequisites, a diagnostic, and remediation for missing background;
+- `README.md` with motivation, plain-language intuition, vocabulary, layered math, walkthrough, experiments, checkpoint questions, and modern-AI connection;
+- a fully guided example before partially guided or independent work;
 - runnable reference code;
 - learner exercises or an experiment workbook;
 - separate reference solutions or reference notes;
+- a capstone increment defined in [CAPSTONE_PATH.md](CAPSTONE_PATH.md);
 - deterministic automated tests where practical;
 - no required paid service unless a local or free alternative is documented.
 
@@ -24,6 +29,8 @@ Every implemented lesson should contain:
 - Never commit API keys, model credentials, datasets with restricted licenses, virtual environments, or generated model weights.
 - Prefer direct NumPy/PyTorch implementations before high-level orchestration frameworks.
 - Explain tensor shapes at each important boundary.
+- Never make code syntax the accidental subject of a conceptual exercise.
+- Introduce every equation in words and with actual numbers before symbolic notation.
 - Keep tests fast; mark expensive or GPU-specific tests explicitly.
 
 ## Before committing
