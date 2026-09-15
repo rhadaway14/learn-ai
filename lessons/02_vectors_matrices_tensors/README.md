@@ -43,23 +43,23 @@ A vector can represent many things:
 
 Vector addition is element-wise:
 
-\[
+$$
 [1,2,3]+[4,5,6]=[5,7,9]
-\]
+$$
 
 Multiplication by a scalar scales every component:
 
-\[
+$$
 2[1,2,3]=[2,4,6]
-\]
+$$
 
 ### Magnitude
 
 The Euclidean magnitude (L2 norm) is:
 
-\[
+$$
 \|x\|_2=\sqrt{\sum_i x_i^2}
-\]
+$$
 
 For `[3, 4]`, the magnitude is `5`.
 
@@ -67,9 +67,9 @@ For `[3, 4]`, the magnitude is `5`.
 
 For equal-length vectors:
 
-\[
+$$
 a\cdot b=\sum_i a_i b_i
-\]
+$$
 
 The dot product combines corresponding components into one scalar. It is both a weighted sum and a measure connected to alignment. Neural-network neurons and attention scores rely on this operation.
 
@@ -79,17 +79,17 @@ A matrix is a two-dimensional arrangement of values. If a batch contains 100 exa
 
 Matrix multiplication is not element-wise multiplication:
 
-\[
+$$
 (m\times n)(n\times p)\rightarrow(m\times p)
-\]
+$$
 
 The inner dimensions must match.
 
 Suppose `X` is a batch with shape `(batch, input_features)`, `W` has shape `(input_features, output_features)`, and `b` has shape `(output_features,)`:
 
-\[
+$$
 Y=XW+b
-\]
+$$
 
 Then `Y` has shape `(batch, output_features)`. That equation is the computational core of a dense neural-network layer.
 
@@ -128,9 +128,9 @@ An embedding maps an object to a vector. Similar meanings should be represented 
 
 Cosine similarity is:
 
-\[
+$$
 \cos(\theta)=\frac{a\cdot b}{\|a\|\|b\|}
-\]
+$$
 
 It ranges from `-1` to `1` for nonzero real vectors:
 
@@ -156,9 +156,9 @@ For `(8, 128, 768)`:
 
 Linear projections turn those token representations into queries, keys, and values. Attention later computes a scaled form of:
 
-\[
+$$
 QK^T
-\]
+$$
 
 The dot products express how strongly each token's query aligns with each token's key. We will derive and implement this in the attention lesson.
 
