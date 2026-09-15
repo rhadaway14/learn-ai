@@ -1,24 +1,413 @@
 # Progress Log
 
-Copy the checkpoint questions from each lesson here and answer them in your own words. The point is not polished prose; it is making gaps visible.
+Record checkpoint answers and experiment observations here or in separate journal files.
 
-## Lesson 01 — Linear regression
+## Lesson 01 — Linear Regression
 
-- [ ] I ran the lab.
-- [ ] I changed the learning rate and observed slow, stable, and divergent training.
-- [ ] I can explain parameters versus hyperparameters.
-- [ ] I can explain training versus inference.
-- [ ] Tests pass.
+- [ ] Run the lab and learning-rate experiments
+- [ ] Explain parameters, hyperparameters, training, inference, and generalization
 
 Notes:
 
-## Lesson 02 — Vectors, matrices, and tensors
+## Lesson 02 — Vectors, Matrices, and Tensors
 
-- [ ] I ran the lab.
-- [ ] I completed `exercises.py` before checking the solutions.
-- [ ] I performed all four experiments.
-- [ ] I can explain shape, rank, dot product, matrix multiplication, and batching.
-- [ ] I can explain why embeddings are vectors and why a neural-network layer uses matrix multiplication.
-- [ ] Tests pass.
+- [ ] Run the lab and complete exercises.py
+- [ ] Explain shapes, dot products, matrix multiplication, batching, and embeddings
+
+Notes:
+
+## Lesson 03 — Loss Functions and Optimization
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 04 — Probability and Statistics for ML
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 05 — Regression and Classification
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 06 — Neural Network Anatomy
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 07 — Backpropagation From Scratch
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 08 — PyTorch and Autograd
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 09 — Train and Evaluate a Neural Network
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 10 — Regularization and Generalization
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 11 — Tokenization
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 12 — Embeddings and Semantic Similarity
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 13 — Attention From Scratch
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 14 — Transformer Blocks
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 15 — Build a Tiny GPT
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 16 — LLM Inference and Decoding
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 17 — Prompt and Context Engineering
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 18 — Structured Output and Tool Calling
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 19 — RAG Fundamentals
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 20 — Hybrid Retrieval and Reranking
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 21 — Agents, Loops, State, and Memory
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 22 — MCP and Tool Ecosystems
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 23 — Multi-Agent Systems
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 24 — Evaluation and Regression Testing
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 25 — Fine-Tuning, LoRA, and QLoRA
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 26 — AI Security and Red Teaming
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 27 — Multimodal AI
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 28 — Production AI Serving
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 29 — MLOps and LLMOps
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 30 — Distributed AI
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 31 — Advanced Model Architectures
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 32 — Advanced Reasoning and Verification
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 33 — Research Literacy and Reproduction
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 34 — Enterprise AI Architecture
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
+
+Notes:
+
+## Lesson 35 — Capstone Production-Grade Agentic AI Platform
+
+- [ ] Read the lesson and predict the lab result
+- [ ] Run the lab
+- [ ] Complete the exercise
+- [ ] Perform and record the experiment
+- [ ] Analyze the failure mode
+- [ ] Answer the checkpoint questions
+- [ ] Write plain-language and technical explanations
 
 Notes:

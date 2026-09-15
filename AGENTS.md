@@ -10,8 +10,8 @@ Every implemented lesson should contain:
 
 - `README.md` with motivation, theory, vocabulary, walkthrough, experiments, checkpoint questions, and modern-AI connection;
 - runnable reference code;
-- learner exercises with clear TODOs;
-- separate reference solutions;
+- learner exercises or an experiment workbook;
+- separate reference solutions or reference notes;
 - deterministic automated tests where practical;
 - no required paid service unless a local or free alternative is documented.
 

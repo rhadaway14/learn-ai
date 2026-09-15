@@ -6,12 +6,18 @@ The complete path covers **35 lessons, five milestone projects, and one producti
 
 The governing rule is simple: **learn the primitive before using the framework that automates it**.
 
-## Current lessons
+## Implemented curriculum
 
-| Lesson | Topic | Lab |
-|---|---|---|
-| 01 | Machine learning and linear regression | Train a line with gradient descent from scratch |
-| 02 | Vectors, matrices, and tensors | Implement the core linear-algebra operations used by neural networks |
+| Phase | Lessons | Major outcome |
+|---|---:|---|
+| Mathematical and ML foundations | 01–05 | Train and evaluate classical models from primitives |
+| Neural networks and PyTorch | 06–10 | Understand backpropagation and complete training systems |
+| Language-model mechanics | 11–16 | Build tokenization, attention, transformer, and decoding primitives |
+| LLM application engineering | 17–23 | Build RAG, tools, agents, MCP, and multi-agent workflows |
+| Quality and production | 24–30 | Evaluate, tune, secure, serve, and operate AI systems |
+| Advanced systems and architecture | 31–35 | Analyze advanced models and deliver the capstone |
+
+All 35 lessons are implemented. Browse the [lesson index](lessons/README.md) or read the detailed [curriculum](CURRICULUM.md).
 
 ## Quick start
 
@@ -46,6 +52,8 @@ Run the labs:
 ```bash
 python lessons/01_linear_regression/train.py
 python lessons/02_vectors_matrices_tensors/lab.py
+python lessons/03_loss_functions_and_optimization/lab.py
+python -m learn_ai.course_labs 35
 ```
 
 Plots are written to each lesson's `outputs/` directory, so the labs also work in terminals without a desktop display.
@@ -80,11 +88,14 @@ learn-ai/
 │   ├── 01_linear_regression/
 │   │   ├── README.md
 │   │   └── train.py
-│   └── 02_vectors_matrices_tensors/
-│       ├── README.md
-│       ├── lab.py
-│       ├── exercises.py
-│       └── solutions.py
+│   ├── 02_vectors_matrices_tensors/
+│   ├── 03_loss_functions_optimization/
+│   └── ... through 35_capstone_production_grade_agentic_ai_platform/
+├── src/learn_ai/
+│   └── course_labs.py
+├── tools/
+│   ├── build_lessons.py
+│   └── lesson_catalog.tsv
 └── tests/
     ├── test_linear_regression.py
     └── test_linear_algebra.py

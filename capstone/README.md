@@ -2,6 +2,14 @@
 
 The capstone combines model access, retrieval, tools, evaluation, security, and operations into one defensible system.
 
+## Workbooks and executable slice
+
+- [Architecture workbook](ARCHITECTURE.md)
+- [Evaluation plan](EVALUATION_PLAN.md)
+- [Threat model](THREAT_MODEL.md)
+- [Operations runbook](RUNBOOK.md)
+- [Deterministic vertical slice](vertical_slice.py)
+
 ## Required capabilities
 
 - API and minimal user interface;
