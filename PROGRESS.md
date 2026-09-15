@@ -4,8 +4,10 @@ Record checkpoint answers and experiment observations here or in separate journa
 
 ## Lesson 01 — Linear Regression
 
-- [ ] Run the lab and learning-rate experiments
+- [ ] Complete the browser-based lesson and its embedded checks
+- [ ] Run the learning-rate, evidence, uncertainty, outlier, and capacity experiments
 - [ ] Explain parameters, hyperparameters, training, inference, and generalization
+- [ ] Explain loss and gradients without relying only on equations
 
 Notes:
 
