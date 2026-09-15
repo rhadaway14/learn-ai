@@ -1,8 +1,8 @@
 import numpy as np
 import pytest
 
+from learn_ai.capstone import run as run_capstone_slice
 from learn_ai.course_labs import LABS, run_lesson
-from capstone.vertical_slice import run as run_capstone_slice
 
 
 @pytest.mark.parametrize("number", sorted(LABS))
