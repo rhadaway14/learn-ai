@@ -1,4 +1,9 @@
-"""Generate consistent Lesson 03–35 learning surfaces from lesson_catalog.tsv."""
+"""Scaffold missing Lesson 03–35 files from lesson_catalog.tsv.
+
+The generator never overwrites authored course material. Student-ready lessons
+require human review against COURSE_DESIGN.md; catalog metadata is not enough to
+generate an adequate explanation automatically.
+"""
 
 from __future__ import annotations
 
@@ -9,6 +14,11 @@ from textwrap import dedent
 
 ROOT = Path(__file__).parents[1]
 CATALOG = Path(__file__).with_name("lesson_catalog.tsv")
+
+
+def write_if_missing(path: Path, content: str) -> None:
+    if not path.exists():
+        path.write_text(content, encoding="utf-8")
 
 
 def slugify(title: str) -> str:
@@ -121,7 +131,7 @@ Use [EXERCISES.md](EXERCISES.md) as the worksheet. Check [SOLUTIONS.md](SOLUTION
 - [ ] Checkpoint answered in your own words
 - [ ] Plain-language and technical explanations written
 """
-        (directory / "README.md").write_text(readme, encoding="utf-8")
+        write_if_missing(directory / "README.md", readme)
 
         lab = dedent(
             f'''\
@@ -134,7 +144,7 @@ Use [EXERCISES.md](EXERCISES.md) as the worksheet. Check [SOLUTIONS.md](SOLUTION
                 main({number})
             '''
         )
-        (directory / "lab.py").write_text(lab, encoding="utf-8")
+        write_if_missing(directory / "lab.py", lab)
 
         exercises = f"""# Lesson {number:02d} Exercises — {title}
 
@@ -165,7 +175,7 @@ Reproduce or reason through this failure: {failure}
 
 Document the detection signal, containment, and corrective action.
 """
-        (directory / "EXERCISES.md").write_text(exercises, encoding="utf-8")
+        write_if_missing(directory / "EXERCISES.md", exercises)
 
         solutions = f"""# Lesson {number:02d} Reference Notes — {title}
 
@@ -185,7 +195,7 @@ Review this only after completing an attempt.
 
 The reference is a minimum viable explanation, not the only valid solution.
 """
-        (directory / "SOLUTIONS.md").write_text(solutions, encoding="utf-8")
+        write_if_missing(directory / "SOLUTIONS.md", solutions)
         relative = directory.relative_to(ROOT).as_posix()
         index_rows.append(
             f"| {number:02d} | {title} | [Lesson]({relative}/README.md) · "
@@ -218,7 +228,7 @@ The reference is a minimum viable explanation, not the only valid solution.
         "[Reference](02_vectors_matrices_tensors/solutions.py) |",
     ]
     index_rows[6:6] = existing
-    (lessons_root / "README.md").write_text("\n".join(index_rows) + "\n", encoding="utf-8")
+    write_if_missing(lessons_root / "README.md", "\n".join(index_rows) + "\n")
 
     first_two = [
         "## Lesson 01 — Linear Regression",
@@ -237,7 +247,7 @@ The reference is a minimum viable explanation, not the only valid solution.
         "",
     ]
     progress_rows[4:4] = first_two
-    (ROOT / "PROGRESS.md").write_text("\n".join(progress_rows), encoding="utf-8")
+    write_if_missing(ROOT / "PROGRESS.md", "\n".join(progress_rows))
 
 
 if __name__ == "__main__":
