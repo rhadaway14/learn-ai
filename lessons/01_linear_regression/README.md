@@ -77,27 +77,27 @@ This is a **regression** problem because its output is a continuous number. Pred
 
 Our model is a straight line:
 
-\[
+$$
 \hat{y}=wx+b
-\]
+$$
 
-The hat in \(\hat{y}\), pronounced “y-hat,” means predicted value.
+The hat in $\hat{y}$, pronounced “y-hat,” means predicted value.
 
 | Symbol | Meaning |
 |---|---|
-| \(x\) | Input feature |
-| \(y\) | Correct label |
-| \(\hat{y}\) | Prediction |
-| \(w\) | Weight or slope |
-| \(b\) | Bias or intercept |
+| $x$ | Input feature |
+| $y$ | Correct label |
+| $\hat{y}$ | Prediction |
+| $w$ | Weight or slope |
+| $b$ | Bias or intercept |
 
 The weight says how much the prediction changes when `x` rises by one. The bias is the prediction when `x` is zero.
 
-For \(\hat{y}=3.5x+2\) and `x = 4`:
+For $\hat{y}=3.5x+2$ and `x = 4`:
 
-\[
+$$
 \hat{y}=3.5(4)+2=16
-\]
+$$
 
 `w` and `b` are **parameters** learned during training. By contrast, **hyperparameters** are choices made by the engineer.
 
@@ -112,11 +112,11 @@ A model with billions of parameters does not have billions of manually configure
 
 The lab generates data from a hidden relationship:
 
-\[
+$$
 y=3.5x+2+\epsilon
-\]
+$$
 
-\(\epsilon\) is random **noise**, representing measurement error or factors not captured by `x`.
+$\epsilon$ is random **noise**, representing measurement error or factors not captured by `x`.
 
 ```python
 x = rng.uniform(0, 10, samples)
@@ -159,9 +159,9 @@ This is the **forward pass**. Initially every prediction is zero. Wrong predicti
 
 For one example, the residual error is:
 
-\[
+$$
 e=\hat{y}-y
-\]
+$$
 
 ```python
 errors = predictions - y
@@ -169,9 +169,9 @@ errors = predictions - y
 
 A **loss function** combines the errors into one objective. This lab uses mean squared error:
 
-\[
+$$
 MSE=\frac{1}{N}\sum_{i=1}^{N}(\hat{y}_i-y_i)^2
-\]
+$$
 
 MSE subtracts each label from its prediction, squares each result, and takes the mean. Squaring prevents positive and negative errors from cancelling and penalizes large mistakes more heavily. That latter property also makes MSE sensitive to outliers.
 
@@ -186,13 +186,13 @@ A **gradient** measures how loss changes when a parameter changes. It tells us:
 
 For this model and MSE:
 
-\[
+$$
 \frac{\partial L}{\partial w}=\frac{2}{N}\sum(\hat{y}_i-y_i)x_i
-\]
+$$
 
-\[
+$$
 \frac{\partial L}{\partial b}=\frac{2}{N}\sum(\hat{y}_i-y_i)
-\]
+$$
 
 The code is the direct translation:
 
@@ -207,15 +207,15 @@ You do not need to memorize the derivation yet. Understand that the sign gives d
 
 Gradient descent subtracts a scaled gradient:
 
-\[
+$$
 w_{new}=w_{old}-\eta\frac{\partial L}{\partial w}
-\]
+$$
 
-\[
+$$
 b_{new}=b_{old}-\eta\frac{\partial L}{\partial b}
-\]
+$$
 
-\(\eta\), eta, is the **learning rate**:
+$\eta$, eta, is the **learning rate**:
 
 ```python
 w -= learning_rate * dw
@@ -257,33 +257,33 @@ PyTorch will later calculate gradients automatically, but it does not change the
 
 Suppose `x = 2`, `y = 10`, and both parameters start at zero.
 
-\[
+$$
 \hat{y}=0(2)+0=0
-\]
+$$
 
-\[
+$$
 e=0-10=-10, \qquad L=(-10)^2=100
-\]
+$$
 
 For this single example:
 
-\[
+$$
 dw=2ex=2(-10)(2)=-40
-\]
+$$
 
-\[
+$$
 db=2e=-20
-\]
+$$
 
 With learning rate `0.01`:
 
-\[
+$$
 w_{new}=0-0.01(-40)=0.4
-\]
+$$
 
-\[
+$$
 b_{new}=0-0.01(-20)=0.2
-\]
+$$
 
 The next prediction becomes `1.0`. It is still wrong, but it moved from `0` toward `10`. Repeated updates across many examples find parameters that fit the dataset as a whole.
 
@@ -420,7 +420,7 @@ Answer without copying the lesson:
 
 **Technical explanation:**
 
-> Linear regression is a parameterized function, \(\hat{y}=wx+b\). We minimize mean squared error with batch gradient descent by computing analytical gradients for the weight and bias and iteratively updating both parameters. A held-out test set estimates generalization to unseen samples.
+> Linear regression is a parameterized function, $\hat{y}=wx+b$. We minimize mean squared error with batch gradient descent by computing analytical gradients for the weight and bias and iteratively updating both parameters. A held-out test set estimates generalization to unseen samples.
 
 ## Definition of done
 
