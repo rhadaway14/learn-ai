@@ -302,16 +302,52 @@ The saved figure shows the learned line over unseen test points and the training
 
 ## 14. Run the lab
 
-From the repository root:
+Treat `train.py` as laboratory equipment. **Do not edit its source code for this lesson.** Change an experiment by passing command-line options, so every run is visible, reproducible, and easy to compare.
+
+From the repository root, run the baseline:
 
 ```bash
 python lessons/01_linear_regression/train.py
 ```
 
-Then open:
+Ask the program to list every available control:
+
+```bash
+python lessons/01_linear_regression/train.py --help
+```
+
+The options fall into three categories:
+
+| Category | Options | What they control |
+|---|---|---|
+| Training hyperparameters | `--learning-rate`, `--epochs` | How the model learns |
+| Dataset configuration | `--samples`, `--noise`, `--data-seed`, `--true-weight`, `--true-bias`, `--relationship`, `--outlier` | What evidence the model receives |
+| Evaluation configuration | `--train-size`, `--split-seed` | Which examples are used for learning and testing |
+
+These command-line values are experiment controls. `w` and `b` inside the model are still the learned parameters. That distinction prevents the overloaded phrase “change the parameters” from becoming confusing.
+
+Every run prints its complete configuration, learned model, and test loss. Use `--output-name` to keep plots from different runs:
+
+```bash
+python lessons/01_linear_regression/train.py \
+  --learning-rate 0.001 \
+  --epochs 500 \
+  --output-name slow-learning.png
+```
+
+PowerShell accepts the command on one line, or uses a backtick for line continuation:
+
+```powershell
+python lessons/01_linear_regression/train.py `
+  --learning-rate 0.001 `
+  --epochs 500 `
+  --output-name slow-learning.png
+```
+
+Plots are written under:
 
 ```text
-lessons/01_linear_regression/outputs/learned_line.png
+lessons/01_linear_regression/outputs/
 ```
 
 Locate every concept in the program:
@@ -333,14 +369,92 @@ Locate every concept in the program:
 
 ## 15. Experiments: learn by breaking it
 
-Change only one independent variable at a time and predict the result before running.
+For each experiment:
 
-1. **Learning rate:** try `0.00001`, `0.001`, `0.01`, `0.1`, and `1.0`. Observe convergence, oscillation, or exploding values.
-2. **Noise:** change its standard deviation to `0`, `4`, and `8`. Ask whether training longer can remove irreducible noise.
-3. **Dataset size:** use 10, 50, 200, and 2,000 examples with several random seeds. Compare parameter stability.
-4. **Epochs:** try 1, 10, 100, and 2,000. Identify optimization underfitting and diminishing benefit.
-5. **Outliers:** replace one label with a huge value. Observe how squared error pulls the line toward it.
-6. **Wrong model form:** generate `y = x**2 + noise` but retain the linear model. More training cannot make a straight line represent a curve.
+1. run the baseline first;
+2. predict what will change;
+3. run the provided command without modifying Python;
+4. compare final `w`, `b`, training-loss shape, test loss, and fitted line;
+5. explain the causal relationship rather than merely reporting that numbers changed.
+
+### Experiment A — Learning rate
+
+```powershell
+python lessons/01_linear_regression/train.py --learning-rate 0.00001 --output-name lr-tiny.png
+python lessons/01_linear_regression/train.py --learning-rate 0.001 --output-name lr-small.png
+python lessons/01_linear_regression/train.py --learning-rate 0.01 --output-name lr-baseline.png
+python lessons/01_linear_regression/train.py --learning-rate 0.1 --output-name lr-large.png
+python lessons/01_linear_regression/train.py --learning-rate 1.0 --output-name lr-extreme.png
+```
+
+Look for slow convergence, smooth convergence, overshooting, and exploding values. If the extreme run prints `inf` or `nan`, that is an observed result rather than a broken lab.
+
+### Experiment B — Number of epochs
+
+```powershell
+python lessons/01_linear_regression/train.py --epochs 1 --output-name epochs-1.png
+python lessons/01_linear_regression/train.py --epochs 10 --output-name epochs-10.png
+python lessons/01_linear_regression/train.py --epochs 100 --output-name epochs-100.png
+python lessons/01_linear_regression/train.py --epochs 2000 --output-name epochs-2000.png
+```
+
+This isolates training duration. Identify where the model is undertrained and where additional epochs provide almost no improvement.
+
+### Experiment C — Noise
+
+```powershell
+python lessons/01_linear_regression/train.py --noise 0 --output-name noise-0.png
+python lessons/01_linear_regression/train.py --noise 4 --output-name noise-4.png
+python lessons/01_linear_regression/train.py --noise 8 --output-name noise-8.png
+```
+
+Noise changes the problem, not the optimizer. Ask why longer training cannot eliminate uncertainty that the feature does not explain.
+
+### Experiment D — Dataset size
+
+```powershell
+python lessons/01_linear_regression/train.py --samples 10 --train-size 8 --output-name samples-10.png
+python lessons/01_linear_regression/train.py --samples 50 --train-size 40 --output-name samples-50.png
+python lessons/01_linear_regression/train.py --samples 200 --train-size 160 --output-name samples-200.png
+python lessons/01_linear_regression/train.py --samples 2000 --train-size 1600 --output-name samples-2000.png
+```
+
+Run the 10-sample case again with `--data-seed 10`, then `--data-seed 20`. Compare that variability with the 2,000-sample runs.
+
+### Experiment E — Training/test split
+
+```powershell
+python lessons/01_linear_regression/train.py --train-size 10 --split-seed 7 --output-name train-10.png
+python lessons/01_linear_regression/train.py --train-size 100 --split-seed 7 --output-name train-100.png
+python lessons/01_linear_regression/train.py --train-size 190 --split-seed 7 --output-name train-190.png
+```
+
+More training data leaves less test data. Explain why both an undersized training set and an undersized evaluation set can create uncertainty.
+
+### Experiment F — Outlier sensitivity
+
+```powershell
+python lessons/01_linear_regression/train.py --outlier 0 --output-name outlier-none.png
+python lessons/01_linear_regression/train.py --outlier 100 --output-name outlier-100.png
+```
+
+MSE squares errors, so one extreme label can exert substantial influence. Observe which learned parameter and which part of the line changes most.
+
+### Experiment G — Recover a different hidden relationship
+
+```powershell
+python lessons/01_linear_regression/train.py --true-weight 7 --true-bias -4 --noise 0 --output-name different-line.png
+```
+
+The training code has not been told the answer through `w` and `b`; it receives examples generated from this relationship and must learn it.
+
+### Experiment H — Wrong model form
+
+```powershell
+python lessons/01_linear_regression/train.py --relationship quadratic --output-name quadratic-data.png
+```
+
+The dataset is now curved while the model remains a straight line. More epochs optimize the available line; they cannot give the model capacity it does not possess.
 
 Record each experiment:
 
