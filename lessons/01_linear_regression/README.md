@@ -6,6 +6,20 @@ This lesson requires no programming experience and shows no programming code.
 
 Open [index.html](index.html) in a web browser. No installation, account, terminal, or internet connection is required. The page contains the complete lesson, interactive model, visualizations, guided experiments, and knowledge checks.
 
+The lesson now teaches each concept through an explanation immediately followed by a small interaction:
+
+| Topic | Interaction |
+|---|---|
+| Rules versus learning | Choose an appropriate mechanism for four real situations |
+| Features, labels, and predictions | Identify each role in a concrete example |
+| Weight and bias | Move each parameter independently and watch the line respond |
+| Mean squared error | Adjust three predictions and build the loss calculation |
+| Gradients | Take one update at a time and observe prediction and loss |
+| Leakage and generalization | Classify trustworthy and contaminated evaluations |
+| Complete training | Control data, noise, step size, duration, and model capacity |
+
+Optional deep-dive panels expand AI terminology, supervised learning, dataset quality, parameters and capacity, loss and metrics, local gradients, underfitting, overfitting, and distribution shift.
+
 ## What you will learn
 
 By the end of the lesson, you should be able to explain:
