@@ -121,6 +121,108 @@ function number(value) {
   return Number.isFinite(value) ? (Math.abs(value) >= 1000 ? value.toExponential(2) : value.toFixed(3)) : "unstable";
 }
 
+const scenarios = [
+  {title: "Shipping fee by package weight", text: "The business has published exact weight brackets and prices.", answer: "rules", why: "The relationship is known, exact, and auditable. Writing the rules directly is clearer."},
+  {title: "Estimate a home's sale price", text: "Past sales contain size, location, condition, and final price, but no complete pricing formula.", answer: "learn", why: "Examples can reveal a statistical relationship that would be difficult to specify as complete rules."},
+  {title: "Block access outside business hours", text: "The security policy states that access is allowed only from 08:00 through 18:00.", answer: "rules", why: "This is an explicit policy boundary, not a relationship that should be estimated from past behavior."},
+  {title: "Predict equipment failure", text: "Thousands of sensor histories are labeled with whether a component failed in the following week.", answer: "learn", why: "The examples may contain a predictive pattern across many interacting measurements."}
+];
+let scenarioIndex = 0;
+
+function showScenario() {
+  const scenario = scenarios[scenarioIndex];
+  document.querySelector("#scenarioTitle").textContent = scenario.title;
+  document.querySelector("#scenarioText").textContent = scenario.text;
+  document.querySelector("#scenarioFeedback").textContent = "";
+  document.querySelector("#nextScenario").hidden = true;
+  document.querySelectorAll(".scenario-choice").forEach(button => button.disabled = false);
+}
+
+document.querySelectorAll(".scenario-choice").forEach(button => button.addEventListener("click", () => {
+  const scenario = scenarios[scenarioIndex];
+  const correct = button.dataset.answer === scenario.answer;
+  document.querySelector("#scenarioFeedback").textContent = `${correct ? "Good choice." : "Consider the mechanism."} ${scenario.why}`;
+  document.querySelectorAll(".scenario-choice").forEach(item => item.disabled = true);
+  document.querySelector("#nextScenario").hidden = false;
+}));
+document.querySelector("#nextScenario").addEventListener("click", () => {scenarioIndex = (scenarioIndex + 1) % scenarios.length; showScenario();});
+
+const roleSequence = ["feature", "label", "prediction"];
+let roleIndex = 0;
+document.querySelectorAll(".role-grid button").forEach(button => button.addEventListener("click", () => {
+  const expected = roleSequence[roleIndex];
+  if (button.dataset.role === expected) {
+    button.classList.add("correct"); button.disabled = true; roleIndex += 1;
+    if (roleIndex === roleSequence.length) {
+      document.querySelector("#rolePrompt").textContent = "All three roles are identified.";
+      document.querySelector("#roleFeedback").textContent = "The feature enters the model, the label supplies the known answer during training, and the prediction is the model's output.";
+    } else {
+      document.querySelector("#rolePrompt").innerHTML = `Now select the <strong>${roleSequence[roleIndex]}</strong>.`;
+      document.querySelector("#roleFeedback").textContent = "Correct.";
+    }
+  } else document.querySelector("#roleFeedback").textContent = `That value is the ${button.dataset.role}. Try the ${expected}.`;
+}));
+
+function drawConceptLine() {
+  const weight = Number(document.querySelector("#lineWeight").value);
+  const bias = Number(document.querySelector("#lineBias").value);
+  document.querySelector("#lineWeightValue").value = weight.toFixed(1);
+  document.querySelector("#lineBiasValue").value = bias.toFixed(1);
+  document.querySelector("#linePrediction").textContent = (weight * 4 + bias).toFixed(1);
+  const canvas = document.querySelector("#lineConceptChart"), context = canvas.getContext("2d");
+  const width = canvas.width, height = canvas.height, pad = 35;
+  context.clearRect(0, 0, width, height); context.fillStyle = "#fff"; context.fillRect(0, 0, width, height);
+  context.strokeStyle = "#dbe3ec"; context.lineWidth = 1;
+  const sx = x => pad + x / 10 * (width - 2 * pad); const sy = y => height - pad - (y + 20) / 100 * (height - 2 * pad);
+  context.beginPath(); context.moveTo(sx(0), sy(0)); context.lineTo(sx(10), sy(0)); context.stroke();
+  context.beginPath(); context.moveTo(sx(0), sy(-20)); context.lineTo(sx(0), sy(80)); context.stroke();
+  context.strokeStyle = "#2864dc"; context.lineWidth = 4; context.beginPath(); context.moveTo(sx(0), sy(bias)); context.lineTo(sx(10), sy(weight * 10 + bias)); context.stroke();
+  context.fillStyle = "#d64b59"; context.beginPath(); context.arc(sx(4), sy(weight * 4 + bias), 6, 0, Math.PI * 2); context.fill();
+  const tilt = weight > 0 ? "upward" : weight < 0 ? "downward" : "not at all";
+  document.querySelector("#lineExplanation").textContent = `The weight tilts the line ${tilt}. The bias makes it cross the vertical axis at ${bias.toFixed(1)}.`;
+}
+document.querySelector("#lineWeight").addEventListener("input", drawConceptLine);
+document.querySelector("#lineBias").addEventListener("input", drawConceptLine);
+
+const mseLabels = [10, 20, 30];
+const msePredictions = [8, 23, 30];
+function drawMse() {
+  const body = document.querySelector("#mseRows"); body.innerHTML = "";
+  const sliderArea = document.querySelector("#mseSliders"); sliderArea.innerHTML = "";
+  let sum = 0;
+  mseLabels.forEach((label, index) => {
+    const residual = msePredictions[index] - label, squared = residual * residual; sum += squared;
+    body.insertAdjacentHTML("beforeend", `<tr><td>${index + 1}</td><td>${label}</td><td>${msePredictions[index]}</td><td>${residual}</td><td>${squared}</td></tr>`);
+    const control = document.createElement("label"); control.innerHTML = `Prediction ${index + 1}: <output>${msePredictions[index]}</output><input type="range" min="0" max="50" step="1" value="${msePredictions[index]}">`;
+    control.querySelector("input").addEventListener("input", event => {msePredictions[index] = Number(event.target.value); drawMse();}); sliderArea.appendChild(control);
+  });
+  const mse = sum / mseLabels.length; document.querySelector("#mseValue").textContent = mse.toFixed(2);
+  const largest = mseLabels.map((label, index) => (msePredictions[index] - label) ** 2).indexOf(Math.max(...mseLabels.map((label, index) => (msePredictions[index] - label) ** 2)));
+  document.querySelector("#mseExplanation").textContent = `Example ${largest + 1} contributes the most squared error. MSE is ${mse.toFixed(2)}; moving that prediction toward its label will have the largest immediate effect.`;
+}
+
+let stepWeight = 0;
+function updateStep(message) {
+  const prediction = stepWeight * 2, error = prediction - 10, loss = error ** 2, gradient = 2 * error * 2;
+  document.querySelector("#stepWeight").textContent = stepWeight.toFixed(2); document.querySelector("#stepPrediction").textContent = prediction.toFixed(2);
+  document.querySelector("#stepLoss").textContent = loss.toFixed(2); document.querySelector("#stepGradient").textContent = gradient.toFixed(2);
+  if (message) document.querySelector("#stepExplanation").textContent = message;
+}
+document.querySelector("#stepRate").addEventListener("input", event => document.querySelector("#stepRateValue").value = Number(event.target.value).toFixed(3));
+document.querySelector("#takeStep").addEventListener("click", () => {
+  const beforePrediction = stepWeight * 2, beforeError = beforePrediction - 10, beforeLoss = beforeError ** 2, gradient = 4 * beforeError;
+  const change = Number(document.querySelector("#stepRate").value) * gradient; stepWeight -= change;
+  const afterLoss = (stepWeight * 2 - 10) ** 2;
+  updateStep(`The update subtracted ${change.toFixed(2)} from the weight. Loss moved from ${beforeLoss.toFixed(2)} to ${afterLoss.toFixed(2)}${afterLoss < beforeLoss ? ", so this step helped." : ", so this step was too large and hurt."}`);
+});
+document.querySelector("#resetStep").addEventListener("click", () => {stepWeight = 0; updateStep("The gradient is negative, so subtracting it will increase the weight and move the prediction toward 10.");});
+
+document.querySelectorAll(".leak-scenarios button").forEach(button => button.addEventListener("click", () => {
+  document.querySelectorAll(".leak-scenarios button").forEach(item => item.classList.remove("correct", "wrong"));
+  const leak = button.dataset.leak === "yes"; button.classList.add(leak ? "wrong" : "correct");
+  document.querySelector("#leakFeedback").textContent = leak ? "Leakage: information from the intended test population influenced training or model selection, so the final score is no longer independent." : "Trustworthy design: validation supports choices while the untouched test set remains an independent final check.";
+}));
+
 function updateLabels() {
   const rate = 10 ** Number(controls.learningRate.value);
   document.querySelector("#learningRateValue").value = rate.toFixed(rate < .001 ? 5 : 3);
@@ -159,3 +261,4 @@ document.querySelectorAll(".quiz").forEach(quiz => quiz.querySelectorAll("button
   quiz.querySelector(".feedback").textContent = correct ? "Correct — you have the idea." : "Not quite. Revisit the explanation above and try again.";
 })));
 updateLabels(); run();
+showScenario(); drawConceptLine(); drawMse(); updateStep();
