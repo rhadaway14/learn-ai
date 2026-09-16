@@ -26,3 +26,17 @@ def test_lesson_01_contains_core_explanations_and_interactions() -> None:
         assert concept in html
     for control in ("learningRate", "epochs", "samples", "noise", "relationship", "outlier"):
         assert f'id="{control}"' in html
+
+
+def test_lesson_01_interleaves_concepts_with_micro_interactions() -> None:
+    html = (LESSON / "index.html").read_text(encoding="utf-8")
+    for interaction in (
+        "scenarioCard",
+        "rolePrompt",
+        "lineConceptChart",
+        "mseRows",
+        "takeStep",
+        "leakFeedback",
+    ):
+        assert f'id="{interaction}"' in html
+    assert html.count('class="deep-dive"') >= 6
