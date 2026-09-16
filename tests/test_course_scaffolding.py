@@ -28,5 +28,7 @@ def test_course_defines_student_readiness_and_capstone_continuity() -> None:
     capstone = (ROOT / "CAPSTONE_PATH.md").read_text(encoding="utf-8")
     assert "no-surprise rule" in standard.lower()
     assert "Student-ready acceptance gate" in standard
+    assert "Concrete examples and responsible metaphors" in standard
+    assert "where each metaphor stops matching reality" in standard
     assert "Increment map" in capstone
     assert "What Lesson 35 must not require unexpectedly" in capstone

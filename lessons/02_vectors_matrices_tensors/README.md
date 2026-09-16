@@ -234,6 +234,45 @@ Transpose is important when vectors are stored in the wrong orientation for an i
 
 Broadcasting applies a compatible smaller tensor across a larger one without manually copying it.
 
+### Start with a spreadsheet metaphor
+
+Imagine four customers arranged as spreadsheet rows. Each customer has three product-category scores:
+
+| Customer | Category A | Category B | Category C |
+|---|---:|---:|---:|
+| 1 | 2 | 0 | −1 |
+| 2 | 1 | 3 | 0 |
+| 3 | −2 | 1 | 2 |
+| 4 | 0 | −1 | 1 |
+
+The table has shape `(4, 3)`: four customer rows and three category columns.
+
+Now suppose the model learned a baseline adjustment for each category:
+
+> `[0.5, −1, 2]`
+
+That bias has shape `(3,)`. It has no customer axis—only one value matching each category column. Broadcasting behaves as though the bias row were filled down across all four customers.
+
+For customer 1:
+
+> `[2, 0, −1] + [0.5, −1, 2] = [2.5, −1, 1]`
+
+The same position-by-position calculation happens for every row. The output remains shape `(4, 3)`.
+
+The spreadsheet metaphor is useful because it shows reuse. It is incomplete because array libraries follow exact dimension rules, not spreadsheet cell references.
+
+### The compatibility rule
+
+Compare shapes from right to left. Two dimensions are compatible when:
+
+- they are equal; or
+- one of them is `1`; or
+- the smaller tensor has no dimension there, allowing it to be reused along that axis.
+
+For `(4, 3) + (3,)`, the final dimensions both contain 3. The bias lacks the preceding customer dimension, so it is reused four times.
+
+For `(4, 3) + (4,)`, the final dimensions are 3 and 4. They conflict, so the operation is invalid. Four bias values cannot be matched to three feature columns.
+
 Suppose a neural-network layer produces shape `(4, 3)`:
 
 - 4 examples;
@@ -241,7 +280,7 @@ Suppose a neural-network layer produces shape `(4, 3)`:
 
 A bias vector with shape `(3,)` contains one adjustment for each output feature. Broadcasting adds that same three-value vector to all four rows. The output remains `(4, 3)`.
 
-Broadcasting is convenient, but an accidentally compatible shape can hide a semantic defect. A robust system names axes, checks shapes at boundaries, and tests known examples.
+Broadcasting is convenient, but mathematical compatibility is not semantic correctness. A three-value bias for product categories must not be added to three columns representing latitude, longitude, and altitude merely because both have length 3. A robust system names axes, checks expected shapes, and tests one known row by hand.
 
 ## Dense neural-network layers
 
@@ -271,15 +310,53 @@ The 10 input features have been transformed into 8 learned output features for e
 
 ## Embeddings and similarity
 
-An embedding maps an object to a vector. The object might be a token, document, image, product, user, or graph node. Training arranges the vector space so geometry is useful for a particular objective.
+An embedding maps an object to a fixed-length vector. The object might be a token, document, image, product, user, or graph node. Training arranges the vector space so geometry is useful for a particular objective.
+
+### Start with a map metaphor
+
+A city map assigns coordinates to places. Nearby coordinates represent nearby physical locations. An embedding model also assigns coordinates, but “nearby” usually means related according to what the model learned.
+
+- hiking boots may be near trail shoes in a product space;
+- “I forgot my login” may be near a help article titled “Reset your password” in a document space;
+- support tickets describing connection timeouts may form a neighborhood even when their wording differs.
+
+The metaphor has limits:
+
+- embedding spaces commonly have hundreds or thousands of dimensions rather than two;
+- individual axes usually do not have simple labels such as “formal” or “about passwords”;
+- proximity reflects the model's data and objective, not a universal definition of meaning;
+- close vectors can still be wrong for the user's task.
+
+### From object to searchable vector
+
+For semantic search, the process is:
+
+1. An embedding model receives a query such as “reset a forgotten password.”
+2. It returns a vector such as `[0.18, −0.42, ...]`.
+3. The same model has already embedded each help document.
+4. The system compares the query vector with document vectors.
+5. Documents with the strongest measured similarity become retrieval candidates.
+
+The vector does not contain a readable “password coordinate.” The relationship is distributed across many learned components.
+
+### Real-world uses
+
+| Use | What is embedded | What geometry helps do |
+|---|---|---|
+| Semantic search | Queries and documents | Retrieve related language even without exact keyword matches |
+| Recommendations | Users, products, or interactions | Find items with related behavioral patterns |
+| Clustering | Tickets, documents, or images | Group similar examples before labels are known |
+| Deduplication | Records or content | Identify likely near-duplicates for further checking |
+
+“Meaning into geometry” is convenient shorthand. More precisely, embeddings turn **relationships useful to the training objective** into geometric patterns.
 
 ### Dot product
 
-Sensitive to both direction and magnitude. Scaling one vector changes the score.
+Sensitive to both direction and magnitude. Scaling one vector changes the score. This is useful when vector size carries information, but confusing when only direction should matter.
 
 ### Euclidean distance
 
-Measures straight-line distance between vector endpoints. Scaling or shifting affects it.
+Measures straight-line distance between vector endpoints. Scaling or shifting affects it. Think of measuring the direct distance between two pins on a map, extended into many dimensions.
 
 ### Cosine similarity
 
@@ -295,11 +372,24 @@ $$
 
 The similarity interaction demonstrates that resizing a vector changes its dot product and distance while cosine similarity remains fixed if direction does not change.
 
+Cosine similarity is not a confidence percentage. A value of `0.82` means the vectors have a particular geometric relationship; it does not mean the answer is 82% correct.
+
 Similarity is not universal understanding. It reflects the embedding model's training data and objective. Production retrieval also depends on filters, indexing, data quality, reranking, and measured relevance.
 
 ## Batches and transformer shapes
 
 AI systems process multiple examples together for efficient hardware use. This introduces a batch axis.
+
+### Start with a tray-of-cards metaphor
+
+Imagine several trays being processed together:
+
+- each **tray** is one input sequence in the batch;
+- each ordered **card slot** is one token position;
+- each card carries a list of numeric **notes**, the hidden vector;
+- transformer layers update the notes using information from other cards while preserving the tray and slot organization.
+
+This metaphor explains the axes, but the notes are not human-readable facts. They are learned numeric activations, and attention mixes them through mathematical operations rather than physically moving cards.
 
 A common language-model activation shape is:
 
@@ -311,11 +401,33 @@ For `(8, 128, 768)`:
 - each sequence has 128 token positions;
 - each position has a 768-value learned representation.
 
+Read it as a nested statement:
+
+> There are 8 sequences. Inside every sequence are 128 ordered token slots. Attached to every slot is a vector containing 768 learned values.
+
 The middle axis contains ordered token positions. A token begins as a vocabulary ID, while the 768-number vector is the model's current representation at that position. The vector can change across layers as surrounding tokens contribute context, even though the position still refers to the same original input slot.
 
 The tensor contains `8 × 128 × 768 = 786,432` numeric activations.
 
-Transformer layers use matrix multiplication to produce query, key, and value vectors at each token position. Query-key dot products then produce attention scores. Lesson 13 will build that operation using the foundations taught here.
+### A smaller complete example
+
+Suppose the tokenizer produces five tokens for one sentence. The application pads each sentence in the batch to eight positions, then processes four sentences together. If the model uses 768 hidden values per position:
+
+> 4 sequences × 8 token slots × 768 values = 24,576 activations
+
+The tensor shape is `(4, 8, 768)`. Padding makes sequence lengths equal for efficient batching. An attention mask marks padded slots so the model does not treat them as ordinary content.
+
+### Why each axis exists
+
+| Axis | Why it exists | Real-world analogy |
+|---|---|---|
+| Batch | Hardware can process several examples efficiently together | Loading a dishwasher rather than washing one plate at a time |
+| Sequence | Token order changes meaning | “Dog bites person” differs from “person bites dog” |
+| Hidden | Each position needs a rich learned workspace | Many adjustable notes on each token card |
+
+Transformer layers often preserve batch and sequence sizes while transforming the hidden vectors. The token position stays organized, but its representation changes as context arrives. For example, the representation of “bank” should evolve differently in “river bank” and “bank account.”
+
+Transformer layers use matrix multiplication to produce query, key, and value vectors at each token position. Query-key dot products then produce attention scores, allowing each position to decide which other positions matter for its update. Lesson 13 will build that operation using the foundations taught here.
 
 ## Interactive practice sequence
 

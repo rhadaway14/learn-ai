@@ -23,6 +23,13 @@ Give a short diagnostic. For every missed prerequisite, point to the exact expla
 
 Introduce the problem first, then the mechanism that solves it.
 
+Include:
+
+- one realistic scenario that remains consistent through the explanation;
+- a familiar metaphor when it materially improves understanding;
+- a short “where the metaphor stops” note;
+- a return to the actual AI inputs, operation, output, and engineering use.
+
 ## Vocabulary
 
 Define every new term before using it. Contrast easily confused terms.
@@ -67,6 +74,8 @@ Show how the technique fails, how that failure appears, and how to diagnose it.
 ## Connection to modern AI
 
 Locate this primitive inside neural networks, transformers, retrieval, agents, training, or inference.
+
+Give at least two concrete real-world applications and explain what role the primitive plays in each one.
 
 ## Capstone increment
 

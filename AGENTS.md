@@ -31,6 +31,7 @@ Every implemented lesson should contain:
 - Explain tensor shapes at each important boundary.
 - Never make code syntax the accidental subject of a conceptual exercise.
 - Introduce every equation in words and with actual numbers before symbolic notation.
+- Ground every major concept in a realistic example and use clearly bounded metaphors where they improve understanding.
 - Keep tests fast; mark expensive or GPU-specific tests explicitly.
 
 ## Before committing

@@ -8,9 +8,11 @@ LESSON = ROOT / "lessons" / "02_vectors_matrices_tensors"
 def test_lesson_02_browser_experience_is_self_contained() -> None:
     html = (LESSON / "index.html").read_text(encoding="utf-8")
     assert '<link rel="stylesheet" href="styles.css">' in html
+    assert '<link rel="stylesheet" href="explanations.css">' in html
     assert '<script src="app.js"></script>' in html
     assert '<script src="../progress.js"></script>' in html
     assert (LESSON / "styles.css").is_file()
+    assert (LESSON / "explanations.css").is_file()
     assert (LESSON / "app.js").is_file()
 
 
@@ -54,6 +56,19 @@ def test_lesson_02_explains_tokens_tensor_layers_and_operation_relevance() -> No
     assert 'id="objectAxisKey"' in html
     assert 'class="tensor-layer"' in script
     assert "token positions per sequence" in script
+
+
+def test_lesson_02_elaborates_broadcasting_embeddings_and_transformer_shapes() -> None:
+    html = (LESSON / "index.html").read_text(encoding="utf-8")
+    for explanation in (
+        "Metaphor: fill the formula down",
+        "Metaphor: a learned map with neighborhoods",
+        "Metaphor: trays of annotated index cards",
+        "Where the metaphor stops",
+        "Build the shape one axis at a time",
+    ):
+        assert explanation in html
+    assert html.count('class="quiz"') >= 6
 
 
 def test_course_dashboard_tracks_all_lessons() -> None:

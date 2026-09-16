@@ -1,0 +1,120 @@
+.metaphor {
+  margin: 24px 0;
+  padding: 22px;
+  border-radius: 10px;
+  border: 1px solid #b9d8d3;
+  border-left: 5px solid var(--teal);
+  background: #f0faf8;
+}
+
+.metaphor > strong {
+  font-size: 19px;
+}
+
+.metaphor small {
+  display: block;
+  margin-top: 12px;
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.broadcast-steps,
+.real-world-grid,
+.shape-anatomy,
+.embedding-pipeline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.broadcast-steps article,
+.real-world-grid article,
+.shape-anatomy article,
+.embedding-pipeline article {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: white;
+}
+
+.broadcast-steps article > strong,
+.shape-anatomy article > strong {
+  display: block;
+  color: var(--blue);
+  font-size: 18px;
+}
+
+.broadcast-steps p,
+.real-world-grid p,
+.shape-anatomy p,
+.embedding-pipeline p {
+  margin-bottom: 0;
+}
+
+.shape-anatomy article {
+  border-top: 4px solid var(--blue);
+}
+
+.shape-anatomy small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .1em;
+}
+
+.embedding-pipeline {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.embedding-pipeline article {
+  position: relative;
+}
+
+.embedding-pipeline article > span {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 12px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--blue);
+  color: white;
+  font-weight: 800;
+}
+
+.shape-build {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 18px 0;
+  padding: 18px;
+  border-radius: 9px;
+  background: white;
+}
+
+.shape-build span,
+.shape-build strong {
+  padding: 7px 9px;
+  border-radius: 6px;
+  background: #e9f0ff;
+}
+
+@media (max-width: 800px) {
+  .broadcast-steps,
+  .real-world-grid,
+  .shape-anatomy {
+    grid-template-columns: 1fr;
+  }
+
+  .embedding-pipeline {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .embedding-pipeline {
+    grid-template-columns: 1fr;
+  }
+}

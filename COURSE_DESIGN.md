@@ -32,6 +32,16 @@ State what the lesson assumes. Provide a short diagnostic and remediation links 
 
 Explain the mechanism without notation. Use one concrete example consistently rather than switching domains repeatedly.
 
+### 3a. Concrete examples and responsible metaphors
+
+Every major concept must include at least one realistic use and one familiar mental model when a metaphor genuinely improves understanding.
+
+- State the concrete situation before abstracting it into variables or shapes.
+- Explain exactly how the concept appears in an AI system or engineering workflow.
+- Label metaphors as metaphors and state where each metaphor stops matching reality.
+- Reuse a coherent scenario long enough for the learner to reason with it.
+- Do not replace the mechanism with an analogy; return to the actual inputs, operation, output, and failure mode.
+
 ### 4. Vocabulary
 
 Define every new term before using it. Distinguish terms that are commonly confused.
@@ -106,6 +116,7 @@ A lesson is student-ready only when all answers are yes.
 | Purpose | Does the learner know why the topic exists before meeting its terminology? |
 | Prerequisites | Are assumptions explicit, diagnosable, and remediable? |
 | Concepts | Is every new term explained in plain language? |
+| Examples | Does every major concept include a concrete use, and are metaphors useful and explicitly bounded? |
 | Math | Is each equation motivated, worked numerically, and symbol-by-symbol defined? |
 | Guidance | Is there a complete example before independent work? |
 | Practice | Does support fade gradually instead of disappearing at once? |
