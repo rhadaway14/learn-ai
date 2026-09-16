@@ -40,6 +40,22 @@ def test_lesson_02_has_required_interactions() -> None:
         assert f'id="{interaction}"' in html
 
 
+def test_lesson_02_explains_tokens_tensor_layers_and_operation_relevance() -> None:
+    html = (LESSON / "index.html").read_text(encoding="utf-8")
+    script = (LESSON / "app.js").read_text(encoding="utf-8")
+    for concept in (
+        "A token is a piece of input assigned a vocabulary ID",
+        "Why addition matters in AI",
+        "Why magnitude matters in AI",
+        "Why one score is useful",
+        "What “transformation” means here",
+    ):
+        assert concept in html
+    assert 'id="objectAxisKey"' in html
+    assert 'class="tensor-layer"' in script
+    assert "token positions per sequence" in script
+
+
 def test_course_dashboard_tracks_all_lessons() -> None:
     html = (ROOT / "course.html").read_text(encoding="utf-8")
     script = (ROOT / "course.js").read_text(encoding="utf-8")

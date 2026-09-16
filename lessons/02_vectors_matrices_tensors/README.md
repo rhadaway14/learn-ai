@@ -53,6 +53,34 @@ A **tensor** is the general term for a numeric collection with zero or more axes
 | Rank-3 tensor | 3 | `(8, 128, 768)` | Sequences, token positions, values per token |
 | Rank-4 tensor | 4 | `(32, 3, 224, 224)` | Images, color channels, height, width |
 
+### What a token means in this lesson
+
+A language model cannot operate directly on the sentence you type. A **tokenizer** first divides the text into pieces selected from that model's vocabulary. A token can be:
+
+- a whole word;
+- part of a word;
+- punctuation;
+- whitespace or a whitespace-plus-word combination;
+- a special marker added by the model or application.
+
+For illustration, a tokenizer might divide `unbelievable!` into pieces resembling:
+
+> `un` · `believ` · `able` · `!`
+
+The exact split and numeric IDs depend on the tokenizer. The example should not be treated as the output of every model.
+
+Each vocabulary piece receives an integer **token ID**. The model uses that ID to look up an initial vector called a token embedding. As the vector passes through transformer layers, it becomes a context-sensitive hidden representation. Therefore these are different things:
+
+| Term | Meaning |
+|---|---|
+| Token | One model-specific piece of the input sequence |
+| Token ID | The integer used to identify that vocabulary piece |
+| Token position | The ordered slot occupied by the token in a sequence |
+| Token embedding | The initial learned vector retrieved for the token ID |
+| Hidden vector | The representation at that position after some model processing |
+
+One token does **not** necessarily equal one word. “128 token positions” means 128 ordered model-input slots, not necessarily 128 words.
+
 ## Rank, shape, and meaning
 
 **Rank** answers “how many axes?”
@@ -83,6 +111,14 @@ $$
 
 This assumes corresponding positions have compatible meaning. Adding `[height, age]` to `[temperature, income]` is numerically possible but semantically meaningless.
 
+Addition is relevant because models frequently need to preserve and combine compatible signals:
+
+- a transformer adds a token embedding and position embedding so the vector carries both token identity and location;
+- a residual connection adds a layer's input back to its output, preserving a direct information path;
+- a bias vector adds one learned adjustment to each output feature across a batch.
+
+The crucial word is **compatible**. Vector addition assumes the same position in both vectors refers to the same learned coordinate or feature.
+
 Scaling multiplies every component by one scalar:
 
 $$
@@ -105,6 +141,15 @@ $$
 
 The subscript `2` names the L2 or Euclidean norm. The lesson's magnitude interaction lets you change components and see the geometric length.
 
+Magnitude is relevant because it measures overall scale:
+
+- cosine similarity divides by magnitudes so it compares direction rather than raw size;
+- gradient magnitude describes the size of a proposed parameter update;
+- extremely large activation or gradient magnitudes can signal unstable training;
+- normalization methods control scale so later calculations behave more predictably.
+
+Magnitude does not, by itself, explain what a vector means. Different vectors can have the same length while pointing in completely different directions.
+
 ## Dot product
 
 The dot product takes two equally long vectors and produces one scalar:
@@ -124,6 +169,15 @@ $$
 
 Positive paired components raise the score. Opposing signs lower it. The result combines alignment with magnitude.
 
+Reducing many component comparisons to one score is useful whenever a model must rank, activate, or choose:
+
+- a neuron compares an input vector with its learned weight vector;
+- a retrieval system ranks a document vector against a query vector;
+- attention compares one token position's query with other positions' keys;
+- a classifier produces one score, or logit, for each possible category.
+
+A large dot product may result from close directional alignment, large vector magnitudes, or both. If magnitude should not affect the comparison, normalize the vectors or use cosine similarity.
+
 Dot products appear throughout AI:
 
 - a neuron forms a weighted sum of inputs;
@@ -134,6 +188,14 @@ Dot products appear throughout AI:
 ## Matrices
 
 A matrix has rows and columns. In a data matrix, rows often represent examples and columns represent features—but never assume this without checking the contract.
+
+### What a transformation means
+
+A transformation maps a vector from one representation to another. Matrix multiplication mixes the input components using learned weights. It can change both the number and interpretation of the components.
+
+For example, a vector with 10 measured input features can be transformed into 8 learned features. Each output feature is a different weighted combination of all 10 inputs. In a transformer, separate learned matrices transform each token's hidden vector into query, key, and value vectors.
+
+Geometrically, matrices can stretch, shrink, rotate, reflect, and combine directions. In machine learning, training adjusts those transformations until the resulting representation helps minimize the task's loss. The matrix does not automatically know the desired meaning; that behavior emerges from the learned weights and training objective.
 
 ### Matrix multiplication
 
@@ -248,6 +310,8 @@ For `(8, 128, 768)`:
 - 8 sequences are processed together;
 - each sequence has 128 token positions;
 - each position has a 768-value learned representation.
+
+The middle axis contains ordered token positions. A token begins as a vocabulary ID, while the 768-number vector is the model's current representation at that position. The vector can change across layers as surrounding tokens contribute context, even though the position still refers to the same original input slot.
 
 The tensor contains `8 × 128 × 768 = 786,432` numeric activations.
 
