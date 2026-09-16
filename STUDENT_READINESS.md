@@ -11,7 +11,8 @@ The original repository scaffold implemented runnable topic demonstrations for a
 | 03 | Loss functions and optimization | Yes | Yes | Yes |
 | 04 | Probability and statistics | Yes | Yes | Yes |
 | 05 | Regression and classification | Yes | Yes | Yes |
-| 06–10 | Neural-network foundations | Yes | Review required | Review required |
+| 06 | Neural-network anatomy | Yes | Yes | Yes |
+| 07–10 | Remaining neural-network foundations | Yes | Review required | Review required |
 | 11–16 | Language-model mechanics | Yes | Review required | Review required |
 | 17–23 | LLM application engineering | Yes | Review required | Review required |
 | 24–30 | Evaluation, security, and operations | Yes | Review required | Review required |

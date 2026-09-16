@@ -61,13 +61,14 @@ Notes:
 
 ## Lesson 06 — Neural Network Anatomy
 
-- [ ] Read the lesson and predict the lab result
-- [ ] Run the lab
-- [ ] Complete the exercise
-- [ ] Perform and record the experiment
-- [ ] Analyze the failure mode
-- [ ] Answer the checkpoint questions
-- [ ] Write plain-language and technical explanations
+- [ ] Complete the interactive browser lesson
+- [ ] Calculate neuron pre-activations and activated outputs
+- [ ] Trace dense-layer shapes and parameter counts
+- [ ] Compare ReLU, sigmoid, tanh, and linear activations
+- [ ] Explain why linear-only depth collapses
+- [ ] Diagnose shape, dead-ReLU, saturation, and capacity failures
+- [ ] Produce the capstone neural architecture and tensor-shape contract
+- [ ] Mark the lesson complete on the course dashboard
 
 Notes:
 

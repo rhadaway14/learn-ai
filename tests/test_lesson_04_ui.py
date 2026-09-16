@@ -75,6 +75,6 @@ def test_lesson_04_reading_explains_core_statistical_cautions() -> None:
 
 def test_course_dashboard_opens_lesson_04_interactively() -> None:
     script = (ROOT / "course.js").read_text(encoding="utf-8")
-    assert "number<=5" in script
-    assert "requestedLesson<=5" in script
+    assert "number<=6" in script
+    assert "requestedLesson<=6" in script
     assert '"04_probability_and_statistics_for_ml"' in script
