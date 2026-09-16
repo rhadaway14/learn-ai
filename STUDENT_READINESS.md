@@ -7,7 +7,7 @@ The original repository scaffold implemented runnable topic demonstrations for a
 | Lesson | Topic | Material exists | Student-ready | Capstone increment verified |
 |---:|---|:---:|:---:|:---:|
 | 01 | How machines learn | Yes | Yes | Yes |
-| 02 | Vectors, matrices, and tensors | Yes | Review required | Review required |
+| 02 | Vectors, matrices, and tensors | Yes | Yes | Yes |
 | 03 | Loss functions and optimization | Yes | Review required | Review required |
 | 04 | Probability and statistics | Yes | Review required | Review required |
 | 05 | Regression and classification | Yes | Review required | Review required |

@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Learn AI — Course Progress</title><link rel="stylesheet" href="course.css"><link rel="stylesheet" href="course-viewer.css"></head>
+<body>
+  <header><a href="course.html" class="brand">Learn AI</a><span>Your learning path</span></header>
+  <section id="lessonViewer" class="lesson-viewer" hidden><div class="viewer-bar"><a href="course.html">← Course progress</a><span id="viewerTitle">Interactive lesson</span></div><iframe id="lessonFrame" title="Interactive course lesson"></iframe></section>
+  <main>
+    <section class="hero"><div><p class="eyebrow">AI ENGINEER → AI ARCHITECT</p><h1>Course progress</h1><p>Thirty-five cumulative lessons, five milestone projects, and one production-grade capstone. Progress is stored only in this browser.</p><a id="continueLink" class="primary" href="lessons/01_linear_regression/index.html">Continue learning</a></div><div class="summary"><strong id="completedCount">0</strong><span>of 35 lessons complete</span><div class="bar"><i id="progressBar"></i></div><small id="progressPercent">0%</small></div></section>
+    <section class="controls"><div><h2>Lessons</h2><p>Interactive lessons open in the course interface. Lessons awaiting instructional review link to their current reading material.</p></div><button id="resetProgress">Reset saved progress</button></section>
+    <div id="coursePhases"></div>
+  </main>
+  <footer><span>Progress remains on this device in browser storage.</span><a href="README.md">Repository guide</a></footer>
+  <script src="lessons/progress.js"></script><script src="course.js"></script>
+</body>
+</html>

@@ -27,7 +27,9 @@ No programming environment is required.
 
 1. Download the repository using GitHub's **Code → Download ZIP** option.
 2. Extract the ZIP file.
-3. Open `lessons/01_linear_regression/index.html` in Chrome, Edge, Firefox, or Safari.
+3. Open `course.html` in Chrome, Edge, Firefox, or Safari.
+
+The course dashboard launches interactive lessons, resumes the next unfinished lesson, and shows completed lessons. Progress is stored locally in the browser and requires no account.
 
 The complete lesson and interactive lab run locally in the browser without an account, terminal, installation, or internet connection.
 

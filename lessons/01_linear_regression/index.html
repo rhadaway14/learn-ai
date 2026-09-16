@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lesson 1 — How Machines Learn</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../progress-ui.css">
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#top">Learn AI</a>
+    <a class="brand" href="../../course.html" target="_top">Learn AI</a>
     <div class="progress-wrap" aria-label="Course progress">
-      <span>Lesson 1 of 35</span>
+      <a href="../../course.html" target="_top">Course progress</a><span>Lesson 1 of 35</span>
       <div class="progress"><span></span></div>
     </div>
   </header>
@@ -252,10 +253,11 @@
       <div class="completion">
         <h3>You are ready for Lesson 2 when you can explain:</h3>
         <ul><li>how a feature, label, prediction, and model differ;</li><li>why loss is needed;</li><li>how gradients and learning rate work together;</li><li>why unseen test data matters;</li><li>why a straight line cannot perfectly fit a curve.</li></ul>
+        <div class="completion-actions"><button id="completeLesson" class="button">Mark Lesson 1 complete</button><a href="../../course.html" target="_top" class="secondary-button">View course progress</a></div><p id="completionStatus" aria-live="polite"></p>
       </div>
     </section>
   </main>
   <footer><strong>Learn AI</strong><span>Lesson 1 · Machine-learning foundations</span></footer>
-  <script src="app.js"></script>
+  <script src="../progress.js"></script><script src="app.js"></script>
 </body>
 </html>

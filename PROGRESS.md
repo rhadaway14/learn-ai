@@ -13,8 +13,11 @@ Notes:
 
 ## Lesson 02 — Vectors, Matrices, and Tensors
 
-- [ ] Run the lab and complete exercises.py
+- [ ] Complete the interactive browser lesson
+- [ ] Complete the rank, shape, vector, matrix, broadcasting, and similarity interactions
 - [ ] Explain shapes, dot products, matrix multiplication, batching, and embeddings
+- [ ] Produce the capstone data-shape contract
+- [ ] Mark the lesson complete on the course dashboard
 
 Notes:
 

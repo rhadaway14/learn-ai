@@ -1,4 +1,5 @@
 "use strict";
+CourseProgress.visit(1);
 
 const controls = {
   learningRate: document.querySelector("#learningRate"),
@@ -262,3 +263,12 @@ document.querySelectorAll(".quiz").forEach(quiz => quiz.querySelectorAll("button
 })));
 updateLabels(); run();
 showScenario(); drawConceptLine(); drawMse(); updateStep();
+
+function completionState() {
+  const done = CourseProgress.isComplete(1);
+  document.querySelector("#completeLesson").textContent = done ? "Lesson 1 completed ✓" : "Mark Lesson 1 complete";
+  document.querySelector("#completionStatus").textContent = done ? "Your course dashboard has been updated." : "Completion is stored in this browser.";
+}
+document.querySelector("#completeLesson").addEventListener("click", () => { CourseProgress.complete(1); completionState(); });
+window.addEventListener("course-progress", completionState);
+completionState();

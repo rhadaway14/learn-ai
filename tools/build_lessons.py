@@ -196,7 +196,7 @@ Review this only after completing an attempt.
 The reference is a minimum viable explanation, not the only valid solution.
 """
         write_if_missing(directory / "SOLUTIONS.md", solutions)
-        relative = directory.relative_to(ROOT).as_posix()
+        relative = directory.relative_to(ROOT / "lessons").as_posix()
         index_rows.append(
             f"| {number:02d} | {title} | [Lesson]({relative}/README.md) · "
             f"[Exercises]({relative}/EXERCISES.md) · [Reference]({relative}/SOLUTIONS.md) |"
@@ -220,12 +220,10 @@ The reference is a minimum viable explanation, not the only valid solution.
 
     lessons_root = ROOT / "lessons"
     existing = [
-        "| 01 | Machine Learning and Linear Regression | "
-        "[Lesson](01_linear_regression/README.md) |",
-        "| 02 | Vectors, Matrices, and Tensors | "
-        "[Lesson](02_vectors_matrices_tensors/README.md) · "
-        "[Exercises](02_vectors_matrices_tensors/exercises.py) · "
-        "[Reference](02_vectors_matrices_tensors/solutions.py) |",
+        "| 01 | How Machines Learn: Linear Regression | "
+        "[Interactive lesson](01_linear_regression/index.html) · [Reading](01_linear_regression/README.md) |",
+        "| 02 | The Shapes of AI Data | "
+        "[Interactive lesson](02_vectors_matrices_tensors/index.html) · [Reading](02_vectors_matrices_tensors/README.md) |",
     ]
     index_rows[6:6] = existing
     write_if_missing(lessons_root / "README.md", "\n".join(index_rows) + "\n")
@@ -240,8 +238,9 @@ The reference is a minimum viable explanation, not the only valid solution.
         "",
         "## Lesson 02 — Vectors, Matrices, and Tensors",
         "",
-        "- [ ] Run the lab and complete exercises.py",
+        "- [ ] Complete the interactive browser lesson",
         "- [ ] Explain shapes, dot products, matrix multiplication, batching, and embeddings",
+        "- [ ] Produce the capstone data-shape contract",
         "",
         "Notes:",
         "",

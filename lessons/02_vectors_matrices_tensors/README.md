@@ -1,53 +1,89 @@
-# Lesson 02 — Vectors, Matrices, and Tensors
+# Lesson 02 — The Shapes of AI Data
 
-## Why this lesson matters
+## Start here
 
-Modern AI is largely organized numerical computation. Tokens become vectors, collections of vectors become matrices, batches become higher-dimensional tensors, and model layers transform them with matrix multiplication.
+Open [index.html](index.html) in a browser. The complete lesson is visual and interactive. It requires no Python, terminal, installation, account, or internet connection.
 
-You do not need to become a mathematician before building AI systems. You do need to be comfortable answering two questions:
+Lesson 2 builds the mathematical vocabulary used throughout neural networks, embeddings, attention, image models, and language models. The goal is not memorizing notation. The goal is answering two engineering questions reliably:
 
-1. What does each axis represent?
-2. Are the shapes compatible with the operation?
+1. What does each axis mean?
+2. Are the shapes compatible with the intended operation?
 
-Shape errors are the compiler errors of machine learning—except they often arrive after the expensive GPU job starts, because the universe enjoys timing.
+## Prerequisites
 
-## 1. Scalars, vectors, matrices, tensors
+You should be able to:
 
-| Object | Example shape | Interpretation |
-|---|---:|---|
-| Scalar | `()` | One number, such as loss |
-| Vector | `(3,)` | One ordered feature or embedding vector |
-| Matrix | `(4, 3)` | Four examples, each with three features |
-| Rank-3 tensor | `(8, 128, 768)` | Eight sequences, 128 tokens each, 768 values per token |
-| Rank-4 tensor | `(32, 3, 224, 224)` | Image batch: batch, channels, height, width |
+- add and multiply ordinary numbers;
+- understand that an ordered list keeps values in specific positions;
+- explain the Lesson 1 terms feature, model, prediction, and parameter.
 
-A **tensor** is the general term for a multidimensional numeric array. In this course, **rank** means the number of axes. A tensor's `shape` gives the size of each axis.
+No linear-algebra or programming background is assumed.
 
-```python
-scalar.shape       # ()
-vector.shape       # (3,)
-matrix.shape       # (4, 3)
-token_batch.shape  # (8, 128, 768)
-```
+## Learning outcomes
 
-Be careful: “rank” can also mean matrix rank in linear algebra. Context determines which meaning is intended.
+After completing the lesson, you should be able to:
 
-## 2. Vectors
+- distinguish scalars, vectors, matrices, and higher-rank tensors;
+- distinguish tensor rank from tensor shape;
+- attach semantic names to axes;
+- perform and explain element-wise vector operations;
+- calculate vector magnitude and a dot product;
+- determine whether two matrix shapes can multiply;
+- calculate an individual matrix-multiplication cell;
+- explain transpose and broadcasting;
+- explain how a dense neural-network layer uses matrix multiplication and bias;
+- compare dot product, Euclidean distance, and cosine similarity;
+- interpret a transformer activation shape such as `(8, 128, 768)`.
 
-A vector can represent many things:
+## Scalars, vectors, matrices, and tensors
 
-- a row of input features: `[square_feet, bedrooms, age]`;
-- a learned embedding for a word, image, or document;
-- the activations within one neural-network layer;
-- a gradient indicating how parameters should change.
+A **scalar** is one number. Loss in Lesson 1 was a scalar.
 
-Vector addition is element-wise:
+A **vector** is an ordered one-axis collection of numbers. One vector might describe a house using size, bedrooms, and age. The order and units are part of its meaning.
+
+A **matrix** is a two-axis collection. A table containing examples as rows and features as columns can be represented as a matrix.
+
+A **tensor** is the general term for a numeric collection with zero or more axes. Scalars, vectors, and matrices are all tensors. In practice, people often say “tensor” especially when an object has three or more axes.
+
+| Object | Tensor rank | Example shape | Possible meaning |
+|---|---:|---:|---|
+| Scalar | 0 | `()` | One loss value |
+| Vector | 1 | `(3,)` | One example with three features |
+| Matrix | 2 | `(4, 3)` | Four examples with three features each |
+| Rank-3 tensor | 3 | `(8, 128, 768)` | Sequences, token positions, values per token |
+| Rank-4 tensor | 4 | `(32, 3, 224, 224)` | Images, color channels, height, width |
+
+## Rank, shape, and meaning
+
+**Rank** answers “how many axes?”
+
+**Shape** answers “how long is every axis, in order?”
+
+Shape `(4, 3)` tells us there are two axes with lengths 4 and 3. It does not tell us whether those axes mean customers and features, documents and terms, or something else.
+
+Axis semantics are a contract. Two components can agree that a tensor has shape `(32, 8)` while disagreeing about whether the first axis means examples or features. The computation may run and still be wrong.
+
+## Vectors
+
+A vector can represent:
+
+- input features for one example;
+- a learned embedding;
+- activations inside a model;
+- gradients for several parameters;
+- probabilities across categories.
+
+### Element-wise operations
+
+Element-wise addition combines matching positions:
 
 $$
 [1,2,3]+[4,5,6]=[5,7,9]
 $$
 
-Multiplication by a scalar scales every component:
+This assumes corresponding positions have compatible meaning. Adding `[height, age]` to `[temperature, income]` is numerically possible but semantically meaningless.
+
+Scaling multiplies every component by one scalar:
 
 $$
 2[1,2,3]=[2,4,6]
@@ -55,157 +91,256 @@ $$
 
 ### Magnitude
 
-The Euclidean magnitude (L2 norm) is:
+Magnitude measures vector length from the origin. For `[3, 4]`:
+
+1. Square the components: `9` and `16`.
+2. Add them: `25`.
+3. Take the square root: `5`.
+
+The symbolic form compresses those steps:
 
 $$
-\|x\|_2=\sqrt{\sum_i x_i^2}
+\lVert x\rVert_2=\sqrt{\sum_i x_i^2}
 $$
 
-For `[3, 4]`, the magnitude is `5`.
+The subscript `2` names the L2 or Euclidean norm. The lesson's magnitude interaction lets you change components and see the geometric length.
 
-### Dot product
+## Dot product
 
-For equal-length vectors:
+The dot product takes two equally long vectors and produces one scalar:
+
+1. multiply values at matching positions;
+2. add all of those products.
+
+For `[1, 2, 3]` and `[4, −1, 2]`:
+
+> `(1 × 4) + (2 × −1) + (3 × 2) = 8`
+
+Symbolically:
 
 $$
 a\cdot b=\sum_i a_i b_i
 $$
 
-The dot product combines corresponding components into one scalar. It is both a weighted sum and a measure connected to alignment. Neural-network neurons and attention scores rely on this operation.
+Positive paired components raise the score. Opposing signs lower it. The result combines alignment with magnitude.
 
-## 3. Matrices and matrix multiplication
+Dot products appear throughout AI:
 
-A matrix is a two-dimensional arrangement of values. If a batch contains 100 examples with 4 features each, its shape is `(100, 4)`.
+- a neuron forms a weighted sum of inputs;
+- attention scores query-key alignment;
+- similarity systems compare vector representations;
+- matrix multiplication organizes many dot products at once.
 
-Matrix multiplication is not element-wise multiplication:
+## Matrices
+
+A matrix has rows and columns. In a data matrix, rows often represent examples and columns represent features—but never assume this without checking the contract.
+
+### Matrix multiplication
+
+Matrix multiplication is not element-wise multiplication. Each result cell is a dot product between:
+
+- one row from the left matrix;
+- one column from the right matrix.
+
+For shapes:
 
 $$
 (m\times n)(n\times p)\rightarrow(m\times p)
 $$
 
-The inner dimensions must match.
+The two `n` dimensions must match because both identify the number of values participating in each dot product. That shared dimension is consumed. The outside dimensions determine the output shape.
 
-Suppose `X` is a batch with shape `(batch, input_features)`, `W` has shape `(input_features, output_features)`, and `b` has shape `(output_features,)`:
+Example:
+
+> `(2, 3) × (3, 4) → (2, 4)`
+
+There will be two output rows and four output columns, and every output cell combines three paired values.
+
+The interactive cell inspector shows the exact row-column calculation for every result cell.
+
+## Transpose
+
+Transposing a matrix swaps its two axes. A `(2, 3)` matrix becomes `(3, 2)`:
+
+- the first original row becomes the first new column;
+- the second original row becomes the second new column;
+- no value is discarded.
+
+Transpose is important when vectors are stored in the wrong orientation for an intended dot product. Attention later computes query-key scores using a transposed key matrix.
+
+## Broadcasting
+
+Broadcasting applies a compatible smaller tensor across a larger one without manually copying it.
+
+Suppose a neural-network layer produces shape `(4, 3)`:
+
+- 4 examples;
+- 3 output features per example.
+
+A bias vector with shape `(3,)` contains one adjustment for each output feature. Broadcasting adds that same three-value vector to all four rows. The output remains `(4, 3)`.
+
+Broadcasting is convenient, but an accidentally compatible shape can hide a semantic defect. A robust system names axes, checks shapes at boundaries, and tests known examples.
+
+## Dense neural-network layers
+
+A dense layer transforms a batch of input vectors:
 
 $$
 Y=XW+b
 $$
 
-Then `Y` has shape `(batch, output_features)`. That equation is the computational core of a dense neural-network layer.
+Read it in words:
 
-NumPy's `@` operator performs matrix multiplication:
+> output = input batch × weight matrix + bias vector
 
-```python
-output = inputs @ weights + bias
-```
+If:
 
-## 4. Transpose
+- input batch `X` has shape `(32, 10)`;
+- weights `W` have shape `(10, 8)`;
+- bias `b` has shape `(8,)`;
 
-Transposing a 2D matrix swaps its axes:
+then:
 
-```python
-matrix.shape    # (2, 3)
-matrix.T.shape  # (3, 2)
-```
+1. `(32, 10) × (10, 8)` produces `(32, 8)`;
+2. the `(8,)` bias broadcasts across all 32 rows;
+3. the final output shape is `(32, 8)`.
 
-Transpose becomes important whenever examples and features are oriented differently, and later when attention computes `Q @ K.T`.
+The 10 input features have been transformed into 8 learned output features for each example.
 
-## 5. Broadcasting
+## Embeddings and similarity
 
-Broadcasting lets NumPy apply compatible smaller arrays across larger ones. In:
+An embedding maps an object to a vector. The object might be a token, document, image, product, user, or graph node. Training arranges the vector space so geometry is useful for a particular objective.
 
-```python
-output = inputs @ weights + bias
-```
+### Dot product
 
-`inputs @ weights` might be `(32, 8)`, while `bias` is `(8,)`. NumPy adds the same bias vector to each of the 32 rows.
+Sensitive to both direction and magnitude. Scaling one vector changes the score.
 
-Broadcasting is convenient, but an accidentally compatible shape can silently calculate the wrong thing. Always attach semantic names to axes.
+### Euclidean distance
 
-## 6. Embeddings and similarity
+Measures straight-line distance between vector endpoints. Scaling or shifting affects it.
 
-An embedding maps an object to a vector. Similar meanings should be represented by vectors that point in similar directions.
+### Cosine similarity
 
-Cosine similarity is:
+Compares direction while normalizing both vector lengths:
 
 $$
-\cos(\theta)=\frac{a\cdot b}{\|a\|\|b\|}
+\cos(\theta)=\frac{a\cdot b}{\lVert a\rVert\lVert b\rVert}
 $$
 
-It ranges from `-1` to `1` for nonzero real vectors:
+- `1` means the same direction;
+- `0` means a right angle;
+- `−1` means opposite directions.
 
-- `1`: same direction;
-- `0`: orthogonal;
-- `-1`: opposite direction.
+The similarity interaction demonstrates that resizing a vector changes its dot product and distance while cosine similarity remains fixed if direction does not change.
 
-Cosine similarity cares about direction rather than magnitude. That is often desirable in semantic retrieval, although production retrieval decisions also involve model quality, normalization, distance metric, indexing, filtering, and reranking.
+Similarity is not universal understanding. It reflects the embedding model's training data and objective. Production retrieval also depends on filters, indexing, data quality, reranking, and measured relevance.
 
-## 7. Connection to transformers
+## Batches and transformer shapes
 
-A language model might represent a batch as:
+AI systems process multiple examples together for efficient hardware use. This introduces a batch axis.
 
-```text
-(batch_size, sequence_length, hidden_dimension)
-```
+A common language-model activation shape is:
+
+> `(batch, sequence, hidden)`
 
 For `(8, 128, 768)`:
 
 - 8 sequences are processed together;
-- each sequence contains 128 token positions;
-- each token is represented by 768 values.
+- each sequence has 128 token positions;
+- each position has a 768-value learned representation.
 
-Linear projections turn those token representations into queries, keys, and values. Attention later computes a scaled form of:
+The tensor contains `8 × 128 × 768 = 786,432` numeric activations.
 
-$$
-QK^T
-$$
+Transformer layers use matrix multiplication to produce query, key, and value vectors at each token position. Query-key dot products then produce attention scores. Lesson 13 will build that operation using the foundations taught here.
 
-The dot products express how strongly each token's query aligns with each token's key. We will derive and implement this in the attention lesson.
+## Interactive practice sequence
 
-## Lab
+Complete these in [index.html](index.html):
 
-Run:
+1. Change tensor rank and interpret shape.
+2. Identify an axis in a transformer-shaped tensor.
+3. Add and scale vectors.
+4. Construct vector magnitude geometrically.
+5. Change dot-product components and explain the score.
+6. Validate compatible and incompatible matrix shapes.
+7. Inspect every cell of a matrix product.
+8. Transpose a matrix.
+9. Apply one broadcast bias across a batch.
+10. Compare embedding similarity measures.
+11. Configure and explain a transformer activation tensor.
 
-```bash
-python lessons/02_vectors_matrices_tensors/lab.py
-```
+## Common failures
 
-Then open `outputs/vectors_and_transformations.png`.
+### Inner dimensions do not match
 
-Complete each `TODO` in `exercises.py`, then run the learner check:
+The row and column used for an output dot product have different lengths. Recheck orientation and whether a transpose is intended.
 
-```bash
-python lessons/02_vectors_matrices_tensors/check_exercises.py
-```
+### Shape is valid but meaning is wrong
 
-Only compare with `solutions.py` after making a serious attempt. The repository's normal `pytest` suite verifies the reference implementation and should remain green even while your learner exercises are intentionally incomplete.
+Axes or component order were swapped. Attach semantic names and test a small known example.
 
-## Experiments
+### Broadcasting silently changes the wrong axis
 
-1. Change the feature vector and dense-layer weights. Predict the output shape and values first.
-2. Multiply one embedding by `10`. Compare dot product, Euclidean distance, and cosine similarity before and after scaling.
-3. Add a second example to the dense-layer batch. Verify the weights do not change shape.
-4. Intentionally try `(2, 3) @ (4, 2)`. Read the error and explain the inner-dimension mismatch.
+The smaller shape is numerically compatible but not semantically intended. Assert the expected output and axis roles.
+
+### High similarity is treated as proof of relevance
+
+The embedding or distance function may not represent the task well. Evaluate retrieval on labeled queries and expected evidence.
+
+### A zero vector is used with cosine similarity
+
+Its magnitude is zero, so division by both magnitudes is undefined.
+
+## Capstone increment
+
+Create a data-shape contract for the future AI delivery advisor. Name and describe:
+
+- one raw input example;
+- one document or evidence representation;
+- one embedding vector;
+- one batch of embeddings;
+- one retrieval-result set;
+- the expected shape and meaning of every axis.
+
+Include at least one invalid shape example and explain how the system will detect it.
 
 ## Knowledge checkpoint
 
-Answer without looking back:
-
-1. What is the difference among a scalar, vector, matrix, and tensor?
-2. What does tensor rank mean here, and how is it different from shape?
-3. Why must the inner dimensions match during matrix multiplication?
-4. Why does a dense layer use matrix multiplication?
-5. What does a dot product produce, and where does it appear in AI?
-6. Why can cosine similarity remain unchanged when a vector is scaled?
-7. Interpret `(16, 256, 1024)` for an LLM activation tensor.
-8. What operation allows one bias vector to be added to every example in a batch?
+1. How do scalar, vector, matrix, and tensor relate?
+2. How do rank and shape differ?
+3. Why is axis meaning not contained in shape alone?
+4. What does vector magnitude measure?
+5. How is a dot product calculated and what does it produce?
+6. Why must matrix-multiplication inner dimensions match?
+7. What happens to shape during transpose?
+8. Why can a bias vector broadcast across a batch?
+9. How do dot product, distance, and cosine similarity differ?
+10. Interpret `(16, 256, 1,024)` for an LLM activation tensor.
+11. Where do matrix multiplication and dot products appear in attention?
 
 ## Speak about it confidently
 
-You should now be able to say:
+Plain-language version:
 
-> AI models represent inputs and internal states as tensors. Dense layers transform batches of vectors using matrix multiplication plus a broadcast bias. Embeddings encode objects as vectors, and similarity functions such as cosine similarity compare their direction. In transformer models, rank-3 tensors commonly represent batches of token sequences, with a learned vector at every token position.
+> AI systems organize numbers into multidimensional collections whose axes carry specific meaning. Vectors describe individual objects, matrices organize and transform batches, and tensors generalize these structures. Shape compatibility determines whether operations are possible, while axis meaning determines whether they are correct.
 
-## What comes next
+Technical version:
 
-Lesson 03 will deepen the training loop: loss surfaces, analytical and numerical gradients, batch versus stochastic gradient descent, learning-rate behavior, and common optimizers.
+> Tensor rank counts axes and shape gives each axis length. Dense layers transform `(batch, input)` by `(input, output)` weights, then broadcast an `(output,)` bias. Dot products produce weighted alignment scores, matrix multiplication computes many such scores, and cosine similarity normalizes dot product by vector magnitudes. Transformer activations commonly use `(batch, sequence, hidden)` layouts.
+
+## Definition of done
+
+- [ ] Complete every embedded interaction.
+- [ ] Answer all three knowledge checks correctly.
+- [ ] Explain rank, shape, and axis meaning without notes.
+- [ ] Calculate a dot product by hand.
+- [ ] Validate matrix multiplication from shapes.
+- [ ] Explain broadcasting with a batch-and-bias example.
+- [ ] Compare cosine similarity, dot product, and distance.
+- [ ] Interpret a transformer tensor shape.
+- [ ] Produce the capstone data-shape contract.
+- [ ] Mark Lesson 2 complete in the course interface.
+
+## Instructor note
+
+The learner-facing path is the browser lesson. Tested numerical reference files remain in the repository for maintainers; learners are not required to read or execute them.
