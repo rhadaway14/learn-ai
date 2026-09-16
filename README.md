@@ -61,24 +61,16 @@ pip install -e '.[dev]'
 pytest
 ```
 
-Later engineering labs use the installed environment:
-
-```bash
-python lessons/02_vectors_matrices_tensors/lab.py
-python lessons/03_loss_functions_and_optimization/lab.py
-python -m learn_ai.course_labs 35
-```
-
-Plots are written to each lesson's `outputs/` directory, so the labs also work in terminals without a desktop display.
+The course introduces programming only after teaching the required code literacy. Early learner-facing lessons use the browser; deterministic Python references remain available for maintainers and automated verification.
 
 ## How to use each lesson
 
-1. Complete the learner-facing lesson or guided reading.
-2. Run the interactive or reference lab and predict the result first.
-3. Complete `exercises.py` without reading `solutions.py`.
-4. Run that lesson's tests.
-5. Perform the experiments and answer the checkpoint questions in your own words.
-6. Update [PROGRESS.md](PROGRESS.md).
+1. Launch the lesson from `course.html`.
+2. Read each explanation and predict an interaction's result before changing its controls.
+3. Complete the guided examples, experiments, and knowledge checks.
+4. Produce the lesson's capstone increment.
+5. Mark the lesson complete in the course interface.
+6. When a later lesson explicitly introduces programming, run its documented lab and tests.
 
 ## Repository map
 

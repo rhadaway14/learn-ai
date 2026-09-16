@@ -197,26 +197,27 @@ The reference is a minimum viable explanation, not the only valid solution.
 """
         write_if_missing(directory / "SOLUTIONS.md", solutions)
         relative = directory.relative_to(ROOT / "lessons").as_posix()
-        index_rows.append(
-            f"| {number:02d} | {title} | [Lesson]({relative}/README.md) · "
-            f"[Exercises]({relative}/EXERCISES.md) · [Reference]({relative}/SOLUTIONS.md) |"
-        )
-        progress_rows.extend(
-            [
-                f"## Lesson {number:02d} — {title}",
-                "",
-                "- [ ] Read the lesson and predict the lab result",
-                "- [ ] Run the lab",
-                "- [ ] Complete the exercise",
-                "- [ ] Perform and record the experiment",
-                "- [ ] Analyze the failure mode",
-                "- [ ] Answer the checkpoint questions",
-                "- [ ] Write plain-language and technical explanations",
-                "",
-                "Notes:",
-                "",
-            ]
-        )
+        if number > 3:
+            index_rows.append(
+                f"| {number:02d} | {title} | [Lesson]({relative}/README.md) · "
+                f"[Exercises]({relative}/EXERCISES.md) · [Reference]({relative}/SOLUTIONS.md) |"
+            )
+            progress_rows.extend(
+                [
+                    f"## Lesson {number:02d} — {title}",
+                    "",
+                    "- [ ] Read the lesson and predict the lab result",
+                    "- [ ] Run the lab",
+                    "- [ ] Complete the exercise",
+                    "- [ ] Perform and record the experiment",
+                    "- [ ] Analyze the failure mode",
+                    "- [ ] Answer the checkpoint questions",
+                    "- [ ] Write plain-language and technical explanations",
+                    "",
+                    "Notes:",
+                    "",
+                ]
+            )
 
     lessons_root = ROOT / "lessons"
     existing = [
@@ -224,11 +225,13 @@ The reference is a minimum viable explanation, not the only valid solution.
         "[Interactive lesson](01_linear_regression/index.html) · [Reading](01_linear_regression/README.md) |",
         "| 02 | The Shapes of AI Data | "
         "[Interactive lesson](02_vectors_matrices_tensors/index.html) · [Reading](02_vectors_matrices_tensors/README.md) |",
+        "| 03 | Loss Functions and Optimization | "
+        "[Interactive lesson](03_loss_functions_and_optimization/index.html) · [Reading](03_loss_functions_and_optimization/README.md) |",
     ]
     index_rows[6:6] = existing
     write_if_missing(lessons_root / "README.md", "\n".join(index_rows) + "\n")
 
-    first_two = [
+    reviewed_lessons = [
         "## Lesson 01 — Linear Regression",
         "",
         "- [ ] Run the lab and learning-rate experiments",
@@ -244,8 +247,16 @@ The reference is a minimum viable explanation, not the only valid solution.
         "",
         "Notes:",
         "",
+        "## Lesson 03 — Loss Functions and Optimization",
+        "",
+        "- [ ] Complete the interactive browser lesson",
+        "- [ ] Compare MAE, MSE, cross-entropy, learning rates, and batch strategies",
+        "- [ ] Produce the capstone optimization and evaluation contract",
+        "",
+        "Notes:",
+        "",
     ]
-    progress_rows[4:4] = first_two
+    progress_rows[4:4] = reviewed_lessons
     write_if_missing(ROOT / "PROGRESS.md", "\n".join(progress_rows))
 
 

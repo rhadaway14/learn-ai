@@ -23,13 +23,13 @@ Notes:
 
 ## Lesson 03 — Loss Functions and Optimization
 
-- [ ] Read the lesson and predict the lab result
-- [ ] Run the lab
-- [ ] Complete the exercise
-- [ ] Perform and record the experiment
-- [ ] Analyze the failure mode
-- [ ] Answer the checkpoint questions
-- [ ] Write plain-language and technical explanations
+- [ ] Complete the interactive browser lesson
+- [ ] Compare MAE, MSE, and cross-entropy behavior
+- [ ] Explain gradient sign, magnitude, and finite-difference checks
+- [ ] Diagnose all four learning-rate trajectories
+- [ ] Compare full-batch, stochastic, and mini-batch descent
+- [ ] Produce the capstone optimization and evaluation contract
+- [ ] Mark the lesson complete on the course dashboard
 
 Notes:
 

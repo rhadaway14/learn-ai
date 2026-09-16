@@ -96,7 +96,7 @@ State which capstone capability the lesson unlocks. The learner adds or improves
 
 ## Code-readiness bridge
 
-The first lesson is deliberately no-code. Before the curriculum requires Python modification, it must teach:
+The opening foundation lessons are deliberately no-code. Before the curriculum requires Python modification, it must teach:
 
 - how to run a program and read an error;
 - values, variables, lists, dictionaries, functions, and loops;

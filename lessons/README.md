@@ -6,7 +6,7 @@ Use this page to navigate the implemented curriculum.
 |---:|---|---|
 | 01 | How Machines Learn: Linear Regression | [Interactive lesson](01_linear_regression/index.html) · [Reading](01_linear_regression/README.md) |
 | 02 | The Shapes of AI Data | [Interactive lesson](02_vectors_matrices_tensors/index.html) · [Reading](02_vectors_matrices_tensors/README.md) |
-| 03 | Loss Functions and Optimization | [Lesson](03_loss_functions_and_optimization/README.md) · [Exercises](03_loss_functions_and_optimization/EXERCISES.md) · [Reference](03_loss_functions_and_optimization/SOLUTIONS.md) |
+| 03 | Loss Functions and Optimization | [Interactive lesson](03_loss_functions_and_optimization/index.html) · [Reading](03_loss_functions_and_optimization/README.md) |
 | 04 | Probability and Statistics for ML | [Lesson](04_probability_and_statistics_for_ml/README.md) · [Exercises](04_probability_and_statistics_for_ml/EXERCISES.md) · [Reference](04_probability_and_statistics_for_ml/SOLUTIONS.md) |
 | 05 | Regression and Classification | [Lesson](05_regression_and_classification/README.md) · [Exercises](05_regression_and_classification/EXERCISES.md) · [Reference](05_regression_and_classification/SOLUTIONS.md) |
 | 06 | Neural Network Anatomy | [Lesson](06_neural_network_anatomy/README.md) · [Exercises](06_neural_network_anatomy/EXERCISES.md) · [Reference](06_neural_network_anatomy/SOLUTIONS.md) |
