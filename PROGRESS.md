@@ -48,13 +48,14 @@ Notes:
 
 ## Lesson 05 — Regression and Classification
 
-- [ ] Read the lesson and predict the lab result
-- [ ] Run the lab
-- [ ] Complete the exercise
-- [ ] Perform and record the experiment
-- [ ] Analyze the failure mode
-- [ ] Answer the checkpoint questions
-- [ ] Write plain-language and technical explanations
+- [ ] Complete the interactive browser lesson
+- [ ] Frame numeric and categorical prediction targets
+- [ ] Compare regression baselines, useful fit, and overfitting
+- [ ] Reconstruct classification metrics from a confusion matrix
+- [ ] Choose thresholds from error costs and operational constraints
+- [ ] Diagnose class imbalance and obvious leakage
+- [ ] Produce the Gate A baseline decision model and evaluation worksheet
+- [ ] Mark the lesson complete on the course dashboard
 
 Notes:
 

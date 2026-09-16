@@ -10,7 +10,7 @@ The original repository scaffold implemented runnable topic demonstrations for a
 | 02 | Vectors, matrices, and tensors | Yes | Yes | Yes |
 | 03 | Loss functions and optimization | Yes | Yes | Yes |
 | 04 | Probability and statistics | Yes | Yes | Yes |
-| 05 | Regression and classification | Yes | Review required | Review required |
+| 05 | Regression and classification | Yes | Yes | Yes |
 | 06–10 | Neural-network foundations | Yes | Review required | Review required |
 | 11–16 | Language-model mechanics | Yes | Review required | Review required |
 | 17–23 | LLM application engineering | Yes | Review required | Review required |

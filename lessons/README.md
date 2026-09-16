@@ -8,7 +8,7 @@ Use this page to navigate the implemented curriculum.
 | 02 | The Shapes of AI Data | [Interactive lesson](02_vectors_matrices_tensors/index.html) · [Reading](02_vectors_matrices_tensors/README.md) |
 | 03 | Loss Functions and Optimization | [Interactive lesson](03_loss_functions_and_optimization/index.html) · [Reading](03_loss_functions_and_optimization/README.md) |
 | 04 | Probability and Statistics for ML | [Interactive lesson](04_probability_and_statistics_for_ml/index.html) · [Reading](04_probability_and_statistics_for_ml/README.md) |
-| 05 | Regression and Classification | [Lesson](05_regression_and_classification/README.md) · [Exercises](05_regression_and_classification/EXERCISES.md) · [Reference](05_regression_and_classification/SOLUTIONS.md) |
+| 05 | Regression and Classification | [Interactive lesson](05_regression_and_classification/index.html) · [Reading](05_regression_and_classification/README.md) · [Exercises](05_regression_and_classification/EXERCISES.md) |
 | 06 | Neural Network Anatomy | [Lesson](06_neural_network_anatomy/README.md) · [Exercises](06_neural_network_anatomy/EXERCISES.md) · [Reference](06_neural_network_anatomy/SOLUTIONS.md) |
 | 07 | Backpropagation From Scratch | [Lesson](07_backpropagation_from_scratch/README.md) · [Exercises](07_backpropagation_from_scratch/EXERCISES.md) · [Reference](07_backpropagation_from_scratch/SOLUTIONS.md) |
 | 08 | PyTorch and Autograd | [Lesson](08_pytorch_and_autograd/README.md) · [Exercises](08_pytorch_and_autograd/EXERCISES.md) · [Reference](08_pytorch_and_autograd/SOLUTIONS.md) |

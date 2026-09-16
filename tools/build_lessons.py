@@ -197,7 +197,7 @@ The reference is a minimum viable explanation, not the only valid solution.
 """
         write_if_missing(directory / "SOLUTIONS.md", solutions)
         relative = directory.relative_to(ROOT / "lessons").as_posix()
-        if number > 4:
+        if number > 5:
             index_rows.append(
                 f"| {number:02d} | {title} | [Lesson]({relative}/README.md) · "
                 f"[Exercises]({relative}/EXERCISES.md) · [Reference]({relative}/SOLUTIONS.md) |"
@@ -229,6 +229,8 @@ The reference is a minimum viable explanation, not the only valid solution.
         "[Interactive lesson](03_loss_functions_and_optimization/index.html) · [Reading](03_loss_functions_and_optimization/README.md) |",
         "| 04 | Probability and Statistics for ML | "
         "[Interactive lesson](04_probability_and_statistics_for_ml/index.html) · [Reading](04_probability_and_statistics_for_ml/README.md) |",
+        "| 05 | Regression and Classification | "
+        "[Interactive lesson](05_regression_and_classification/index.html) · [Reading](05_regression_and_classification/README.md) · [Exercises](05_regression_and_classification/EXERCISES.md) |",
     ]
     index_rows[6:6] = existing
     write_if_missing(lessons_root / "README.md", "\n".join(index_rows) + "\n")
@@ -262,6 +264,14 @@ The reference is a minimum viable explanation, not the only valid solution.
         "- [ ] Complete the interactive browser lesson",
         "- [ ] Explain distributions, sampling bias, base rates, confidence intervals, and calibration",
         "- [ ] Produce the capstone uncertainty and sampling contract",
+        "",
+        "Notes:",
+        "",
+        "## Lesson 05 — Regression and Classification",
+        "",
+        "- [ ] Complete the interactive browser lesson",
+        "- [ ] Explain targets, baselines, metrics, thresholds, splits, and leakage",
+        "- [ ] Produce the Gate A baseline decision model and evaluation worksheet",
         "",
         "Notes:",
         "",

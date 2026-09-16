@@ -63,6 +63,6 @@ def test_lesson_03_teaches_mechanisms_examples_and_failures() -> None:
 
 def test_course_dashboard_opens_lesson_03_interactively() -> None:
     script = (ROOT / "course.js").read_text(encoding="utf-8")
-    assert "number<=4" in script
-    assert "requestedLesson<=4" in script
+    assert "number<=5" in script
+    assert "requestedLesson<=5" in script
     assert '"03_loss_functions_and_optimization"' in script
