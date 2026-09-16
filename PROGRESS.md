@@ -35,13 +35,14 @@ Notes:
 
 ## Lesson 04 — Probability and Statistics for ML
 
-- [ ] Read the lesson and predict the lab result
-- [ ] Run the lab
-- [ ] Complete the exercise
-- [ ] Perform and record the experiment
-- [ ] Analyze the failure mode
-- [ ] Answer the checkpoint questions
-- [ ] Write plain-language and technical explanations
+- [ ] Complete the interactive browser lesson
+- [ ] Compare distributions with equal means and different spread
+- [ ] Explain why sample size reduces random error but not collection bias
+- [ ] Work the base-rate example from natural counts
+- [ ] Interpret confidence intervals and calibration correctly
+- [ ] Distinguish prediction from causal intervention
+- [ ] Produce the capstone uncertainty and sampling contract
+- [ ] Mark the lesson complete on the course dashboard
 
 Notes:
 

@@ -197,7 +197,7 @@ The reference is a minimum viable explanation, not the only valid solution.
 """
         write_if_missing(directory / "SOLUTIONS.md", solutions)
         relative = directory.relative_to(ROOT / "lessons").as_posix()
-        if number > 3:
+        if number > 4:
             index_rows.append(
                 f"| {number:02d} | {title} | [Lesson]({relative}/README.md) · "
                 f"[Exercises]({relative}/EXERCISES.md) · [Reference]({relative}/SOLUTIONS.md) |"
@@ -227,6 +227,8 @@ The reference is a minimum viable explanation, not the only valid solution.
         "[Interactive lesson](02_vectors_matrices_tensors/index.html) · [Reading](02_vectors_matrices_tensors/README.md) |",
         "| 03 | Loss Functions and Optimization | "
         "[Interactive lesson](03_loss_functions_and_optimization/index.html) · [Reading](03_loss_functions_and_optimization/README.md) |",
+        "| 04 | Probability and Statistics for ML | "
+        "[Interactive lesson](04_probability_and_statistics_for_ml/index.html) · [Reading](04_probability_and_statistics_for_ml/README.md) |",
     ]
     index_rows[6:6] = existing
     write_if_missing(lessons_root / "README.md", "\n".join(index_rows) + "\n")
@@ -252,6 +254,14 @@ The reference is a minimum viable explanation, not the only valid solution.
         "- [ ] Complete the interactive browser lesson",
         "- [ ] Compare MAE, MSE, cross-entropy, learning rates, and batch strategies",
         "- [ ] Produce the capstone optimization and evaluation contract",
+        "",
+        "Notes:",
+        "",
+        "## Lesson 04 — Probability and Statistics for ML",
+        "",
+        "- [ ] Complete the interactive browser lesson",
+        "- [ ] Explain distributions, sampling bias, base rates, confidence intervals, and calibration",
+        "- [ ] Produce the capstone uncertainty and sampling contract",
         "",
         "Notes:",
         "",
