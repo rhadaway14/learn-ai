@@ -22,14 +22,7 @@ function normal(random) {
 }
 
 function dataset(count, noise, relationship, outlier) {
-  const random = seededRandom(42);
-  const rows = Array.from({length: count}, (_, index) => {
-    const x = random() * 10;
-    const signal = relationship === "linear" ? 3.5 * x + 2 : x * x + 2;
-    return {x, y: signal + normal(random) * noise, test: index % 5 === 0};
-  });
-  if (outlier) rows[Math.floor(rows.length / 2)].y += 70;
-  return rows;
+  return Lesson01Logic.dataset(count, noise, relationship, outlier);
 }
 
 function train(rows, learningRate, epochs) {

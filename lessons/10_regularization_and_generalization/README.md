@@ -536,7 +536,7 @@ The browser lesson provides practice in this order:
 
 ## Capstone increment: generalization stress-test and control plan
 
-Complete the reproducible model-training component and model evidence card promised for Lessons 6–10.
+Complete the reproducible model-training specification and model evidence card promised for Lessons 6–10.
 
 ### Generalization claim
 

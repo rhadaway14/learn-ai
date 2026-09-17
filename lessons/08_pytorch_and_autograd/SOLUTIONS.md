@@ -120,4 +120,4 @@ A strong execution and state contract:
 - defines different checkpoint contents for inference, continuation, and reproduction;
 - includes automated checks for incompatible shapes, dtypes, devices, missing or non-finite gradients, wrong modes, and checkpoint mismatches.
 
-The contract is ready for Lesson 9 when another engineer can implement the model without guessing what state the framework should own or when that state changes.
+The contract is ready for later implementation when another engineer can build the model without guessing what state the framework should own or when that state changes. That implementation follows Engineering Lab A.

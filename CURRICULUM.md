@@ -1,6 +1,6 @@
 # Hands-On AI Engineering Curriculum
 
-This is a build-first path from machine-learning fundamentals to advanced AI architecture. It is designed for an experienced software/cloud engineer, so Python syntax, Git, APIs, containers, and basic deployment are treated as existing skills rather than separate courses.
+This is an evidence-first path from machine-learning fundamentals to advanced AI architecture. It is designed for engineers with uneven backgrounds. **Lessons 1–10 are browser-first and require no Python knowledge.** Programming becomes part of the learner path only after the required Engineering Lab A readiness bridge.
 
 The full path is approximately **140–200 hours**. The time ranges include reading, implementation, experiments, checkpoints, and milestone projects.
 
@@ -10,7 +10,7 @@ Every lesson follows the same loop:
 
 1. **Concept** — understand the primitive and why it exists.
 2. **Derivation** — work through the relevant math at an engineering level.
-3. **Implementation** — build it with minimal abstraction.
+3. **Application** — use a guided interaction or specification to apply it; implement it only after the code-readiness bridge.
 4. **Experiment** — change assumptions and observe failure modes.
 5. **Connection** — locate the primitive inside modern AI systems.
 6. **Checkpoint** — explain it and pass executable tests.
@@ -21,12 +21,12 @@ Frameworks are introduced only after the underlying operation is visible.
 
 | Lesson | Subject | Hands-on result | Est. time |
 |---:|---|---|---:|
-| 01 | ML fundamentals | Linear regression and gradient descent from NumPy | 2–3h |
-| 02 | Vectors, matrices, tensors | Dense layer, similarity, shape experiments | 3–4h |
-| 03 | Loss and optimization | Loss surfaces, finite differences, SGD variants | 3–4h |
+| 01 | ML fundamentals | Interactive linear-regression investigation and evidence record | 2–3h |
+| 02 | Vectors, matrices, tensors | Guided similarity, shape, and transformation experiments | 3–4h |
+| 03 | Loss and optimization | Interactive loss surfaces, finite differences, and optimizer diagnosis | 3–4h |
 | 04 | Probability and statistics | Distributions, sampling, Bayes, confidence experiments | 4–5h |
 | 05 | Regression and classification | Linear/logistic regression and decision boundaries | 4–5h |
-| Project A | Classical ML benchmark | Compare baseline models on one real dataset | 2–4h |
+| Project A | Classical ML benchmark specification | Compare model evidence and define a reproducible benchmark protocol | 2–4h |
 
 Exit criteria:
 
@@ -39,19 +39,25 @@ Exit criteria:
 
 | Lesson | Subject | Hands-on result | Est. time |
 |---:|---|---|---:|
-| 06 | Neural-network anatomy | NumPy multilayer network forward pass | 3–4h |
-| 07 | Backpropagation | Manual computational graph and backward pass | 4–5h |
-| 08 | PyTorch and autograd | Rebuild earlier model with tensors/autograd | 3–4h |
-| 09 | First real neural network | Train, validate, save, and load a classifier | 4–6h |
-| 10 | Generalization | Regularization, dropout, normalization experiments | 4–5h |
-| Project B | Image classifier | Reproducible training and evaluation pipeline | 4–6h |
+| 06 | Neural-network anatomy | Trace a multilayer forward pass and its shapes | 3–4h |
+| 07 | Backpropagation | Trace a computational graph and parameter-update evidence | 4–5h |
+| 08 | PyTorch and autograd | Specify tensor, gradient, and optimizer behavior | 3–4h |
+| 09 | First real neural network | Design a reproducible train/validate/checkpoint protocol | 4–6h |
+| 10 | Generalization | Investigate capacity, regularization, and validation evidence | 4–5h |
+| Project B | Model-training specification | Reproducible training specification and model evidence card | 4–6h |
 
 Exit criteria:
 
 - trace shapes through a network;
 - explain activations, capacity, backpropagation, and automatic differentiation;
-- write a correct PyTorch training loop;
+- specify the lifecycle and evidence required for a correct training loop;
 - diagnose unstable, overfit, and underfit training.
+
+## Required Engineering Lab A — Python and PyTorch readiness (6–10 hours)
+
+This bridge occurs **after Lesson 10 and before any learner is asked to read, run, or modify Python**. It teaches how to run a program and interpret an error; values, variables, collections, functions, loops, packages, and virtual environments; tensor shapes and structured output; safe configuration changes; and tests with pass/fail evidence.
+
+Experienced Python developers may pass a diagnostic and skip supported practice. Everyone must demonstrate the same readiness evidence before programming labs in later phases. Maintainer reference implementations do not count as learner tasks before this gate.
 
 ## Phase 3 — Language models from primitives (30–40 hours)
 
@@ -136,7 +142,7 @@ Each lesson is assessed across four dimensions:
 | Dimension | Evidence |
 |---|---|
 | Understand | Written checkpoint answers in `PROGRESS.md` |
-| Implement | Working lab and completed exercises |
+| Apply | Completed interaction or specification; working implementation only after Engineering Lab A |
 | Investigate | Recorded experiment observations |
 | Explain | Short plain-language and technical explanations |
 

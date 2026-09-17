@@ -12,7 +12,8 @@ The learner will build an evidence-grounded AI delivery advisor with retrieval, 
 |---:|---|---|
 | 01–02 | Models, learning, data, vectors, shapes, similarity | Problem statement, glossary, sample inputs and expected outputs |
 | 03–05 | Loss, optimization, probability, regression, classification, metrics | Baseline decision model and evaluation worksheet |
-| 06–10 | Neural networks, backpropagation, training, validation, regularization | Reproducible model-training component and model card |
+| 06–10 | Neural networks, backpropagation, training, validation, regularization | Reproducible model-training specification and model evidence card |
+| Engineering Lab A | Python, environments, tests, and PyTorch readiness | Selected specification converted into a tested reference implementation |
 | 11–12 | Tokenization and embeddings | Document representation and semantic-search prototype |
 | 13–16 | Attention, transformers, language modeling, inference | Small language-model experiment and inference decision record |
 | 17–18 | Context design, structured output, tool contracts | Versioned instructions, response schema, and validated tool interface |
@@ -36,16 +37,20 @@ Every increment records:
 - success metrics;
 - a normal example;
 - at least one failure example;
-- automated or reproducible verification;
+- a reproducible verification procedure; automated verification after Engineering Lab A;
 - the decision to keep, revise, or replace it.
 
-Later lessons may replace earlier implementations, but they must preserve the evidence explaining why the design changed.
+Later lessons may implement or replace earlier artifacts, but they must preserve the evidence explaining why the design changed. Lessons 1–10 produce specifications and evidence; they do not silently require a runnable component.
 
 ## Readiness gates
 
 ### Gate A — Foundations complete (after Lesson 05)
 
 The learner can explain learning and evaluation, establish a naive baseline, select a meaningful metric, and detect obvious leakage.
+
+### Engineering readiness gate — after Lesson 10
+
+Before programming labs, the learner can run Python in an isolated environment, read common errors, modify documented configuration, reason about tensor shapes, and run tests. Passing the diagnostic or the supported bridge exercises satisfies the same gate.
 
 ### Gate B — Model mechanics complete (after Lesson 16)
 

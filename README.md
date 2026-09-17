@@ -10,14 +10,14 @@ The governing rules are simple: **learn the primitive before using the framework
 
 | Phase | Lessons | Major outcome |
 |---|---:|---|
-| Mathematical and ML foundations | 01–05 | Train and evaluate classical models from primitives |
-| Neural networks and PyTorch | 06–10 | Understand backpropagation and complete training systems |
+| Mathematical and ML foundations | 01–05 | Investigate classical models and evaluation from primitives |
+| Neural networks and PyTorch concepts | 06–10 | Specify a reproducible training system and its evidence |
 | Language-model mechanics | 11–16 | Build tokenization, attention, transformer, and decoding primitives |
 | LLM application engineering | 17–23 | Build RAG, tools, agents, MCP, and multi-agent workflows |
 | Quality and production | 24–30 | Evaluate, tune, secure, serve, and operate AI systems |
 | Advanced systems and architecture | 31–35 | Analyze advanced models and deliver the capstone |
 
-All 35 lessons have implementation material. Lessons are being reviewed individually against the stricter [student-readiness gate](STUDENT_READINESS.md). Browse the [lesson index](lessons/README.md) or read the detailed [curriculum](CURRICULUM.md).
+All 35 lessons have learning material, and each is reviewed individually against the stricter [student-readiness gate](STUDENT_READINESS.md). Lessons 1–10 are browser-first and require no Python. After Lesson 10, **Engineering Lab A** establishes Python, testing, and PyTorch readiness before programming becomes required. Browse the [lesson index](lessons/README.md) or read the detailed [curriculum](CURRICULUM.md).
 
 ## Quick start
 
@@ -35,7 +35,7 @@ The complete lesson and interactive lab run locally in the browser without an ac
 
 ### Engineering environment for later lessons
 
-Python 3.11–3.13 is supported when the curriculum reaches programming labs.
+Python 3.11–3.13 is supported after the learner passes Engineering Lab A and reaches programming labs.
 
 ### Windows PowerShell
 

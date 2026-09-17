@@ -93,7 +93,7 @@ Rows are actual classes and columns are predictions.
 
 | Actual \ Predicted | On time | Slightly late | Severely late |
 |---|---:|---:|---:|
-| On time | 640 | 45 | 15 |
+| On time | 630 | 45 | 25 |
 | Slightly late | 55 | 150 | 25 |
 | Severely late | 12 | 28 | 30 |
 

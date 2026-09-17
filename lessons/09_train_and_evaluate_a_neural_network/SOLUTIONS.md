@@ -62,14 +62,14 @@ Different systems may define the comparison as greater-than-or-equal. That choic
 ## 7. Confusion matrix
 
 - total = 1,000;
-- correct = 640 + 150 + 30 = 820;
-- accuracy = 820 ÷ 1,000 = 82.0%;
+- correct = 630 + 150 + 30 = 810;
+- accuracy = 810 ÷ 1,000 = 81.0%;
 - actual severe late = 12 + 28 + 30 = 70;
 - severe-late recall = 30 ÷ 70 = 42.9%;
-- predicted severe late = 15 + 25 + 30 = 70;
-- severe-late precision = 30 ÷ 70 = 42.9%;
+- predicted severe late = 25 + 25 + 30 = 80;
+- severe-late precision = 30 ÷ 80 = 37.5%;
 - missed actual severe late = 12 + 28 = 40;
-- false severe-late alarms = 15 + 25 = 40.
+- false severe-late alarms = 25 + 25 = 50.
 
 The operating point should combine the cost of a missed severe delay, the cost and capacity of intervention, class prevalence, and the value of acting early. Limited capacity often calls for a precision constraint while maximizing recall within that capacity.
 

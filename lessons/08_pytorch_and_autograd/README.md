@@ -27,7 +27,7 @@ By the end, you should be able to:
 
 This lesson deliberately contains no Python implementation. The course promise is that engineers with no Python background can understand the examples and capstone requirements.
 
-Lesson 9 must provide an explicit bridge before asking students to modify a training program:
+Engineering Lab A, after Lesson 10, provides the explicit bridge before students modify a training program:
 
 - values and variables;
 - lists, mappings, functions, loops, and indentation;
@@ -442,7 +442,7 @@ Extend the Lesson 6–7 model specification with:
 - strict restoration checks; and
 - golden examples proving preprocessing and output interpretation.
 
-Lesson 9 will implement and test this contract after teaching the minimum code and environment skills.
+After Engineering Lab A, a programming lab will implement and test this contract using the taught code and environment skills.
 
 ## Definition of done
 

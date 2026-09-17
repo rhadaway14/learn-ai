@@ -1,0 +1,6 @@
+(function(root,factory){const api=factory();if(typeof module!=="undefined"&&module.exports)module.exports=api;else root.Lesson09Logic=api;})(typeof globalThis!=="undefined"?globalThis:this,function(){
+  function seededNoise(seed,epoch){const raw=Math.sin(seed*91.7+epoch*17.13)*43758.5453;return(raw-Math.floor(raw))-.5;}
+  function trainingSeries(rate,seed){seed=Number(seed);const train=[],validation=[],turn=14+(seed%7);for(let epoch=1;epoch<=30;epoch++){const n=seededNoise(seed,epoch);if(rate==="slow"){train.push(.22+.75*Math.exp(-epoch/35)+n*.006);validation.push(.29+.71*Math.exp(-epoch/31)+n*.009);}else if(rate==="high"){train.push(Math.max(.19,.38+.61*Math.exp(-epoch/10)+.15*Math.sin(epoch*1.7+seed)+n*.04));validation.push(Math.max(.32,.49+.55*Math.exp(-epoch/9)+.19*Math.sin(epoch*1.43+seed*.3)+n*.05));}else{train.push(.12+.82*Math.exp(-epoch/6.5)+n*.004);validation.push(.20+.76*Math.exp(-epoch/5.2)+Math.max(0,epoch-turn)*.010+n*.008);}}return{train,validation};}
+  function matrixMetrics(matrix){const total=matrix.flat().reduce((a,b)=>a+b,0),correct=matrix.reduce((sum,row,i)=>sum+row[i],0),actual=matrix[2].reduce((a,b)=>a+b,0),predicted=matrix.reduce((sum,row)=>sum+row[2],0),tp=matrix[2][2];return{total,correct,accuracy:correct/total,severeRecall:tp/actual,severePrecision:tp/predicted};}
+  return{trainingSeries,matrixMetrics};
+});

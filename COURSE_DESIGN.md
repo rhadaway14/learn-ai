@@ -96,7 +96,9 @@ State which capstone capability the lesson unlocks. The learner adds or improves
 
 ## Code-readiness bridge
 
-The opening foundation lessons are deliberately no-code. Before the curriculum requires Python modification, it must teach:
+Lessons 1–10 are deliberately browser-first and require no Python knowledge. They may discuss what a program or framework does, but learner artifacts are observations, calculations, diagrams, protocols, specifications, and evidence cards—not runnable Python components.
+
+**Engineering Lab A: Python and PyTorch Readiness** occurs after Lesson 10 and is a required release gate before any later lesson asks a learner to read, run, debug, or modify Python. It teaches:
 
 - how to run a program and read an error;
 - values, variables, lists, dictionaries, functions, and loops;
@@ -106,6 +108,8 @@ The opening foundation lessons are deliberately no-code. Before the curriculum r
 - running tests and interpreting pass/fail results.
 
 Experienced Python developers may pass the diagnostic and skip the bridge exercises. Engineers from other languages can focus on syntax mapping rather than learning programming from scratch.
+
+Maintainer reference programs may exist beside early lessons for validation and future development. They must be labeled as reference material and must not be presented as required learner work before Engineering Lab A. Course language must distinguish a **specification** (what a system must do and how its evidence is judged) from an **implementation** (runnable code that satisfies that contract).
 
 ## Student-ready acceptance gate
 
