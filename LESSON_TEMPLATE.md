@@ -1,5 +1,7 @@
 # Lesson NN — Title
 
+This template implements [LESSON_CONTRACT.md](LESSON_CONTRACT.md). The core path is required; the Engineer deep dive is optional.
+
 ## Outcomes
 
 After this lesson, you can:
@@ -77,9 +79,23 @@ Locate this primitive inside neural networks, transformers, retrieval, agents, t
 
 Give at least two concrete real-world applications and explain what role the primitive plays in each one.
 
+## Where this fits in the AI story
+
+Name the capability available before this lesson, the capability added now, the next limitation, and one modern AI use case. Use the shared `.ai-story` component in interactive lessons.
+
+## Engineer deep dive
+
+State additional prerequisites, then deepen the same topic through derivation, implementation mechanics, performance, production failure diagnosis, and architecture tradeoffs. End with a design or diagnostic task. Use the shared `.advanced-section` component.
+
+## Hands-on activity
+
+Use [templates/lesson-activity.md](templates/lesson-activity.md) and the `lesson-activity.schema.json` contract. Include guided, challenge, and optional engineer-extension levels, a failure experiment, saved evidence, recovery instructions, and explicit acceptance criteria.
+
 ## Capstone increment
 
 Name the artifact this lesson adds or improves, its acceptance evidence, and where the learner will reuse it.
+
+Also create or update the current phase-project increment using [templates/phase-project-increment.md](templates/phase-project-increment.md). Name its downstream consumer.
 
 ## Knowledge checkpoint
 

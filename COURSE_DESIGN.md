@@ -18,6 +18,8 @@ If a lesson needs knowledge that the course has not taught, the lesson must prov
 
 ## Required teaching sequence
 
+The normative component and artifact structure is defined in [LESSON_CONTRACT.md](LESSON_CONTRACT.md). This document governs teaching quality; the contract governs how that quality appears consistently in every lesson.
+
 Every student-ready lesson follows this sequence.
 
 ### 1. Purpose before terminology
@@ -82,6 +84,14 @@ Include recall, interpretation, prediction, and application questions. A learner
 ### 10. Capstone increment
 
 State which capstone capability the lesson unlocks. The learner adds or improves a small capstone artifact before moving on.
+
+### 11. Two depths, one lesson
+
+The required core path remains approachable to a learner with only the stated prerequisites. Each topic also provides an optional **Engineer deep dive** covering derivation, implementation mechanics, performance, production failure modes, and architecture tradeoffs. Advanced material must deepen the topic without becoming a hidden prerequisite for the required activity.
+
+### 12. AI story and phase-project continuity
+
+Every lesson identifies the capability available before the lesson, the capability added now, a modern AI use case, and the next capability it unlocks. Its hands-on activity produces evidence used by a named phase-project increment rather than ending as an isolated demonstration.
 
 ## Accessibility and ease-of-use standard
 

@@ -2,6 +2,8 @@
 
 The capstone is not postponed until Lesson 35. It grows through small, reviewable increments so the final lesson integrates familiar parts instead of introducing a new project all at once.
 
+The intermediate integration points are defined in [PHASE_PROJECTS.md](PHASE_PROJECTS.md). Lesson activities create evidence, phase increments turn that evidence into accepted capabilities, and phase projects deliver working slices that the capstone later integrates.
+
 ## Final system
 
 The learner will build an evidence-grounded AI delivery advisor with retrieval, bounded tools, evaluation, security controls, observability, and an operational deployment design.

@@ -2,6 +2,8 @@
 
 The milestone projects integrate several lessons at a time. Each project should include an architecture note, reproducible setup, tests, evaluation results, and a short retrospective.
 
+The authoritative lesson-to-project increment sequence is in [PHASE_PROJECTS.md](../PHASE_PROJECTS.md). Every project capability must cite the lesson activity and accepted phase increment that introduced it.
+
 ## Project A — Classical ML benchmark
 
 Choose a tabular dataset. Establish a naive baseline, train multiple classical models, select metrics, prevent leakage, and explain the final tradeoff.

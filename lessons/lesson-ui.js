@@ -12,6 +12,10 @@
 
   document.querySelectorAll("button.active").forEach(active=>{const group=active.parentElement;if(!group)return;const buttons=[...group.querySelectorAll(":scope > button")];if(buttons.length<2)return;const sync=()=>buttons.forEach(button=>button.setAttribute("aria-pressed",String(button.classList.contains("active"))));sync();buttons.forEach(button=>button.addEventListener("click",()=>setTimeout(sync,0)));});
 
+  document.querySelectorAll(".advanced-section").forEach(section=>{const summary=section.querySelector("summary");if(!summary)return;summary.setAttribute("aria-label",`${text(summary.textContent)}. Optional advanced material.`);section.addEventListener("toggle",()=>section.dispatchEvent(new CustomEvent("lesson-component",{bubbles:true,detail:{type:"advanced",open:section.open}})));});
+  document.querySelectorAll(".hands-on-activity").forEach(activity=>{const levels=[...activity.querySelectorAll(".activity-levels [data-level]")];levels.forEach((level,index)=>{level.setAttribute("aria-label",`Activity level ${index+1} of ${levels.length}: ${text(level.querySelector("strong")?.textContent||level.dataset.level)}`);});});
+  document.querySelectorAll(".ai-story").forEach(story=>{const current=story.querySelector('[data-story-step="now"]');if(current)current.setAttribute("aria-current","step");});
+
   document.querySelectorAll(".quiz").forEach(quiz=>{const correct=quiz.querySelector(`button[data-choice="${quiz.dataset.answer}"]`);quiz.querySelectorAll("button").forEach(button=>button.addEventListener("click",()=>{if(button===correct)return;const key=`why${button.dataset.choice.toUpperCase()}`;quiz.querySelector(".feedback").textContent=LessonUiLogic.feedbackFor(quiz.dataset[key]);}));});
 
   const lessonNumber=Number(document.querySelector(".progress-wrap span")?.textContent.match(/Lesson\s+(\d+)/)?.[1]);

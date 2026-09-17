@@ -6,6 +6,8 @@ The complete path covers **35 lessons, five milestone projects, and one producti
 
 The governing rules are simple: **learn the primitive before using the framework that automates it**, and never require knowledge the course has not taught. See the [course teaching standard](COURSE_DESIGN.md) and [cumulative capstone path](CAPSTONE_PATH.md).
 
+Every lesson follows the [reusable lesson contract](LESSON_CONTRACT.md): an approachable core path, an optional engineer deep dive, a visible connection to the larger AI story, a scaffolded hands-on activity, and an artifact that advances the current phase project.
+
 ## Implemented curriculum
 
 | Phase | Lessons | Major outcome |
@@ -80,10 +82,14 @@ learn-ai/
 ├── ROADMAP.md
 ├── PROGRESS.md
 ├── CURRICULUM.md
+├── LESSON_CONTRACT.md
+├── PHASE_PROJECTS.md
 ├── STUDY_GUIDE.md
 ├── AGENTS.md
 ├── LESSON_TEMPLATE.md
 ├── projects/
+├── schemas/
+├── templates/
 ├── capstone/
 ├── resources/
 ├── pyproject.toml
