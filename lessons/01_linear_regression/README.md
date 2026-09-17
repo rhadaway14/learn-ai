@@ -94,7 +94,7 @@ No learning occurred during this calculation. This is a forward pass: the curren
 
 ## From one error to one loss
 
-The model needs feedback. For each example, compare its prediction with the correct answer. The difference is a residual error.
+The model needs feedback. For each example, compare its prediction with the correct answer. This course defines the signed residual as `prediction − label`; some references reverse the order, so the convention must always be stated.
 
 If the correct answer is `10` and the prediction is `7`, the prediction is off by `3`.
 

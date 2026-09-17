@@ -89,11 +89,11 @@ Linear regression is one method for solving a regression task. Decision trees, e
 
 ### Residuals
 
-A residual is the signed difference between the actual value and the prediction.
+A residual is the signed difference between the prediction and the actual label. This course uses the same convention as Lesson 1.
 
 In words:
 
-> residual = actual value − predicted value
+> residual = predicted value − actual label
 
 For an actual effort of 640 hours and a prediction of 590 hours:
 
@@ -101,7 +101,7 @@ $$
 640 - 590 = +50\text{ hours}
 $$
 
-A positive residual means the prediction was too low. A negative residual means it was too high. Looking at residual patterns can reveal missing nonlinear structure, different variance across the range, subgroup failures, or systematic underprediction.
+A negative residual means the prediction was too low. A positive residual means it was too high. Some texts reverse the subtraction order; the diagnostic pattern is unchanged when the chosen convention is used consistently. Looking at residual patterns can reveal missing nonlinear structure, different variance across the range, subgroup failures, or systematic underprediction.
 
 ### Mean Absolute Error
 

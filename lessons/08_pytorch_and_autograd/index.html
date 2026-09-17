@@ -6,6 +6,7 @@
   <title>Lesson 8 — PyTorch and Autograd</title>
   <link rel="stylesheet" href="../01_linear_regression/styles.css">
   <link rel="stylesheet" href="../progress-ui.css">
+  <link rel="stylesheet" href="../accessibility.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -60,6 +61,8 @@
     <section id="modes" class="content-section soft">
       <p class="section-number">06</p><h2>Training and evaluation modes change selected layer behavior</h2>
       <p>Switching a module to evaluation mode does not disable autograd. It changes mode-aware layers such as dropout and batch normalization. Disabling gradients controls graph recording. These controls are separate.</p>
+      <div class="concept-grid"><article><h3>Dropout primer</h3><p>During training, dropout randomly hides some activations and rescales the survivors so units cannot rely on exactly the same partners. During evaluation, the full learned network is used for stable output.</p></article><article><h3>Batch-normalization primer</h3><p>During training, batch normalization uses the current batch and updates stored running statistics. During evaluation, it uses those stored statistics so one prediction does not depend on its temporary batch companions.</p></article></div>
+      <p class="callout"><strong>Forward reference:</strong> Lesson 10 teaches dropout, normalization, and regularization in depth. Here you only need their state contract: their behavior changes with training versus evaluation mode.</p>
       <div class="micro-lab mode-lab"><div><p class="tag">MODE BEHAVIOR LAB</p><h3>Send the same input through dropout repeatedly</h3><p>The conceptual layer has four activations `[2, 2, 2, 2]` and drops half during training while rescaling survivors.</p></div><div class="mode-buttons"><button data-mode="train" class="active">Training mode</button><button data-mode="eval">Evaluation mode</button></div><button id="runModePass" class="button">Run same input again</button><div id="modeOutputs" class="mode-outputs"></div><p id="modeMeaning" class="observation-light"></p></div>
       <div class="comparison"><article><h3>Training mode</h3><p>Dropout samples masks; batch normalization updates and uses batch statistics. Repeated outputs may differ.</p></article><article class="accent-card"><h3>Evaluation mode</h3><p>Dropout is disabled; batch normalization uses stored running statistics. Repeated outputs should be stable for stable inputs and parameters.</p></article></div>
       <div class="callout"><strong>Quiet failure:</strong> validation in training mode may be noisy or update running statistics. Inference with gradient recording may still produce correct values but waste memory. Test both mode and gradient context explicitly.</div>
@@ -88,6 +91,6 @@
     </section>
   </main>
   <footer><strong>Learn AI</strong><span>Lesson 8 · PyTorch and autograd</span></footer>
-  <script src="../progress.js"></script><script src="app.js"></script>
+  <script src="../progress.js"></script><script src="app.js"></script><script src="../lesson-ui-logic.js"></script><script src="../lesson-ui.js"></script>
 </body>
 </html>

@@ -6,6 +6,7 @@
   <title>Lesson 7 — Backpropagation From Scratch</title>
   <link rel="stylesheet" href="../01_linear_regression/styles.css">
   <link rel="stylesheet" href="../progress-ui.css">
+  <link rel="stylesheet" href="../accessibility.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -20,6 +21,7 @@
       <div class="comparison"><article><p class="tag">FORWARD PASS</p><h3>What value does the graph produce?</h3><p>Use current inputs and parameters to calculate intermediate values, prediction, and loss.</p></article><article class="accent-card"><p class="tag">BACKWARD PASS</p><h3>How sensitive is loss to each value?</h3><p>Traverse dependencies in reverse and calculate one gradient for every value that needs it.</p></article></div>
       <div class="metaphor"><strong>Metaphor: tracing a final invoice backward</strong><p>A project total comes from subtotals, quantities, and rates. To understand how changing one rate affects the final invoice, trace that rate's contribution through each subtotal to the total.</p><small>Where the metaphor stops: backpropagation computes local derivatives rather than blame or causal responsibility, and all sensitivities are evaluated at the current numerical point.</small></div>
       <div class="concept-grid"><article><h3>Value</h3><p>A number produced during the forward pass.</p><small>Pre-activation p = 7.</small></article><article><h3>Local derivative</h3><p>How an operation's output changes with one direct input.</p><small>For y = p², dy/dp = 2p.</small></article><article><h3>Upstream gradient</h3><p>Sensitivity already arriving from later in the graph.</p><small>How loss changes with y.</small></article><article><h3>Parameter gradient</h3><p>Final sensitivity of loss to a learned parameter.</p><small>Used by the optimizer.</small></article></div>
+      <div class="callout"><strong>Read the calculus notation aloud:</strong> a <em>derivative</em> is the local slope or sensitivity introduced in Lesson 3. Read `dy/dx` as “the derivative of y with respect to x”—how much y changes when x changes a little. Use `d` when the expression follows one input. Read `∂y/∂x` as “the partial derivative of y with respect to x.” The symbol `∂` means we vary x while holding the other current inputs fixed. In the trace, `∂L/∂W` means how the loss L responds to each element of weights W.</div>
       <div class="micro-lab readiness-check"><p class="tag">PREREQUISITE CHECK</p><h3>If increasing a weight slightly increases loss, which direction should gradient descent move that weight?</h3><div class="choice-row readiness-choices"><button data-correct="false">Increase it further</button><button data-correct="true">Decrease it</button><button data-correct="false">The gradient gives no direction</button></div><p id="readinessFeedback" class="feedback" aria-live="polite"></p></div>
     </section>
 
@@ -59,7 +61,8 @@
       <p>A neural network may contain millions or billions of parameters but normally trains from one scalar loss per batch. Reverse mode starts with the loss derivative 1 and computes all parameter gradients in one backward traversal.</p>
       <div class="comparison"><article><h3>Forward mode</h3><p>Efficient when there are few inputs and many outputs. It carries the effect of selected inputs forward.</p></article><article class="accent-card"><h3>Reverse mode</h3><p>Efficient when there is one or a few outputs and many inputs. It carries one loss sensitivity backward to all parameters.</p></article></div>
       <div class="reverse-steps"><article><span>1</span><div><strong>Run forward</strong><p>Store values needed by local derivatives.</p></div></article><article><span>2</span><div><strong>Seed loss</strong><p>Set dL/dL = 1.</p></div></article><article><span>3</span><div><strong>Reverse topological order</strong><p>Process a node only after all later contributions arrive.</p></div></article><article><span>4</span><div><strong>Accumulate leaves</strong><p>Each parameter receives a gradient with the same shape as that parameter.</p></div></article></div>
-      <h3>Tensor gradients preserve parameter shapes</h3><p>If weights W are shaped `(10, 64)`, the gradient ∂L/∂W is also `(10, 64)`. Each gradient element answers how loss responds to one weight element at the current point.</p>
+      <h3>Tensor gradients preserve parameter shapes</h3><p>If weights W are shaped `(10, 64)`, the gradient ∂L/∂W is also `(10, 64)`. Each weight gets its own copy of the same upstream-gradient × local-derivative calculation.</p>
+      <div class="worked-example"><h3>One numeric tensor gradient</h3><p>Let input `x = [2, 3, 4]` feed two outputs through a `3 × 2` weight matrix. If the arriving output gradient is `[5, 6]`, each weight gradient is input value × arriving output gradient:</p><div class="plain-formula">∂L/∂W = [[10, 12], [15, 18], [20, 24]]</div><p>The result is `3 × 2`, exactly like W. Row 1 uses input 2, row 2 uses input 3, and row 3 uses input 4.</p></div>
       <div class="callout"><strong>Backpropagation calculates gradients; the optimizer applies updates.</strong> Backward does not itself decide the learning rate or change parameters. That separation is why the training-loop order matters.</div>
       <details class="deep-dive"><summary>Go deeper: Jacobian-vector products without building a giant Jacobian</summary><div><p>A vector-valued operation has a Jacobian containing all local output-to-input derivatives. Reverse mode multiplies the arriving gradient vector by that local Jacobian as it traverses the graph. Frameworks compute this vector–Jacobian product directly rather than materializing an enormous matrix.</p></div></details>
     </section>
@@ -87,6 +90,6 @@
     </section>
   </main>
   <footer><strong>Learn AI</strong><span>Lesson 7 · Backpropagation from scratch</span></footer>
-  <script src="../progress.js"></script><script src="app.js"></script>
+  <script src="../progress.js"></script><script src="app.js"></script><script src="../lesson-ui-logic.js"></script><script src="../lesson-ui.js"></script>
 </body>
 </html>

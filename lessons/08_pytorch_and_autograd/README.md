@@ -21,7 +21,7 @@ By the end, you should be able to:
 - trace the clear → forward → loss → backward → step lifecycle;
 - distinguish training/evaluation mode from gradient recording;
 - specify checkpoint contents for inference, training continuation, and experiment reproduction; and
-- produce a PyTorch execution and state contract for Lesson 9.
+- produce a PyTorch execution and state contract for later implementation after Engineering Lab A.
 
 ## Code-readiness boundary
 

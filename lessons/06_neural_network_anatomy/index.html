@@ -6,6 +6,7 @@
   <title>Lesson 6 — Neural Network Anatomy</title>
   <link rel="stylesheet" href="../01_linear_regression/styles.css">
   <link rel="stylesheet" href="../progress-ui.css">
+  <link rel="stylesheet" href="../accessibility.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -70,7 +71,9 @@
     <section id="forward" class="content-section">
       <p class="section-number">07</p><h2>The forward pass is the same computation used during training and inference</h2>
       <ol class="workflow-list"><li><span>1</span><div><strong>Receive a batch</strong><p>Rows are examples; columns are features.</p></div></li><li><span>2</span><div><strong>Transform</strong><p>Each dense layer computes XW + b.</p></div></li><li><span>3</span><div><strong>Activate</strong><p>A nonlinear function changes the representation.</p></div></li><li><span>4</span><div><strong>Produce task outputs</strong><p>The output head matches regression or classification.</p></div></li><li><span>5</span><div><strong>During training only</strong><p>Compare with labels, calculate loss, compute gradients, and update parameters.</p></div></li><li><span>6</span><div><strong>During inference</strong><p>Use the forward output without learning from that request.</p></div></li></ol>
-      <h3>The output layer must match the task</h3><div class="output-heads"><article><p class="tag">REGRESSION</p><h3>One or more linear outputs</h3><p>Predict an unrestricted numeric amount, unless the domain requires a bounded output.</p></article><article><p class="tag">BINARY CLASSIFICATION</p><h3>One logit, then sigmoid</h3><p>Produce a positive-class score between 0 and 1, followed by a decision threshold.</p></article><article><p class="tag">MULTICLASS CLASSIFICATION</p><h3>One logit per class, then softmax</h3><p>Softmax converts class scores into positive values that sum to 1.</p></article></div>
+      <h3>The output layer must match the task</h3><div class="output-heads"><article><p class="tag">REGRESSION</p><h3>One or more linear outputs</h3><p>Predict an unrestricted numeric amount, unless the domain requires a bounded output.</p></article><article><p class="tag">BINARY CLASSIFICATION</p><h3>One logit, then sigmoid</h3><p>A logit is the unrestricted weighted score defined in Lesson 5. Sigmoid maps it between 0 and 1 before a decision threshold.</p></article><article><p class="tag">MULTICLASS CLASSIFICATION</p><h3>One logit per class, then softmax</h3><p><strong>Softmax</strong> compares every class logit and turns them into positive shares that sum to 1.</p></article></div>
+      <div class="worked-example"><h3>Softmax with three class logits</h3><p>Suppose the logits for on time, slightly late, and severely late are `[2.0, 1.0, 0.1]`. Exponentiation makes every value positive: `[7.39, 2.72, 1.11]`. Their sum is `11.22`. Divide each positive value by that sum:</p><div class="plain-formula">[7.39 ÷ 11.22, 2.72 ÷ 11.22, 1.11 ÷ 11.22] = [0.659, 0.242, 0.099]</div><p>The outputs sum to 1 and preserve the ranking. They are model confidence scores, not automatically calibrated real-world probabilities; representative validation evidence must establish calibration.</p></div>
+      <div class="callout"><strong>Two unrelated uses of “residual”:</strong> a residual error is prediction minus label. A residual or skip <em>connection</em> in a later network architecture adds an earlier representation to a later one so information and gradients have a shorter path.</div>
       <div class="failure-grid"><article><h3>Shape mismatch</h3><p>Adjacent widths do not connect. Diagnose by writing every tensor shape before multiplying.</p></article><article><h3>Missing nonlinearity</h3><p>Many layers collapse to one linear map. Inspect the architecture between learned transforms.</p></article><article><h3>Dead ReLU</h3><p>A unit remains on the zero side and stops responding. Inspect activation and gradient distributions.</p></article><article><h3>Saturation</h3><p>Extreme sigmoid or tanh inputs have near-zero slopes. Inspect pre-activations and local gradients.</p></article></div>
     </section>
 
@@ -88,6 +91,6 @@
     </section>
   </main>
   <footer><strong>Learn AI</strong><span>Lesson 6 · Neural network anatomy</span></footer>
-  <script src="../progress.js"></script><script src="app.js"></script>
+  <script src="../progress.js"></script><script src="app.js"></script><script src="../lesson-ui-logic.js"></script><script src="../lesson-ui.js"></script>
 </body>
 </html>

@@ -6,6 +6,7 @@
   <title>Lesson 1 — How Machines Learn</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="../progress-ui.css">
+  <link rel="stylesheet" href="../accessibility.css">
 </head>
 <body>
   <header class="topbar">
@@ -129,9 +130,9 @@
     <section id="loss" class="content-section soft">
       <p class="section-number">04</p>
       <h2>How do we measure “wrong”?</h2>
-      <p>For each example, the model makes a prediction. The difference between the prediction and the correct label is the <strong>residual error</strong>.</p>
+      <p>For each example, the model makes a prediction. In this course, the signed <strong>residual error</strong> is always <strong>prediction − label</strong>. Some books choose the opposite sign; either convention works only when it is used consistently.</p>
       <div class="mini-example">
-        <div><small>CORRECT LABEL</small><strong>10</strong></div><span>−</span><div><small>PREDICTION</small><strong>7</strong></div><span>=</span><div><small>ERROR SIZE</small><strong>3</strong></div>
+        <div><small>PREDICTION</small><strong>7</strong></div><span>−</span><div><small>CORRECT LABEL</small><strong>10</strong></div><span>=</span><div><small>SIGNED RESIDUAL</small><strong>−3</strong></div>
       </div>
       <p>A dataset contains many errors, so we need one summary score. <strong>Mean squared error (MSE)</strong> does this in three understandable steps:</p>
       <ol class="explain-steps">
@@ -251,13 +252,14 @@
         <button data-choice="a">A direction and local sensitivity</button><button data-choice="b">The guaranteed final answer</button><button data-choice="c">More training examples</button><p class="feedback"></p>
       </div>
       <div class="completion">
-        <h3>You are ready for Lesson 2 when you can explain:</h3>
-        <ul><li>how a feature, label, prediction, and model differ;</li><li>why loss is needed;</li><li>how gradients and learning rate work together;</li><li>why unseen test data matters;</li><li>why a straight line cannot perfectly fit a curve.</li></ul>
+        <h3>Capstone increment: problem and prediction contract</h3>
+        <p>Use the capstone template to define the first durable artifact for the AI delivery advisor.</p>
+        <ul><li>State the decision the prediction will support and who uses it.</li><li>Name the input features available at prediction time and the label learned from later.</li><li>Give one normal example with an expected prediction.</li><li>Give one failure example and describe its operational cost.</li><li>Choose a first success metric and record what it does not measure.</li></ul>
         <div class="completion-actions"><button id="completeLesson" class="button">Mark Lesson 1 complete</button><a href="../../course.html" target="_top" class="secondary-button">View course progress</a></div><p id="completionStatus" aria-live="polite"></p>
       </div>
     </section>
   </main>
   <footer><strong>Learn AI</strong><span>Lesson 1 · Machine-learning foundations</span></footer>
-  <script src="../progress.js"></script><script src="logic.js"></script><script src="app.js"></script>
+  <script src="../progress.js"></script><script src="logic.js"></script><script src="app.js"></script><script src="../lesson-ui-logic.js"></script><script src="../lesson-ui.js"></script>
 </body>
 </html>

@@ -6,6 +6,7 @@
   <title>Lesson 10 — Regularization and Generalization</title>
   <link rel="stylesheet" href="../01_linear_regression/styles.css">
   <link rel="stylesheet" href="../progress-ui.css">
+  <link rel="stylesheet" href="../accessibility.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -33,7 +34,8 @@
     <section id="curves" class="content-section">
       <p class="section-number">03</p><h2>Learning curves ask whether more data is likely to help</h2>
       <p>A learning curve trains comparable models on increasing amounts of training data, then plots training and validation error against sample count. Its pattern helps separate a capacity problem from a data-coverage problem.</p>
-      <div class="micro-lab curve-lab"><div><p class="tag">LEARNING-CURVE DIAGNOSTIC</p><h3>Compare three evidence patterns</h3></div><div class="curve-buttons"><button data-curve="bias" class="active">High bias</button><button data-curve="variance">High variance</button><button data-curve="healthy">Healthy convergence</button></div><div id="learningCurveChart" class="learning-chart"></div><div class="curve-summary"><p><small>TRAINING PATTERN</small><strong id="curveTraining"></strong></p><p><small>VALIDATION PATTERN</small><strong id="curveValidation"></strong></p><p><small>LIKELY NEXT MOVE</small><strong id="curveAction"></strong></p></div><p id="curveMeaning" class="observation-light"></p></div>
+      <div class="callout"><strong>Three meanings of “bias”:</strong> here, <em>high bias</em> means a model family makes overly rigid assumptions and underfits. It is different from the learned bias parameter <em>b</em> (the intercept in Lessons 1 and 6) and from sampling bias (systematically unrepresentative evidence in Lesson 4). <em>High variance</em> means the fitted model changes too much with the particular training sample and often overfits.</div>
+      <div class="micro-lab curve-lab"><div><p class="tag">LEARNING-CURVE DIAGNOSTIC</p><h3>Compare three evidence patterns</h3></div><div class="curve-buttons"><button data-curve="bias" class="active">Underfitting pattern · high bias</button><button data-curve="variance">Overfitting pattern · high variance</button><button data-curve="healthy">Healthy convergence</button></div><div id="learningCurveChart" class="learning-chart"></div><div class="curve-summary"><p><small>TRAINING PATTERN</small><strong id="curveTraining"></strong></p><p><small>VALIDATION PATTERN</small><strong id="curveValidation"></strong></p><p><small>LIKELY NEXT MOVE</small><strong id="curveAction"></strong></p></div><p id="curveMeaning" class="observation-light"></p></div>
       <div class="metaphor"><strong>Metaphor: diagnosing a student with more practice questions</strong><p>If both practice and new-question scores stay poor, more questions alone may not fix a missing concept. If practice is excellent but new-question performance improves as coverage grows, more varied evidence may help.</p><small>Where the metaphor stops: learning curves depend on the same data quality, split design, optimization budget, and metric validity as every other experiment.</small></div>
     </section>
 
@@ -87,6 +89,6 @@
     </section>
   </main>
   <footer><strong>Learn AI</strong><span>Lesson 10 · Regularization and generalization</span></footer>
-  <script src="../progress.js"></script><script src="logic.js"></script><script src="app.js"></script>
+  <script src="../progress.js"></script><script src="logic.js"></script><script src="app.js"></script><script src="../lesson-ui-logic.js"></script><script src="../lesson-ui.js"></script>
 </body>
 </html>

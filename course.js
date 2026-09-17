@@ -29,10 +29,16 @@ window.addEventListener("message",event=>{
 
 if(requestedLesson>=1&&requestedLesson<=10){
   viewer.hidden=false;
+  const courseMain=document.querySelector("#courseMain");
+  courseMain.inert=true;
+  courseMain.setAttribute("aria-hidden","true");
+  for(const id of ["courseHeader","courseFooter"]){const area=document.querySelector(`#${id}`);area.inert=true;area.setAttribute("aria-hidden","true");}
+  document.title=`Lesson ${requestedLesson} — ${lessonTitles[requestedLesson-1]} · Learn AI`;
   document.querySelector("#viewerTitle").textContent=`Lesson ${requestedLesson} · ${lessonTitles[requestedLesson-1]}`;
   frame.title=`Lesson ${requestedLesson}: ${lessonTitles[requestedLesson-1]}`;
   frame.src=`lessons/${slugs[requestedLesson-1]}/index.html`;
   frame.addEventListener("load",()=>sendProgress(frame.contentWindow));
+  viewer.querySelector("a").focus();
 }
 
 document.querySelector("#resetProgress").addEventListener("click",()=>{if(confirm("Clear completed and visited lessons on this browser?")){CourseProgress.clear();render();}});window.addEventListener("course-progress",render);render();

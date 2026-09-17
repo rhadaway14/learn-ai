@@ -10,7 +10,7 @@ The learner will build an evidence-grounded AI delivery advisor with retrieval, 
 
 | Lessons | What the learner has learned | Capstone artifact produced |
 |---:|---|---|
-| 01–02 | Models, learning, data, vectors, shapes, similarity | Problem statement, glossary, sample inputs and expected outputs |
+| 01–02 | Models, learning, data, vectors, shapes, similarity | Problem-and-prediction contract, glossary, sample inputs, expected outputs, and data-shape contract |
 | 03–05 | Loss, optimization, probability, regression, classification, metrics | Baseline decision model and evaluation worksheet |
 | 06–10 | Neural networks, backpropagation, training, validation, regularization | Reproducible model-training specification and model evidence card |
 | Engineering Lab A | Python, environments, tests, and PyTorch readiness | Selected specification converted into a tested reference implementation |
@@ -28,6 +28,8 @@ The learner will build an evidence-grounded AI delivery advisor with retrieval, 
 | 35 | Integration | Operable capstone release with evaluation report and demonstration |
 
 ## Required artifact contract
+
+Use [the capstone-increment template](templates/capstone-increment.md) for every lesson artifact. Lessons 6–10 also build [the model evidence card](templates/model-evidence-card.md). These templates turn the contract below into fillable prompts rather than leaving learners to invent a document structure.
 
 Every increment records:
 
