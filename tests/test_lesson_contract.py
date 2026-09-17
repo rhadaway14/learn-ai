@@ -23,7 +23,7 @@ def test_shared_components_support_contract_markup():
     css = (ROOT / "lessons/lesson-components.css").read_text(encoding="utf-8")
     script = (ROOT / "lessons/lesson-ui.js").read_text(encoding="utf-8")
     accessibility = (ROOT / "lessons/accessibility.css").read_text(encoding="utf-8")
-    for component in (".ai-story", ".advanced-section", ".hands-on-activity", ".phase-increment"):
+    for component in (".learning-lanes", ".ai-story", ".advanced-section", ".hands-on-activity", ".phase-increment"):
         assert component in css
     assert "lesson-components.css" in accessibility
     assert 'aria-current","step"' in script

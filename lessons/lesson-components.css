@@ -1,4 +1,8 @@
-.ai-story,.hands-on-activity,.phase-increment,.advanced-section{margin:2rem 0;border:1px solid #d9e1eb;border-radius:16px;background:#fff;box-shadow:0 10px 30px rgba(25,42,70,.06)}
+.learning-lanes,.ai-story,.hands-on-activity,.phase-increment,.advanced-section{margin:2rem 0;border:1px solid #d9e1eb;border-radius:16px;background:#fff;box-shadow:0 10px 30px rgba(25,42,70,.06)}
+.learning-lanes{display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:1rem;background:#f8fafc}
+.learning-lanes article{padding:1rem;border-radius:12px;background:#fff;border:1px solid #dce5ef}
+.learning-lanes article[data-depth="advanced"]{border-color:#b7a8ec;background:#faf8ff}
+.learning-lanes h2{margin-top:0;font-size:1.1rem}.learning-lanes p{margin-bottom:.65rem}.learning-lanes a{font-weight:750}
 .ai-story,.hands-on-activity,.phase-increment{padding:1.4rem}
 .story-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:1rem 0}
 .story-steps article{position:relative;padding:1rem;border-radius:12px;background:#f4f7fb;border:1px solid #dce5ef}
@@ -16,5 +20,5 @@
 .phase-increment{border-color:#efc15b;background:linear-gradient(135deg,#fffaf0,#fff)}
 .acceptance-criteria li{margin:.45rem 0}
 .component-status{font-size:.85rem;color:#526174}
-@media(max-width:760px){.story-steps,.activity-levels{grid-template-columns:1fr}}
+@media(max-width:760px){.learning-lanes,.story-steps,.activity-levels{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.advanced-section>summary{scroll-behavior:auto}}

@@ -37,6 +37,8 @@ For each lesson, record:
 - accessibility and setup issues;
 - final student-ready decision.
 
+For lessons using the reusable contract, also apply [PERSONA_TESTING.md](PERSONA_TESTING.md). Component presence is not sufficient: record both novice and experienced-engineer walkthrough evidence. The current reference result is [the Lessons 1–3 pre-pilot review](evaluations/persona-review-foundations-reference.md).
+
 ## Current course promise
 
 Lesson 1 is the approved presentation baseline. Later lessons must meet or deliberately adapt its principles: approachable entry, explicit vocabulary, layered explanation, controlled interaction, visible feedback, and no unexplained prerequisite jumps.
