@@ -237,6 +237,7 @@ function run() {
   const observation = document.querySelector("#observation");
   if (result.unstable) observation.innerHTML = "<strong>The training became unstable.</strong> The steps were so large that the model moved farther away on each update. Lower the learning rate and try again.";
   else if (controls.relationship.value === "quadratic") observation.innerHTML = "<strong>The model found its best straight-line compromise, but the pattern is curved.</strong> This is limited model capacity: more steps cannot turn a line into a curve.";
+  else if (controls.outlier.checked) { const baseline=train(dataset(Number(controls.samples.value),Number(controls.noise.value),controls.relationship.value,false),rate,Number(controls.epochs.value)); observation.innerHTML=`<strong>One unusual training label pulled the fitted line.</strong> Adding 70 to that label contributes roughly 4,900 squared-error units before refitting. The learned weight moved from ${number(baseline.weight)} without the outlier to ${number(result.weight)} with it.`; }
   else if (Number(controls.noise.value) >= 5) observation.innerHTML = "<strong>The trend is learnable, but considerable uncertainty remains.</strong> Noise represents variation this single input cannot explain.";
   else observation.innerHTML = `<strong>The line learned from examples.</strong> Its weight is ${number(result.weight)}; the hidden relationship used to create the baseline data has a weight of 3.5.`;
 }

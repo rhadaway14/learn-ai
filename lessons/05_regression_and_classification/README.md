@@ -98,7 +98,7 @@ In words:
 For an actual effort of 640 hours and a prediction of 590 hours:
 
 $$
-640 - 590 = +50\text{ hours}
+590 - 640 = -50\text{ hours}
 $$
 
 A negative residual means the prediction was too low. A positive residual means it was too high. Some texts reverse the subtraction order; the diagnostic pattern is unchanged when the chosen convention is used consistently. Looking at residual patterns can reveal missing nonlinear structure, different variance across the range, subgroup failures, or systematic underprediction.

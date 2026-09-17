@@ -1,7 +1,7 @@
 .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-:where(a,button,input,select,summary):focus-visible{outline:3px solid #ffbf47;outline-offset:3px}
-:where(button,.button,.secondary-button,.text-button){min-height:44px}
-:where(.micro-lab small,.metric-cards small,.summary small){font-size:max(12px,.75rem)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #ffbf47;outline-offset:3px}
+button,.button,.secondary-button,.text-button{min-height:44px}
+.micro-lab small,.metric-cards small,.summary small{font-size:max(12px,.75rem)}
 canvas,svg{max-width:100%;height:auto}
 .split-test{background:#9b3d00!important}.split-validation{background:#087064!important}
 .actual-negative:after{color:#0b665d!important}.chart-label{fill:#4c596b!important;font-size:12px!important}

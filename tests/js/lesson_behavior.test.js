@@ -43,3 +43,10 @@ test("Lesson 10 errors are calculated from the displayed fitted model",()=>{
   assert.ok(flexible.validationError>flexible.trainError+.1,"separate validation evidence exposes overfit");
   assert.ok(constrained.trainError>flexible.trainError,"regularization changes the fitted model and its measured error");
 });
+
+test("Lesson 10 capacity control can demonstrate all three fit diagnoses",()=>{
+  const evidence=18,noise=1,regularization=0;
+  const reference=lesson10.fitModel(10,evidence,noise,regularization).trainError;
+  const diagnoses=new Set(Array.from({length:10},(_,i)=>lesson10.diagnoseFit(lesson10.fitModel(i+1,evidence,noise,regularization),reference)));
+  assert.deepEqual([...diagnoses].sort(),["Overfitting risk","Underfitting","Useful balance"].sort());
+});
