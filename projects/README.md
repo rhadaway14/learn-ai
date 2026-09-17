@@ -8,6 +8,8 @@ The authoritative lesson-to-project increment sequence is in [PHASE_PROJECTS.md]
 
 Choose a tabular dataset. Establish a naive baseline, train multiple classical models, select metrics, prevent leakage, and explain the final tradeoff.
 
+[Open the browser-first Phase 1 project](phase1/index.html) — complete this integrated assessment after Lesson 5; no coding is required.
+
 [Open Project A](PROJECT_A_CLASSICAL_ML.md)
 
 ## Project B — Image classifier

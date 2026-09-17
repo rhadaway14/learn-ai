@@ -1,5 +1,7 @@
 # Project A — Classical ML Benchmark
 
+> **Sequence note:** First complete the [browser-first Phase 1 Model Investigation Workbench](phase1/index.html). It assesses the Lessons 1–5 reasoning without requiring programming. This document is the optional implementation extension to begin after Engineering Lab A introduces the coding workflow.
+
 ## Mission
 
 Build a defensible binary-classification benchmark on a public tabular dataset. The goal is not the highest score; it is a reproducible decision.

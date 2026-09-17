@@ -6,7 +6,7 @@ Each lesson contributes evidence to a working project completed at the end of it
 
 **Lessons:** 1–5  
 **Outcome:** Compare a regression and classification problem, inspect evidence, choose an evaluation measure, and explain leakage and uncertainty through a visual workbench.  
-**Delivery:** [Project A — Classical ML benchmark](projects/PROJECT_A_CLASSICAL_ML.md)
+**Delivery:** [Browser-first Model Investigation Workbench](projects/phase1/index.html), followed by the [Project A implementation extension](projects/PROJECT_A_CLASSICAL_ML.md) after Engineering Lab A.
 
 | Increment | Lesson contribution |
 |---|---|
