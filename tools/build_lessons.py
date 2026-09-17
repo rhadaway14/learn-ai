@@ -197,7 +197,7 @@ The reference is a minimum viable explanation, not the only valid solution.
 """
         write_if_missing(directory / "SOLUTIONS.md", solutions)
         relative = directory.relative_to(ROOT / "lessons").as_posix()
-        if number > 6:
+        if number > 7:
             index_rows.append(
                 f"| {number:02d} | {title} | [Lesson]({relative}/README.md) · "
                 f"[Exercises]({relative}/EXERCISES.md) · [Reference]({relative}/SOLUTIONS.md) |"
@@ -233,6 +233,8 @@ The reference is a minimum viable explanation, not the only valid solution.
         "[Interactive lesson](05_regression_and_classification/index.html) · [Reading](05_regression_and_classification/README.md) · [Exercises](05_regression_and_classification/EXERCISES.md) |",
         "| 06 | Neural Network Anatomy | "
         "[Interactive lesson](06_neural_network_anatomy/index.html) · [Reading](06_neural_network_anatomy/README.md) · [Exercises](06_neural_network_anatomy/EXERCISES.md) |",
+        "| 07 | Backpropagation From Scratch | "
+        "[Interactive lesson](07_backpropagation_from_scratch/index.html) · [Reading](07_backpropagation_from_scratch/README.md) · [Exercises](07_backpropagation_from_scratch/EXERCISES.md) |",
     ]
     index_rows[6:6] = existing
     write_if_missing(lessons_root / "README.md", "\n".join(index_rows) + "\n")
@@ -282,6 +284,14 @@ The reference is a minimum viable explanation, not the only valid solution.
         "- [ ] Complete the interactive browser lesson",
         "- [ ] Explain neurons, dense layers, activations, capacity, and tensor shapes",
         "- [ ] Produce the capstone neural architecture and tensor-shape contract",
+        "",
+        "Notes:",
+        "",
+        "## Lesson 07 — Backpropagation From Scratch",
+        "",
+        "- [ ] Complete the interactive browser lesson",
+        "- [ ] Explain computational graphs, chain rule, reverse mode, and gradient state",
+        "- [ ] Produce the capstone backward-pass and gradient-state contract",
         "",
         "Notes:",
         "",

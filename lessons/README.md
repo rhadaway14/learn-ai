@@ -10,7 +10,7 @@ Use this page to navigate the implemented curriculum.
 | 04 | Probability and Statistics for ML | [Interactive lesson](04_probability_and_statistics_for_ml/index.html) · [Reading](04_probability_and_statistics_for_ml/README.md) |
 | 05 | Regression and Classification | [Interactive lesson](05_regression_and_classification/index.html) · [Reading](05_regression_and_classification/README.md) · [Exercises](05_regression_and_classification/EXERCISES.md) |
 | 06 | Neural Network Anatomy | [Interactive lesson](06_neural_network_anatomy/index.html) · [Reading](06_neural_network_anatomy/README.md) · [Exercises](06_neural_network_anatomy/EXERCISES.md) |
-| 07 | Backpropagation From Scratch | [Lesson](07_backpropagation_from_scratch/README.md) · [Exercises](07_backpropagation_from_scratch/EXERCISES.md) · [Reference](07_backpropagation_from_scratch/SOLUTIONS.md) |
+| 07 | Backpropagation From Scratch | [Interactive lesson](07_backpropagation_from_scratch/index.html) · [Reading](07_backpropagation_from_scratch/README.md) · [Exercises](07_backpropagation_from_scratch/EXERCISES.md) |
 | 08 | PyTorch and Autograd | [Lesson](08_pytorch_and_autograd/README.md) · [Exercises](08_pytorch_and_autograd/EXERCISES.md) · [Reference](08_pytorch_and_autograd/SOLUTIONS.md) |
 | 09 | Train and Evaluate a Neural Network | [Lesson](09_train_and_evaluate_a_neural_network/README.md) · [Exercises](09_train_and_evaluate_a_neural_network/EXERCISES.md) · [Reference](09_train_and_evaluate_a_neural_network/SOLUTIONS.md) |
 | 10 | Regularization and Generalization | [Lesson](10_regularization_and_generalization/README.md) · [Exercises](10_regularization_and_generalization/EXERCISES.md) · [Reference](10_regularization_and_generalization/SOLUTIONS.md) |

@@ -74,13 +74,14 @@ Notes:
 
 ## Lesson 07 — Backpropagation From Scratch
 
-- [ ] Read the lesson and predict the lab result
-- [ ] Run the lab
-- [ ] Complete the exercise
-- [ ] Perform and record the experiment
-- [ ] Analyze the failure mode
-- [ ] Answer the checkpoint questions
-- [ ] Write plain-language and technical explanations
+- [ ] Complete the interactive browser lesson
+- [ ] Trace one computational graph forward and backward
+- [ ] Apply upstream gradient × local derivative through a chain
+- [ ] Sum gradient contributions across branches
+- [ ] Explain reverse mode and tensor-gradient shapes
+- [ ] Demonstrate stale and intentional gradient accumulation
+- [ ] Produce the capstone backward-pass and gradient-state contract
+- [ ] Mark the lesson complete on the course dashboard
 
 Notes:
 
