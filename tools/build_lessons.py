@@ -197,7 +197,7 @@ The reference is a minimum viable explanation, not the only valid solution.
 """
         write_if_missing(directory / "SOLUTIONS.md", solutions)
         relative = directory.relative_to(ROOT / "lessons").as_posix()
-        if number > 9:
+        if number > 10:
             index_rows.append(
                 f"| {number:02d} | {title} | [Lesson]({relative}/README.md) · "
                 f"[Exercises]({relative}/EXERCISES.md) · [Reference]({relative}/SOLUTIONS.md) |"
@@ -239,6 +239,8 @@ The reference is a minimum viable explanation, not the only valid solution.
         "[Interactive lesson](08_pytorch_and_autograd/index.html) · [Reading](08_pytorch_and_autograd/README.md) · [Exercises](08_pytorch_and_autograd/EXERCISES.md) |",
         "| 09 | Train and Evaluate a Neural Network | "
         "[Interactive lesson](09_train_and_evaluate_a_neural_network/index.html) · [Reading](09_train_and_evaluate_a_neural_network/README.md) · [Exercises](09_train_and_evaluate_a_neural_network/EXERCISES.md) |",
+        "| 10 | Regularization and Generalization | "
+        "[Interactive lesson](10_regularization_and_generalization/index.html) · [Reading](10_regularization_and_generalization/README.md) · [Exercises](10_regularization_and_generalization/EXERCISES.md) |",
     ]
     index_rows[6:6] = existing
     write_if_missing(lessons_root / "README.md", "\n".join(index_rows) + "\n")
@@ -312,6 +314,14 @@ The reference is a minimum viable explanation, not the only valid solution.
         "- [ ] Complete the interactive browser lesson",
         "- [ ] Explain splits, batches, curves, early stopping, metrics, and seed evidence",
         "- [ ] Produce the capstone training, evaluation, and release protocol",
+        "",
+        "Notes:",
+        "",
+        "## Lesson 10 — Regularization and Generalization",
+        "",
+        "- [ ] Complete the interactive browser lesson",
+        "- [ ] Explain capacity, learning curves, penalties, dropout, augmentation, and normalization",
+        "- [ ] Produce the capstone generalization stress-test and model evidence card",
         "",
         "Notes:",
         "",

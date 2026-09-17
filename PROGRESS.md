@@ -117,13 +117,16 @@ Notes:
 
 ## Lesson 10 — Regularization and Generalization
 
-- [ ] Read the lesson and predict the lab result
-- [ ] Run the lab
-- [ ] Complete the exercise
-- [ ] Perform and record the experiment
-- [ ] Analyze the failure mode
-- [ ] Answer the checkpoint questions
-- [ ] Write plain-language and technical explanations
+- [ ] Complete the interactive browser lesson
+- [ ] Distinguish underfitting, useful fit, overfitting, and deployment shift
+- [ ] Diagnose capacity and data limitations with learning curves
+- [ ] Calculate and explain L1 and L2 penalties
+- [ ] Explain dropout scaling and training/evaluation behavior
+- [ ] Review augmentation policies for plausibility and label preservation
+- [ ] Distinguish input standardization, batch normalization, and layer normalization
+- [ ] Design controlled regularization ablations across repeated seeds
+- [ ] Produce the capstone generalization stress-test and model evidence card
+- [ ] Mark the lesson complete on the course dashboard
 
 Notes:
 

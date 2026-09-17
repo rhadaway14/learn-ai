@@ -13,7 +13,7 @@ Use this page to navigate the implemented curriculum.
 | 07 | Backpropagation From Scratch | [Interactive lesson](07_backpropagation_from_scratch/index.html) · [Reading](07_backpropagation_from_scratch/README.md) · [Exercises](07_backpropagation_from_scratch/EXERCISES.md) |
 | 08 | PyTorch and Autograd | [Interactive lesson](08_pytorch_and_autograd/index.html) · [Reading](08_pytorch_and_autograd/README.md) · [Exercises](08_pytorch_and_autograd/EXERCISES.md) |
 | 09 | Train and Evaluate a Neural Network | [Interactive lesson](09_train_and_evaluate_a_neural_network/index.html) · [Reading](09_train_and_evaluate_a_neural_network/README.md) · [Exercises](09_train_and_evaluate_a_neural_network/EXERCISES.md) |
-| 10 | Regularization and Generalization | [Lesson](10_regularization_and_generalization/README.md) · [Exercises](10_regularization_and_generalization/EXERCISES.md) · [Reference](10_regularization_and_generalization/SOLUTIONS.md) |
+| 10 | Regularization and Generalization | [Interactive lesson](10_regularization_and_generalization/index.html) · [Reading](10_regularization_and_generalization/README.md) · [Exercises](10_regularization_and_generalization/EXERCISES.md) |
 | 11 | Tokenization | [Lesson](11_tokenization/README.md) · [Exercises](11_tokenization/EXERCISES.md) · [Reference](11_tokenization/SOLUTIONS.md) |
 | 12 | Embeddings and Semantic Similarity | [Lesson](12_embeddings_and_semantic_similarity/README.md) · [Exercises](12_embeddings_and_semantic_similarity/EXERCISES.md) · [Reference](12_embeddings_and_semantic_similarity/SOLUTIONS.md) |
 | 13 | Attention From Scratch | [Lesson](13_attention_from_scratch/README.md) · [Exercises](13_attention_from_scratch/EXERCISES.md) · [Reference](13_attention_from_scratch/SOLUTIONS.md) |

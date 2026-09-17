@@ -95,6 +95,6 @@ def test_lesson_08_capstone_prepares_lesson_09_implementation() -> None:
 
 def test_course_dashboard_opens_lesson_08_interactively() -> None:
     script = (ROOT / "course.js").read_text(encoding="utf-8")
-    assert "number<=9" in script
-    assert "requestedLesson<=9" in script
+    assert "number<=10" in script
+    assert "requestedLesson<=10" in script
     assert '"08_pytorch_and_autograd"' in script

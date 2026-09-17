@@ -113,6 +113,6 @@ def test_lesson_09_exercises_include_calculation_diagnosis_and_capstone() -> Non
 
 def test_course_dashboard_opens_lesson_09_interactively() -> None:
     script = (ROOT / "course.js").read_text(encoding="utf-8")
-    assert "number<=9" in script
-    assert "requestedLesson<=9" in script
+    assert "number<=10" in script
+    assert "requestedLesson<=10" in script
     assert '"09_train_and_evaluate_a_neural_network"' in script
