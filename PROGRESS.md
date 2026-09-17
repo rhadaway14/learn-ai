@@ -101,13 +101,17 @@ Notes:
 
 ## Lesson 09 — Train and Evaluate a Neural Network
 
-- [ ] Read the lesson and predict the lab result
-- [ ] Run the lab
-- [ ] Complete the exercise
-- [ ] Perform and record the experiment
-- [ ] Analyze the failure mode
-- [ ] Answer the checkpoint questions
-- [ ] Write plain-language and technical explanations
+- [ ] Complete the interactive browser lesson
+- [ ] Define the prediction moment, target, eligible features, and leakage boundary
+- [ ] Choose a split strategy that matches the deployment claim
+- [ ] Calculate batches per epoch and total optimizer updates
+- [ ] Diagnose training and validation curve relationships
+- [ ] Configure early stopping and identify the checkpoint to restore
+- [ ] Interpret confusion-matrix cells and class-specific metrics
+- [ ] Compare repeatability from one seed with robustness across seeds
+- [ ] Build a model-selection and final-test release gate
+- [ ] Produce the capstone training, evaluation, and release protocol
+- [ ] Mark the lesson complete on the course dashboard
 
 Notes:
 

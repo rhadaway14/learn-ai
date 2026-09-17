@@ -93,6 +93,6 @@ def test_lesson_05_completes_foundation_gate_a() -> None:
 
 def test_course_dashboard_opens_lesson_05_interactively() -> None:
     script = (ROOT / "course.js").read_text(encoding="utf-8")
-    assert "number<=8" in script
-    assert "requestedLesson<=8" in script
+    assert "number<=9" in script
+    assert "requestedLesson<=9" in script
     assert '"05_regression_and_classification"' in script
