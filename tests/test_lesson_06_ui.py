@@ -95,6 +95,6 @@ def test_lesson_06_capstone_prepares_later_model_mechanics() -> None:
 
 def test_course_dashboard_opens_lesson_06_interactively() -> None:
     script = (ROOT / "course.js").read_text(encoding="utf-8")
-    assert "number<=7" in script
-    assert "requestedLesson<=7" in script
+    assert "number<=8" in script
+    assert "requestedLesson<=8" in script
     assert '"06_neural_network_anatomy"' in script

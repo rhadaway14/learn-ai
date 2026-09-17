@@ -87,13 +87,15 @@ Notes:
 
 ## Lesson 08 — PyTorch and Autograd
 
-- [ ] Read the lesson and predict the lab result
-- [ ] Run the lab
-- [ ] Complete the exercise
-- [ ] Perform and record the experiment
-- [ ] Analyze the failure mode
-- [ ] Answer the checkpoint questions
-- [ ] Write plain-language and technical explanations
+- [ ] Complete the interactive browser lesson
+- [ ] Explain tensor shape, dtype, device, value memory, and gradient metadata
+- [ ] Trace autograd recording and expected leaf gradients
+- [ ] Inventory registered parameters, buffers, optimizer state, and external metadata
+- [ ] Explain the clear → forward → loss → backward → step lifecycle
+- [ ] Separate module modes from gradient-recording contexts
+- [ ] Plan inference, training-resume, and reproducibility checkpoints
+- [ ] Produce the capstone PyTorch execution and state contract
+- [ ] Mark the lesson complete on the course dashboard
 
 Notes:
 

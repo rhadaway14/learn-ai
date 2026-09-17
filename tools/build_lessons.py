@@ -197,7 +197,7 @@ The reference is a minimum viable explanation, not the only valid solution.
 """
         write_if_missing(directory / "SOLUTIONS.md", solutions)
         relative = directory.relative_to(ROOT / "lessons").as_posix()
-        if number > 7:
+        if number > 8:
             index_rows.append(
                 f"| {number:02d} | {title} | [Lesson]({relative}/README.md) · "
                 f"[Exercises]({relative}/EXERCISES.md) · [Reference]({relative}/SOLUTIONS.md) |"
@@ -235,6 +235,8 @@ The reference is a minimum viable explanation, not the only valid solution.
         "[Interactive lesson](06_neural_network_anatomy/index.html) · [Reading](06_neural_network_anatomy/README.md) · [Exercises](06_neural_network_anatomy/EXERCISES.md) |",
         "| 07 | Backpropagation From Scratch | "
         "[Interactive lesson](07_backpropagation_from_scratch/index.html) · [Reading](07_backpropagation_from_scratch/README.md) · [Exercises](07_backpropagation_from_scratch/EXERCISES.md) |",
+        "| 08 | PyTorch and Autograd | "
+        "[Interactive lesson](08_pytorch_and_autograd/index.html) · [Reading](08_pytorch_and_autograd/README.md) · [Exercises](08_pytorch_and_autograd/EXERCISES.md) |",
     ]
     index_rows[6:6] = existing
     write_if_missing(lessons_root / "README.md", "\n".join(index_rows) + "\n")
@@ -292,6 +294,14 @@ The reference is a minimum viable explanation, not the only valid solution.
         "- [ ] Complete the interactive browser lesson",
         "- [ ] Explain computational graphs, chain rule, reverse mode, and gradient state",
         "- [ ] Produce the capstone backward-pass and gradient-state contract",
+        "",
+        "Notes:",
+        "",
+        "## Lesson 08 — PyTorch and Autograd",
+        "",
+        "- [ ] Complete the interactive browser lesson",
+        "- [ ] Explain tensor metadata, autograd, registered state, modes, and checkpoints",
+        "- [ ] Produce the capstone PyTorch execution and state contract",
         "",
         "Notes:",
         "",

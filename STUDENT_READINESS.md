@@ -13,7 +13,8 @@ The original repository scaffold implemented runnable topic demonstrations for a
 | 05 | Regression and classification | Yes | Yes | Yes |
 | 06 | Neural-network anatomy | Yes | Yes | Yes |
 | 07 | Backpropagation from scratch | Yes | Yes | Yes |
-| 08–10 | Remaining neural-network foundations | Yes | Review required | Review required |
+| 08 | PyTorch and autograd | Yes | Yes | Yes |
+| 09–10 | Remaining neural-network foundations | Yes | Review required | Review required |
 | 11–16 | Language-model mechanics | Yes | Review required | Review required |
 | 17–23 | LLM application engineering | Yes | Review required | Review required |
 | 24–30 | Evaluation, security, and operations | Yes | Review required | Review required |

@@ -101,6 +101,6 @@ def test_lesson_07_capstone_prepares_autograd_comparison() -> None:
 
 def test_course_dashboard_opens_lesson_07_interactively() -> None:
     script = (ROOT / "course.js").read_text(encoding="utf-8")
-    assert "number<=7" in script
-    assert "requestedLesson<=7" in script
+    assert "number<=8" in script
+    assert "requestedLesson<=8" in script
     assert '"07_backpropagation_from_scratch"' in script
