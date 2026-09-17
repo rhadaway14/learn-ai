@@ -35,6 +35,16 @@ The course dashboard launches interactive lessons, resumes the next unfinished l
 
 The complete lesson and interactive lab run locally in the browser without an account, terminal, installation, or internet connection.
 
+### Optional Foundations runtime
+
+Lessons 1–3 also have an optional containerized Model Investigation Workbench that stores experiment evidence across sessions:
+
+```bash
+docker compose --profile foundations up --build
+```
+
+Open `http://localhost:8080/labs/foundations/`. Docker is not required for the core learning path. See [the Foundations runtime guide](labs/foundations/README.md).
+
 ### Engineering environment for later lessons
 
 Python 3.11–3.13 is supported after the learner passes Engineering Lab A and reaches programming labs.
@@ -90,6 +100,11 @@ learn-ai/
 ├── projects/
 ├── schemas/
 ├── templates/
+├── activities/
+├── phase-projects/
+├── labs/
+│   └── foundations/
+├── compose.yaml
 ├── capstone/
 ├── resources/
 ├── pyproject.toml
