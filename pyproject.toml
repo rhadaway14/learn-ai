@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8,<9"]
+dev = ["jsonschema>=4.23,<5", "pytest>=8,<9"]
 engineering-lab-a = ["torch>=2.4,<3"]
 
 [tool.pytest.ini_options]

@@ -2,7 +2,7 @@
 
 This tracker distinguishes existing lesson files from lessons that have passed the teaching gate in [COURSE_DESIGN.md](COURSE_DESIGN.md).
 
-The original repository scaffold implemented runnable topic demonstrations for all 35 lessons. It did not prove that every lesson contained enough instruction for a learner with an unknown background. Each lesson will now be reviewed and expanded before being marked student-ready.
+The original repository scaffold implemented runnable topic demonstrations for all 35 lessons. It did not prove that every lesson contained enough instruction for a learner with an unknown background. Lessons 1–10 have now passed the internal teaching, artifact-contract, automated accessibility, and repository-consistency gates. An external learner pilot and real assistive-technology walkthrough remain required before claiming production-course validation. Lessons 11–35 still require individual instructional review.
 
 | Lesson | Topic | Material exists | Student-ready | Capstone increment verified |
 |---:|---|:---:|:---:|:---:|
@@ -41,4 +41,4 @@ For lessons using the reusable contract, also apply [PERSONA_TESTING.md](PERSONA
 
 ## Current course promise
 
-Lesson 1 is the approved presentation baseline. Later lessons must meet or deliberately adapt its principles: approachable entry, explicit vocabulary, layered explanation, controlled interaction, visible feedback, and no unexplained prerequisite jumps.
+Lessons 1–10 are the approved browser-first pattern: approachable entry, explicit vocabulary, layered explanation, controlled interaction, visible feedback, a 500-word-or-greater advanced engineering section, real prerequisite declarations, and no required Python. Engineering Lab A is the explicit programming-readiness gate after Lesson 10. Later lessons must meet or deliberately adapt this pattern and must not be marked student-ready solely because scaffold files exist.

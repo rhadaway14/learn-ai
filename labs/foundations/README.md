@@ -14,6 +14,8 @@ Open:
 - Workbench: <http://localhost:8080/labs/foundations/>
 - API health: <http://localhost:8081/health>
 
+The API is intentionally a local teaching service. Compose restricts browser access to `http://localhost:8080`, limits request bodies to 64 KiB, and persists only learner-entered experiment notes. Port `8081` is published for local inspection; do not expose it to an untrusted network or treat it as a production service.
+
 Stop containers with `Ctrl+C`, then run:
 
 ```bash

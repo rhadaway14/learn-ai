@@ -1,4 +1,4 @@
-# Lesson 04 — Probability and Statistics for Machine Learning
+# Lesson 04 — Probability and Statistics for ML
 
 ## Start here
 

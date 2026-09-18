@@ -4,7 +4,7 @@ Use this page to navigate the implemented curriculum.
 
 | Lesson | Topic | Materials |
 |---:|---|---|
-| 01 | How Machines Learn: Linear Regression | [Interactive lesson](01_linear_regression/index.html) · [Reading](01_linear_regression/README.md) |
+| 01 | How Machines Learn | [Interactive lesson](01_linear_regression/index.html) · [Reading](01_linear_regression/README.md) |
 | 02 | The Shapes of AI Data | [Interactive lesson](02_vectors_matrices_tensors/index.html) · [Reading](02_vectors_matrices_tensors/README.md) |
 | 03 | Loss Functions and Optimization | [Interactive lesson](03_loss_functions_and_optimization/index.html) · [Reading](03_loss_functions_and_optimization/README.md) |
 | 04 | Probability and Statistics for ML | [Interactive lesson](04_probability_and_statistics_for_ml/index.html) · [Reading](04_probability_and_statistics_for_ml/README.md) |

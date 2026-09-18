@@ -2,7 +2,7 @@
 
 This is an evidence-first path from machine-learning fundamentals to advanced AI architecture. It is designed for engineers with uneven backgrounds. **Lessons 1–10 are browser-first and require no Python knowledge.** Programming becomes part of the learner path only after the required Engineering Lab A readiness bridge.
 
-The full path is approximately **140–200 hours**. The time ranges include reading, implementation, experiments, checkpoints, and milestone projects.
+The full path is approximately **135–185 hours**. For Lessons 1–10, the estimates below are the sum of the core and engineer lanes displayed in the browser; milestone projects are listed separately. Later-phase estimates include reading, implementation, experiments, and checkpoints.
 
 ## Learning method
 
@@ -17,15 +17,15 @@ Every lesson follows the same loop:
 
 Frameworks are introduced only after the underlying operation is visible.
 
-## Phase 1 — Mathematical and ML foundations (18–25 hours)
+## Phase 1 — Mathematical and ML foundations (11–14 hours)
 
 | Lesson | Subject | Hands-on result | Est. time |
 |---:|---|---|---:|
-| 01 | ML fundamentals | Interactive linear-regression investigation and evidence record | 2–3h |
-| 02 | Vectors, matrices, tensors | Guided similarity, shape, and transformation experiments | 3–4h |
-| 03 | Loss and optimization | Interactive loss surfaces, finite differences, and optimizer diagnosis | 3–4h |
-| 04 | Probability and statistics | Distributions, sampling, Bayes, confidence experiments | 4–5h |
-| 05 | Regression and classification | Linear/logistic regression and decision boundaries | 4–5h |
+| 01 | How Machines Learn | Interactive linear-regression investigation and evidence record | 80–90m |
+| 02 | The Shapes of AI Data | Guided similarity, shape, and transformation experiments | 100–110m |
+| 03 | Loss Functions and Optimization | Interactive loss surfaces, finite differences, and optimizer diagnosis | 100–110m |
+| 04 | Probability and Statistics for ML | Distributions, sampling, Bayes, confidence experiments | 120–130m |
+| 05 | Regression and Classification | Linear/logistic regression and decision boundaries | 135–145m |
 | Project A | Classical ML benchmark specification | Compare model evidence and define a reproducible benchmark protocol | 2–4h |
 
 Exit criteria:
@@ -35,15 +35,15 @@ Exit criteria:
 - recognize data leakage, underfitting, and overfitting;
 - choose meaningful regression and classification metrics.
 
-## Phase 2 — Neural networks and PyTorch (22–30 hours)
+## Phase 2 — Neural networks and PyTorch (15–18 hours)
 
 | Lesson | Subject | Hands-on result | Est. time |
 |---:|---|---|---:|
-| 06 | Neural-network anatomy | Trace a multilayer forward pass and its shapes | 3–4h |
-| 07 | Backpropagation | Trace a computational graph and parameter-update evidence | 4–5h |
-| 08 | PyTorch and autograd | Specify tensor, gradient, and optimizer behavior | 3–4h |
-| 09 | First real neural network | Design a reproducible train/validate/checkpoint protocol | 4–6h |
-| 10 | Generalization | Investigate capacity, regularization, and validation evidence | 4–5h |
+| 06 | Neural Network Anatomy | Trace a multilayer forward pass and its shapes | 115–125m |
+| 07 | Backpropagation From Scratch | Trace a computational graph and parameter-update evidence | 125–135m |
+| 08 | PyTorch and Autograd | Specify tensor, gradient, and optimizer behavior | 125–135m |
+| 09 | Train and Evaluate a Neural Network | Design a reproducible train/validate/checkpoint protocol | 130–140m |
+| 10 | Regularization and Generalization | Investigate capacity, regularization, and validation evidence | 130–140m |
 | Project B | Model-training specification | Reproducible training specification and model evidence card | 4–6h |
 
 Exit criteria:

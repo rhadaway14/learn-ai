@@ -254,6 +254,14 @@ If batches have different sizes, averaging the batch averages equally can be wro
 
 Suppose one batch contains 50 examples with average loss 0.4 and the final batch contains 10 examples with average loss 0.8.
 
+The epoch loss must weight each batch by the number of examples it represents:
+
+$$
+L_{epoch}=\frac{\sum_{b=1}^{B} n_b L_b}{\sum_{b=1}^{B} n_b}
+$$
+
+For these two batches, the result is `(50 × 0.4 + 10 × 0.8) / 60 = 0.4667`. Averaging the two batch means directly would report `0.6` and over-weight the smaller final batch.
+
 An equal batch average gives:
 
 > (0.4 + 0.8) ÷ 2 = 0.6

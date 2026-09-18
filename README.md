@@ -37,7 +37,7 @@ The complete lesson and interactive lab run locally in the browser without an ac
 
 ### Optional Foundations runtime
 
-Lessons 1–3 also have an optional containerized Model Investigation Workbench that stores experiment evidence across sessions:
+Lessons 1–3 also have an optional containerized Experiment Evidence Notebook that stores experiment evidence across sessions:
 
 ```bash
 docker compose --profile foundations up --build

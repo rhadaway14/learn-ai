@@ -7,7 +7,15 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./:/usr/share/nginx/html:ro
+      - ./course.html:/usr/share/nginx/html/course.html:ro
+      - ./course.js:/usr/share/nginx/html/course.js:ro
+      - ./course.css:/usr/share/nginx/html/course.css:ro
+      - ./course-viewer.css:/usr/share/nginx/html/course-viewer.css:ro
+      - ./README.md:/usr/share/nginx/html/README.md:ro
+      - ./lessons:/usr/share/nginx/html/lessons:ro
+      - ./projects:/usr/share/nginx/html/projects:ro
+      - ./labs:/usr/share/nginx/html/labs:ro
+      - ./templates:/usr/share/nginx/html/templates:ro
     depends_on:
       foundations-api:
         condition: service_healthy
@@ -19,6 +27,8 @@ services:
     environment:
       FOUNDATIONS_DB_PATH: /data/experiments.db
       FOUNDATIONS_PORT: "8080"
+      FOUNDATIONS_ALLOWED_ORIGIN: http://localhost:8080
+      FOUNDATIONS_MAX_BODY_BYTES: "65536"
     ports:
       - "8081:8080"
     volumes:

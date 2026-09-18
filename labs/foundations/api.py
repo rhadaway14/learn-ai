@@ -73,13 +73,17 @@ class ExperimentStore:
 
 class FoundationsHandler(BaseHTTPRequestHandler):
     store: ExperimentStore
+    allowed_origin = "http://localhost:8080"
+    max_body_bytes = 65_536
 
     def _send(self, status: HTTPStatus, payload: Any) -> None:
         body = json.dumps(payload).encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
-        self.send_header("Access-Control-Allow-Origin", "*")
+        if self.headers.get("Origin") == self.allowed_origin:
+            self.send_header("Access-Control-Allow-Origin", self.allowed_origin)
+            self.send_header("Vary", "Origin")
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         self.end_headers()
@@ -102,6 +106,9 @@ class FoundationsHandler(BaseHTTPRequestHandler):
             return
         try:
             length = int(self.headers.get("Content-Length", "0"))
+            if length > self.max_body_bytes:
+                self._send(HTTPStatus.REQUEST_ENTITY_TOO_LARGE, {"error": "request body exceeds configured limit"})
+                return
             payload = json.loads(self.rfile.read(length) or b"{}")
             created = self.store.add(Experiment.from_payload(payload))
         except (ValueError, json.JSONDecodeError) as error:
@@ -116,6 +123,8 @@ class FoundationsHandler(BaseHTTPRequestHandler):
 def run() -> None:
     path = os.environ.get("FOUNDATIONS_DB_PATH", "/data/experiments.db")
     port = int(os.environ.get("FOUNDATIONS_PORT", "8080"))
+    FoundationsHandler.allowed_origin = os.environ.get("FOUNDATIONS_ALLOWED_ORIGIN", "http://localhost:8080")
+    FoundationsHandler.max_body_bytes = int(os.environ.get("FOUNDATIONS_MAX_BODY_BYTES", "65536"))
     FoundationsHandler.store = ExperimentStore(path)
     ThreadingHTTPServer(("0.0.0.0", port), FoundationsHandler).serve_forever()
 

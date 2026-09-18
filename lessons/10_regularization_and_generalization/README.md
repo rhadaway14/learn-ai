@@ -209,6 +209,14 @@ The optimizer follows the total objective. Evaluation should still report the pr
 
 > objective = data loss + λ × penalty
 
+In symbolic form:
+
+$$
+J(\theta)=L_{data}(\theta)+\lambda R(\theta)
+$$
+
+Here, $\theta$ contains the trainable parameters, $L_{data}$ measures prediction error, and $R$ measures the property being discouraged.
+
 Where:
 
 - **objective** is the quantity optimized;
@@ -237,6 +245,10 @@ Large magnitudes contribute disproportionately because they are squared.
 ### Compact notation
 
 > L2 penalty = sum of wᵢ²
+
+$$
+R_{L2}(w)=\sum_{i=1}^{d} w_i^2
+$$
 
 Where **wᵢ** means the weight at position *i*.
 
@@ -269,6 +281,10 @@ For weights 2, −1, and 0.5:
 ### Compact notation
 
 > L1 penalty = sum of |wᵢ|
+
+$$
+R_{L1}(w)=\sum_{i=1}^{d}|w_i|
+$$
 
 L1 applies pressure that can move small weights exactly to zero, creating sparsity.
 
