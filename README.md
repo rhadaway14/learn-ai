@@ -19,7 +19,7 @@ Every lesson follows the [reusable lesson contract](LESSON_CONTRACT.md): an appr
 | Quality and production | 24–30 | Evaluate, tune, secure, serve, and operate AI systems |
 | Advanced systems and architecture | 31–35 | Analyze advanced models and deliver the capstone |
 
-All 35 lessons have learning material, and each is reviewed individually against the stricter [student-readiness gate](STUDENT_READINESS.md). Lessons 1–10 are browser-first and require no Python. After Lesson 10, **Engineering Lab A** establishes Python, testing, and PyTorch readiness before programming becomes required. Browse the [lesson index](lessons/README.md) or read the detailed [curriculum](CURRICULUM.md).
+All 35 lessons have learning material, and each is reviewed individually against the stricter [student-readiness gate](STUDENT_READINESS.md). Lessons 1–10 are browser-first and require no Python. After Lesson 10, [**Engineering Lab A**](labs/engineering_lab_a/README.md) establishes Python, testing, and PyTorch readiness before programming becomes required. Browse the [lesson index](lessons/README.md) or read the detailed [curriculum](CURRICULUM.md).
 
 ## Quick start
 

@@ -18,7 +18,7 @@ Each lesson contributes evidence to a working project completed at the end of it
 
 ## Phase 2 — Reproducible Neural Model Training System
 
-**Lessons:** 6–10 plus Engineering Lab A  
+**Lessons:** 6–10 plus [Engineering Lab A](labs/engineering_lab_a/README.md)
 **Outcome:** Specify, implement, train, diagnose, and evaluate a small neural model with reproducible evidence.  
 **Delivery:** [Project B — Image classifier](projects/PROJECT_B_IMAGE_CLASSIFIER.md), preceded by a domain-neutral model-training workbench.
 
@@ -29,7 +29,7 @@ Each lesson contributes evidence to a working project completed at the end of it
 | P2-I03 | Framework execution, state, mode, and checkpoint contract |
 | P2-I04 | Dataset boundary, training run, evaluation, and checkpoint selection |
 | P2-I05 | Generalization controls and model evidence card |
-| P2-I06 | Tested reference implementation created during Engineering Lab A |
+| [P2-I06](phase-projects/phase2/P2-I06.json) | Tested reference implementation created during [Engineering Lab A](labs/engineering_lab_a/README.md) |
 
 ## Phase 3 — Small Language-Model Explorer
 

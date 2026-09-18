@@ -53,11 +53,13 @@ Exit criteria:
 - specify the lifecycle and evidence required for a correct training loop;
 - diagnose unstable, overfit, and underfit training.
 
-## Required Engineering Lab A — Python and PyTorch readiness (6–10 hours)
+## [Required Engineering Lab A — Python and PyTorch readiness](labs/engineering_lab_a/README.md) (6–10 hours)
 
 This bridge occurs **after Lesson 10 and before any learner is asked to read, run, or modify Python**. It teaches how to run a program and interpret an error; values, variables, collections, functions, loops, packages, and virtual environments; tensor shapes and structured output; safe configuration changes; and tests with pass/fail evidence.
 
 Experienced Python developers may pass a diagnostic and skip supported practice. Everyone must demonstrate the same readiness evidence before programming labs in later phases. Maintainer reference implementations do not count as learner tasks before this gate.
+
+The lab produces [P2-I06](phase-projects/phase2/P2-I06.json), a tested PyTorch reference implementation and reproducible evidence record.
 
 ## Phase 3 — Language models from primitives (30–40 hours)
 
