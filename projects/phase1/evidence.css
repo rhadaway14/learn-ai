@@ -1,0 +1,10 @@
+.evidence-status {
+  display: block;
+  margin-top: .45rem;
+  padding: .45rem .6rem;
+  border-radius: 7px;
+  font-weight: 650;
+}
+.evidence-status:empty { display: none; }
+.evidence-status.correct { background: #eaf8f1; color: #126342; }
+.evidence-status.incorrect { background: #fff3e5; color: #7a4100; }

@@ -249,15 +249,15 @@
     <section id="check" class="content-section">
       <p class="section-number">07</p>
       <h2>Check your understanding</h2>
-<div class="quiz" data-answer="b" data-why-a="Choosing “The correct labels” follows a tempting alternative, but it does not resolve the distinction in “What does training change?” Revisit the lesson’s worked example and identify what is measured, transformed, or held separate before retrying." data-why-c="Choosing “The test examples” follows a tempting alternative, but it does not resolve the distinction in “What does training change?” Revisit the lesson’s worked example and identify what is measured, transformed, or held separate before retrying.">
+<div class="quiz" data-answer="b" data-why-a="Labels are fixed evidence supplied to training; changing them would move the target instead of improving the model that is trying to match it." data-why-c="Test examples remain untouched evaluation evidence. Updating them would contaminate the independent check rather than teach the model.">
         <h3>1. What does training change?</h3>
         <button data-choice="a">The correct labels</button><button data-choice="b">The model's weight and bias</button><button data-choice="c">The test examples</button><p class="feedback"></p>
       </div>
-<div class="quiz" data-answer="c" data-why-a="Choosing “To make the dataset smaller” follows a tempting alternative, but it does not resolve the distinction in “Why keep test data separate?” Revisit the lesson’s worked example and identify what is measured, transformed, or held separate before retrying." data-why-b="Choosing “To lower training loss” follows a tempting alternative, but it does not resolve the distinction in “Why keep test data separate?” Revisit the lesson’s worked example and identify what is measured, transformed, or held separate before retrying.">
+<div class="quiz" data-answer="c" data-why-a="Dataset size is unrelated to why a holdout exists; a smaller dataset can still leak if the same evidence guides training and evaluation." data-why-b="Training loss measures fit to examples already used for updates, so lowering it cannot demonstrate behavior on genuinely unseen cases.">
         <h3>2. Why keep test data separate?</h3>
         <button data-choice="a">To make the dataset smaller</button><button data-choice="b">To lower training loss</button><button data-choice="c">To measure performance on unseen examples</button><p class="feedback"></p>
       </div>
-<div class="quiz" data-answer="a" data-why-b="Choosing “The guaranteed final answer” follows a tempting alternative, but it does not resolve the distinction in “What does a gradient provide?” Revisit the lesson’s worked example and identify what is measured, transformed, or held separate before retrying." data-why-c="Choosing “More training examples” follows a tempting alternative, but it does not resolve the distinction in “What does a gradient provide?” Revisit the lesson’s worked example and identify what is measured, transformed, or held separate before retrying.">
+<div class="quiz" data-answer="a" data-why-b="A gradient describes the slope at the current parameter value, not a guaranteed destination; following it can still overshoot or reach a poor region." data-why-c="Additional examples come from data collection. A gradient is calculated from current errors and says how sensitive loss is to a local parameter change.">
         <h3>3. What does a gradient provide?</h3>
         <button data-choice="a">A direction and local sensitivity</button><button data-choice="b">The guaranteed final answer</button><button data-choice="c">More training examples</button><p class="feedback"></p>
       </div>

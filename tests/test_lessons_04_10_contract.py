@@ -14,13 +14,21 @@ LESSONS = {
 }
 
 
-def test_lessons_04_10_implement_the_full_lesson_contract():
+def test_lessons_04_10_use_the_canonical_lesson_contract():
     for lesson, (directory, increment) in LESSONS.items():
         html = (ROOT / "lessons" / directory / "index.html").read_text(encoding="utf-8")
-        for marker in ("learning-lanes", 'id="ai-story"', "advanced-section", "hands-on-activity", "phase-increment"):
+        for marker in ("learning-lanes", 'id="ai-story"', "advanced-section", "hands-on-activity", "phase-increment", 'data-story-step="before"', 'data-story-step="now"', 'data-story-step="next"'):
             assert marker in html, f"Lesson {lesson} missing {marker}"
         assert f'data-activity-id="L{lesson:02d}-A1"' in html
-        assert f'data-increment-id="{increment}"' in html
+        assert f'data-increment="{increment}"' in html
+        assert f'data-phase="{increment[1]}"' in html
+        assert '<aside class="ai-story" data-current=' in html
+        assert "<strong>Modern use case:</strong>" in html
+        assert '<li data-level="guided">' in html
+        assert '<li data-level="challenge">' in html
+        assert '<li data-level="extension">' in html
+        assert '<div class="hands-on-activity"' not in html
+        assert "data-increment-id=" not in html
         assert "no coding" in html.lower()
         assert "Engineer extension · optional" in html
 
@@ -45,12 +53,13 @@ def test_activity_and_increment_records_are_connected():
 def test_phase_one_project_is_browser_first_and_assesses_release_reasoning():
     html = (ROOT / "projects/phase1/index.html").read_text(encoding="utf-8")
     app = (ROOT / "projects/phase1/app.js").read_text(encoding="utf-8")
-    assert html.count("data-question=") == 7
+    assert html.count("data-question=") == 9
     assert html.count('data-critical="true"') == 2
-    assert html.count("data-feedback=") == 21
+    assert html.count("data-feedback=") == 27
     for evidence in ("normal_case", "failure_case", "limitations"):
         assert f'name="{evidence}"' in html
     assert "no coding required" in html.lower()
     assert "PhaseOneAssessment.evaluate" in app
+    assert "PhaseOneAssessment.checkAnswers" in app
     assert "phase1-model-investigation.json" in app
     assert "localStorage" in app
