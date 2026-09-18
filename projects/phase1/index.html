@@ -1,27 +1,442 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Phase 1 Project — Model Investigation Workbench</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="evidence.css"></head>
-<body>
-  <header class="topbar"><strong>Learn AI · Phase 1 Gate</strong><a href="../../course.html">Return to course progress</a></header>
-  <section class="hero"><p class="eyebrow">LESSONS 1–5 · INTEGRATED ASSESSMENT · NO CODING REQUIRED</p><h1>Should this delivery-risk model be built?</h1><p class="lede">You are the model reviewer. Turn an ambiguous request into a defensible prediction and evaluation contract. Every decision changes what the eventual system can honestly claim.</p><p>Estimated time: 45–60 minutes. Your draft is saved in this browser.</p></section>
-  <main>
-    <section class="case"><p class="tag">CASE FILE</p><h2>Northstar delivery-risk advisor</h2><p>Northstar wants to flag implementation projects likely to finish more than 24 hours late. A human operations team can review only 20% of new projects. Missing a truly late project costs much more than reviewing an on-time project, but too many alerts will overwhelm the team.</p><div class="facts"><article><strong>2,400</strong><span>completed projects</span></article><article><strong>12%</strong><span>historically over 24 hours late</span></article><article><strong>20%</strong><span>maximum review capacity</span></article></div><p>Available fields include planned integrations, document count, promised date, customer tier, account ID, actual completion timestamp, and the post-project delay code. Most records come from established enterprise customers; the next launch expands to smaller customers.</p></section>
-    <section class="rubric"><h2>Your release gate</h2><ul><li>Correctly defend at least 7 of 9 decisions.</li><li>Pass both release-critical checks: leakage and production-shaped splitting.</li><li>Write three case-specific evidence notes using at least 12 distinct words each.</li></ul><p>The goal is not memorization. Use <strong>Check my decisions</strong> at any time for formative feedback; the final assessment also evaluates your evidence notes.</p></section>
-    <form id="assessmentForm">
-      <fieldset class="question" data-question="q1" data-answer="b"><legend>1. What is the most useful prediction contract?</legend><label class="option"><input type="radio" name="q1" value="a" data-feedback="A label that says ‘risky’ has no stable event, horizon, or action."> Predict whether a project is risky.</label><label class="option"><input type="radio" name="q1" value="b" data-feedback="This fixes the unit, event, prediction time, horizon, and downstream action."> At booking, estimate the probability that this project finishes more than 24 hours late so operations can choose a review queue.</label><label class="option"><input type="radio" name="q1" value="c" data-feedback="Predicting the timestamp may be possible, but it does not directly specify the requested event or capacity-limited action."> Predict the exact final completion timestamp.</label><p class="feedback" aria-live="polite"></p></fieldset>
-      <fieldset class="question" data-question="q2" data-answer="c" data-critical="true"><legend>2. Which candidate feature must be excluded? <span class="critical">RELEASE-CRITICAL</span></legend><label class="option"><input type="radio" name="q2" value="a" data-feedback="Planned integrations exist at booking and can be valid if collection is reliable."> Number of planned integrations.</label><label class="option"><input type="radio" name="q2" value="b" data-feedback="Customer tier may raise fairness and drift questions, but it exists at prediction time; those questions require evaluation rather than automatic leakage rejection."> Customer tier.</label><label class="option"><input type="radio" name="q2" value="c" data-feedback="The completion timestamp exists only after the outcome and would leak the answer into the inputs."> Actual completion timestamp.</label><p class="feedback" aria-live="polite"></p></fieldset>
-      <fieldset class="question" data-question="q3" data-answer="a"><legend>3. Which baseline should the first model have to beat?</legend><label class="option"><input type="radio" name="q3" value="a" data-feedback="The historical 12% rate is the simplest honest probability forecast and exposes whether complexity adds value."> Assign every comparable project the historical 12% late rate.</label><label class="option"><input type="radio" name="q3" value="b" data-feedback="A random 50/50 guess ignores the observed base rate and is artificially easy to beat."> Flip a fair coin.</label><label class="option"><input type="radio" name="q3" value="c" data-feedback="A large neural model is a candidate, not a naive baseline."> Train the widest neural network that fits in memory.</label><p class="feedback" aria-live="polite"></p></fieldset>
-      <fieldset class="question" data-question="q4" data-answer="b"><legend>4. What is the largest evidence-quality concern before launch?</legend><label class="option"><input type="radio" name="q4" value="a" data-feedback="More rows reduce some random uncertainty but do not fix an unrepresentative population."> The dataset has fewer than one million rows.</label><label class="option"><input type="radio" name="q4" value="b" data-feedback="Performance and calibration learned mostly from enterprise customers may not transfer to smaller customers."> The evaluation sample underrepresents the new smaller-customer population.</label><label class="option"><input type="radio" name="q4" value="c" data-feedback="A 12% base rate is usable; it changes metric interpretation and should be monitored rather than disqualifying the project."> The positive class is not exactly 50%.</label><p class="feedback" aria-live="polite"></p></fieldset>
-      <fieldset class="question" data-question="q5" data-answer="c"><legend>5. Which evaluation emphasis best matches the stated cost?</legend><label class="option"><input type="radio" name="q5" value="a" data-feedback="Accuracy may look high by predicting nearly everything on time while missing costly late projects."> Overall accuracy alone.</label><label class="option"><input type="radio" name="q5" value="b" data-feedback="Precision matters for review capacity, but optimizing it alone can miss too many costly late projects."> Precision alone, regardless of recall.</label><label class="option"><input type="radio" name="q5" value="c" data-feedback="Recall exposes missed late projects while precision and review volume keep the policy within capacity."> Recall for late projects, reported with precision and review volume.</label><p class="feedback" aria-live="polite"></p></fieldset>
-      <fieldset class="question" data-question="q6" data-answer="b"><legend>6. How should the alert threshold be selected?</legend><label class="option"><input type="radio" name="q6" value="a" data-feedback="A 0.5 default ignores prevalence, asymmetric cost, calibration, and the 20% capacity constraint."> Always use 0.5 because probabilities above half are positive.</label><label class="option"><input type="radio" name="q6" value="b" data-feedback="Validation evidence lets the team balance missed cases and false alerts while enforcing capacity before the final test."> On validation data, compare error cost and choose an operating point whose expected review volume fits 20% capacity.</label><label class="option"><input type="radio" name="q6" value="c" data-feedback="Optimizing the threshold on the final test consumes the evidence meant for the final generalization estimate."> Keep changing it until final-test recall is maximized.</label><p class="feedback" aria-live="polite"></p></fieldset>
-      <fieldset class="question" data-question="q7" data-answer="c" data-critical="true"><legend>7. Which split best resembles deployment? <span class="critical">RELEASE-CRITICAL</span></legend><label class="option"><input type="radio" name="q7" value="a" data-feedback="Random rows can place the same account in multiple partitions and mix future cases into training."> Randomly assign individual rows to all partitions.</label><label class="option"><input type="radio" name="q7" value="b" data-feedback="Alphabetical order has no relationship to the production boundary."> Sort by project name and split alphabetically.</label><label class="option"><input type="radio" name="q7" value="c" data-feedback="A later holdout estimates future behavior, and grouping prevents account-specific patterns from crossing boundaries."> Train on earlier projects, validate/test on later projects, and keep each account within one partition.</label><p class="feedback" aria-live="polite"></p></fieldset>
-      <fieldset class="question" data-question="q8" data-answer="b"><legend>8. The model receives 32 projects with 5 features each. Which shape contract preserves that meaning?</legend><label class="option"><input type="radio" name="q8" value="a" data-feedback="A one-dimensional length of 160 preserves the element count but erases which values belong to each project and feature."> A vector shaped (160), because only the number of values matters.</label><label class="option"><input type="radio" name="q8" value="b" data-feedback="The first axis identifies 32 project examples and the second identifies the same 5 ordered features for every project."> A matrix shaped (32, 5), documented as (project, feature).</label><label class="option"><input type="radio" name="q8" value="c" data-feedback="Shape (5, 32) can hold the same count, but it reverses the declared axis contract and changes how later operations interpret rows."> A matrix shaped (5, 32), without documenting the axis order.</label><p class="feedback" aria-live="polite"></p></fieldset>
-      <fieldset class="question" data-question="q9" data-answer="c"><legend>9. Baseline training overshoots repeatedly and loss grows after every update. What is the best controlled experiment?</legend><label class="option"><input type="radio" name="q9" value="a" data-feedback="Changing the labels changes the learning problem and destroys a controlled comparison; labels remain fixed evidence."> Edit the labels until the current predictions look correct.</label><label class="option"><input type="radio" name="q9" value="b" data-feedback="The final test must remain outside optimization decisions, and checking it after each update would contaminate the release evidence."> Choose the learning rate that looks best on the final test after every update.</label><label class="option"><input type="radio" name="q9" value="c" data-feedback="A smaller update size directly tests whether the learning rate caused overshoot; resetting the same initial state keeps the comparison interpretable."> Reset to the same starting state, lower the learning rate, and compare the loss trajectory.</label><p class="feedback" aria-live="polite"></p></fieldset>
-      <section class="evidence"><p class="tag">EVIDENCE NOTES</p><h2>Explain what the numbers cannot say alone</h2><p>Each note needs at least 12 distinct words and must connect explicitly to the Northstar case. Repeated filler does not count.</p><label>Normal case<small>Describe a project, its predicted risk, the operations review action, and why that action helps.</small><textarea name="normal_case" required></textarea><span class="evidence-status" data-evidence-status="normal_case" aria-live="polite"></span></label><label>Failure case<small>Describe a false alert or missed late project, its cost, and a signal that would reveal the failure.</small><textarea name="failure_case" required></textarea><span class="evidence-status" data-evidence-status="failure_case" aria-live="polite"></span></label><label>Limitations and uncertainty<small>Name a sample, population, calibration, subgroup, or customer-shift limitation that must accompany the recommendation.</small><textarea name="limitations" required></textarea><span class="evidence-status" data-evidence-status="limitations" aria-live="polite"></span></label></section>
-      <div class="actions"><button type="button" id="checkDecisions">Check my decisions</button><button type="submit">Assess my final decision</button><button type="button" id="downloadArtifact" disabled>Download evidence artifact</button></div>
-    </form>
-    <section id="result" class="result" hidden aria-live="polite"></section>
-    <a class="back" href="../../lessons/05_regression_and_classification/index.html">Return to Lesson 5</a>
-  </main>
-  <script src="logic.js"></script><script src="app.js"></script>
-</body></html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Phase 1 Project — Model Investigation Workbench</title>
+    <link rel="stylesheet" href="../../lessons/accessibility.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="evidence.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <strong>Learn AI · Phase 1 Gate</strong
+      ><a href="../../course.html">Return to course progress</a>
+    </header>
+    <section class="hero">
+      <p class="eyebrow">
+        LESSONS 1–5 · INTEGRATED ASSESSMENT · NO CODING REQUIRED
+      </p>
+      <h1>Should this delivery-risk model be built?</h1>
+      <p class="lede">
+        You are the model reviewer. Turn an ambiguous request into a defensible
+        prediction and evaluation contract. Every decision changes what the
+        eventual system can honestly claim.
+      </p>
+      <p>
+        Estimated time: 45–60 minutes. Your draft is saved in this browser when
+        storage is available.
+      </p>
+      <div
+        id="storageWarning"
+        class="storage-warning"
+        role="status"
+        aria-live="polite"
+        hidden
+      ></div>
+    </section>
+    <main>
+      <section class="case">
+        <p class="tag">CASE FILE</p>
+        <h2>Northstar delivery-risk advisor</h2>
+        <p>
+          Northstar wants to flag implementation projects likely to finish more
+          than 24 hours late. A human operations team can review only 20% of new
+          projects. Missing a truly late project costs much more than reviewing
+          an on-time project, but too many alerts will overwhelm the team.
+        </p>
+        <div class="facts">
+          <article>
+            <strong>2,400</strong><span>completed projects</span>
+          </article>
+          <article>
+            <strong>12%</strong><span>historically over 24 hours late</span>
+          </article>
+          <article>
+            <strong>20%</strong><span>maximum review capacity</span>
+          </article>
+        </div>
+        <p>
+          Available fields include planned integrations, document count,
+          promised date, customer tier, account ID, actual completion timestamp,
+          and the post-project delay code. Most records come from established
+          enterprise customers; the next launch expands to smaller customers.
+        </p>
+      </section>
+      <section class="rubric">
+        <h2>Your release gate</h2>
+        <ul>
+          <li>Correctly defend at least 7 of 9 decisions.</li>
+          <li>
+            Pass both release-critical checks: leakage and production-shaped
+            splitting.
+          </li>
+          <li>
+            Write three case-specific evidence notes using at least 12 distinct
+            words each.
+          </li>
+        </ul>
+        <p>
+          The goal is not memorization. Use
+          <strong>Check my decisions</strong> at any time for formative
+          feedback; the final assessment also evaluates your evidence notes.
+        </p>
+      </section>
+      <form id="assessmentForm">
+        <fieldset class="question" data-question="q1" data-answer="b">
+          <legend>1. What is the most useful prediction contract?</legend>
+          <label class="option"
+            ><input
+              type="radio"
+              name="q1"
+              value="a"
+              data-feedback="A label that says ‘risky’ has no stable event, horizon, or action."
+            />
+            Predict whether a project is risky.</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q1"
+              value="b"
+              data-feedback="This fixes the unit, event, prediction time, horizon, and downstream action."
+            />
+            At booking, estimate the probability that this project finishes more
+            than 24 hours late so operations can choose a review queue.</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q1"
+              value="c"
+              data-feedback="Predicting the timestamp may be possible, but it does not directly specify the requested event or capacity-limited action."
+            />
+            Predict the exact final completion timestamp.</label
+          >
+          <p class="feedback" aria-live="polite"></p>
+        </fieldset>
+        <fieldset
+          class="question"
+          data-question="q2"
+          data-answer="c"
+          data-critical="true"
+        >
+          <legend>
+            2. Which candidate feature must be excluded?
+            <span class="critical">RELEASE-CRITICAL</span>
+          </legend>
+          <label class="option"
+            ><input
+              type="radio"
+              name="q2"
+              value="a"
+              data-feedback="Planned integrations exist at booking and can be valid if collection is reliable."
+            />
+            Number of planned integrations.</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q2"
+              value="b"
+              data-feedback="Customer tier may raise fairness and drift questions, but it exists at prediction time; those questions require evaluation rather than automatic leakage rejection."
+            />
+            Customer tier.</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q2"
+              value="c"
+              data-feedback="The completion timestamp exists only after the outcome and would leak the answer into the inputs."
+            />
+            Actual completion timestamp.</label
+          >
+          <p class="feedback" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="question" data-question="q3" data-answer="a">
+          <legend>
+            3. Which baseline should the first model have to beat?
+          </legend>
+          <label class="option"
+            ><input
+              type="radio"
+              name="q3"
+              value="a"
+              data-feedback="The historical 12% rate is the simplest honest probability forecast and exposes whether complexity adds value."
+            />
+            Assign every comparable project the historical 12% late rate.</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q3"
+              value="b"
+              data-feedback="A random 50/50 guess ignores the observed base rate and is artificially easy to beat."
+            />
+            Flip a fair coin.</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q3"
+              value="c"
+              data-feedback="A large neural model is a candidate, not a naive baseline."
+            />
+            Train the widest neural network that fits in memory.</label
+          >
+          <p class="feedback" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="question" data-question="q4" data-answer="b">
+          <legend>
+            4. What is the largest evidence-quality concern before launch?
+          </legend>
+          <label class="option"
+            ><input
+              type="radio"
+              name="q4"
+              value="a"
+              data-feedback="More rows reduce some random uncertainty but do not fix an unrepresentative population."
+            />
+            The dataset has fewer than one million rows.</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q4"
+              value="b"
+              data-feedback="Performance and calibration learned mostly from enterprise customers may not transfer to smaller customers."
+            />
+            The evaluation sample underrepresents the new smaller-customer
+            population.</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q4"
+              value="c"
+              data-feedback="A 12% base rate is usable; it changes metric interpretation and should be monitored rather than disqualifying the project."
+            />
+            The positive class is not exactly 50%.</label
+          >
+          <p class="feedback" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="question" data-question="q5" data-answer="c">
+          <legend>
+            5. Which evaluation emphasis best matches the stated cost?
+          </legend>
+          <label class="option"
+            ><input
+              type="radio"
+              name="q5"
+              value="a"
+              data-feedback="Accuracy may look high by predicting nearly everything on time while missing costly late projects."
+            />
+            Overall accuracy alone.</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q5"
+              value="b"
+              data-feedback="Precision matters for review capacity, but optimizing it alone can miss too many costly late projects."
+            />
+            Precision alone, regardless of recall.</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q5"
+              value="c"
+              data-feedback="Recall exposes missed late projects while precision and review volume keep the policy within capacity."
+            />
+            Recall for late projects, reported with precision and review
+            volume.</label
+          >
+          <p class="feedback" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="question" data-question="q6" data-answer="b">
+          <legend>6. How should the alert threshold be selected?</legend>
+          <label class="option"
+            ><input
+              type="radio"
+              name="q6"
+              value="a"
+              data-feedback="A 0.5 default ignores prevalence, asymmetric cost, calibration, and the 20% capacity constraint."
+            />
+            Always use 0.5 because probabilities above half are positive.</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q6"
+              value="b"
+              data-feedback="Validation evidence lets the team balance missed cases and false alerts while enforcing capacity before the final test."
+            />
+            On validation data, compare error cost and choose an operating point
+            whose expected review volume fits 20% capacity.</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q6"
+              value="c"
+              data-feedback="Optimizing the threshold on the final test consumes the evidence meant for the final generalization estimate."
+            />
+            Keep changing it until final-test recall is maximized.</label
+          >
+          <p class="feedback" aria-live="polite"></p>
+        </fieldset>
+        <fieldset
+          class="question"
+          data-question="q7"
+          data-answer="c"
+          data-critical="true"
+        >
+          <legend>
+            7. Which split best resembles deployment?
+            <span class="critical">RELEASE-CRITICAL</span>
+          </legend>
+          <label class="option"
+            ><input
+              type="radio"
+              name="q7"
+              value="a"
+              data-feedback="Random rows can place the same account in multiple partitions and mix future cases into training."
+            />
+            Randomly assign individual rows to all partitions.</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q7"
+              value="b"
+              data-feedback="Alphabetical order has no relationship to the production boundary."
+            />
+            Sort by project name and split alphabetically.</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q7"
+              value="c"
+              data-feedback="A later holdout estimates future behavior, and grouping prevents account-specific patterns from crossing boundaries."
+            />
+            Train on earlier projects, validate/test on later projects, and keep
+            each account within one partition.</label
+          >
+          <p class="feedback" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="question" data-question="q8" data-answer="b">
+          <legend>
+            8. The model receives 32 projects with 5 features each. Which shape
+            contract preserves that meaning?
+          </legend>
+          <label class="option"
+            ><input
+              type="radio"
+              name="q8"
+              value="a"
+              data-feedback="A one-dimensional length of 160 preserves the element count but erases which values belong to each project and feature."
+            />
+            A vector shaped (160), because only the number of values
+            matters.</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q8"
+              value="b"
+              data-feedback="The first axis identifies 32 project examples and the second identifies the same 5 ordered features for every project."
+            />
+            A matrix shaped (32, 5), documented as (project, feature).</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q8"
+              value="c"
+              data-feedback="Shape (5, 32) can hold the same count, but it reverses the declared axis contract and changes how later operations interpret rows."
+            />
+            A matrix shaped (5, 32), without documenting the axis order.</label
+          >
+          <p class="feedback" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="question" data-question="q9" data-answer="c">
+          <legend>
+            9. Baseline training overshoots repeatedly and loss grows after
+            every update. What is the best controlled experiment?
+          </legend>
+          <label class="option"
+            ><input
+              type="radio"
+              name="q9"
+              value="a"
+              data-feedback="Changing the labels changes the learning problem and destroys a controlled comparison; labels remain fixed evidence."
+            />
+            Edit the labels until the current predictions look correct.</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q9"
+              value="b"
+              data-feedback="The final test must remain outside optimization decisions, and checking it after each update would contaminate the release evidence."
+            />
+            Choose the learning rate that looks best on the final test after
+            every update.</label
+          ><label class="option"
+            ><input
+              type="radio"
+              name="q9"
+              value="c"
+              data-feedback="A smaller update size directly tests whether the learning rate caused overshoot; resetting the same initial state keeps the comparison interpretable."
+            />
+            Reset to the same starting state, lower the learning rate, and
+            compare the loss trajectory.</label
+          >
+          <p class="feedback" aria-live="polite"></p>
+        </fieldset>
+        <section class="evidence">
+          <p class="tag">EVIDENCE NOTES</p>
+          <h2>Explain what the numbers cannot say alone</h2>
+          <p>
+            Each note needs at least 12 distinct words and must connect
+            explicitly to the Northstar case. Repeated filler does not count.
+          </p>
+          <label
+            >Normal case<small
+              >Describe a project, its predicted risk, the operations review
+              action, and why that action helps.</small
+            ><textarea name="normal_case" required></textarea
+            ><span
+              class="evidence-status"
+              data-evidence-status="normal_case"
+              aria-live="polite"
+            ></span></label
+          ><label
+            >Failure case<small
+              >Describe a false alert or missed late project, its cost, and a
+              signal that would reveal the failure.</small
+            ><textarea name="failure_case" required></textarea
+            ><span
+              class="evidence-status"
+              data-evidence-status="failure_case"
+              aria-live="polite"
+            ></span></label
+          ><label
+            >Limitations and uncertainty<small
+              >Name a sample, population, calibration, subgroup, or
+              customer-shift limitation that must accompany the
+              recommendation.</small
+            ><textarea name="limitations" required></textarea
+            ><span
+              class="evidence-status"
+              data-evidence-status="limitations"
+              aria-live="polite"
+            ></span
+          ></label>
+        </section>
+        <div class="actions">
+          <button type="button" id="checkDecisions">Check my decisions</button
+          ><button type="submit">Assess my final decision</button
+          ><button type="button" id="downloadArtifact" disabled>
+            Download evidence artifact
+          </button>
+        </div>
+      </form>
+      <section id="result" class="result" hidden aria-live="polite"></section>
+      <a
+        class="back"
+        href="../../lessons/05_regression_and_classification/index.html"
+        >Return to Lesson 5</a
+      >
+    </main>
+    <script src="../../lessons/progress.js"></script>
+    <script src="logic.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

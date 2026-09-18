@@ -51,3 +51,43 @@ def test_terminology_bridges_and_templates_exist():
     assert "Three meanings of “bias”" in lesson_10
     assert (ROOT / "templates/capstone-increment.md").exists()
     assert (ROOT / "templates/model-evidence-card.md").exists()
+
+
+def test_phase_one_milestone_is_navigable_and_persisted():
+    course = (ROOT / "course.js").read_text(encoding="utf-8")
+    project = (ROOT / "projects/phase1/index.html").read_text(encoding="utf-8")
+    app = (ROOT / "projects/phase1/app.js").read_text(encoding="utf-8")
+    progress = (ROOT / "lessons/progress.js").read_text(encoding="utf-8")
+    assert 'projects/phase1/index.html' in course
+    assert 'state.milestones?.phase1?.completed' in course
+    assert '../../lessons/progress.js' in project
+    assert 'CourseProgress.completeMilestone("phase1")' in app
+    assert "completeMilestone" in progress and "isMilestoneComplete" in progress
+
+
+def test_storage_failures_have_visible_recovery_guidance():
+    course_html = (ROOT / "course.html").read_text(encoding="utf-8")
+    project_html = (ROOT / "projects/phase1/index.html").read_text(encoding="utf-8")
+    project_app = (ROOT / "projects/phase1/app.js").read_text(encoding="utf-8")
+    progress = (ROOT / "lessons/progress.js").read_text(encoding="utf-8")
+    assert 'id="storageWarning"' in course_html and 'aria-live="polite"' in course_html
+    assert 'id="storageWarning"' in project_html and 'aria-live="polite"' in project_html
+    assert 'catch (_)' in project_app and "download your evidence artifact" in project_app
+    assert "course-storage-error" in progress and "localStorage.setItem" in progress
+
+
+def test_known_contrast_and_mobile_overflow_regressions_are_covered():
+    css = (ROOT / "lessons/accessibility.css").read_text(encoding="utf-8")
+    for selector in (
+        ".hero-card .cycle-arrow",
+        ".token-flow b",
+        ".parameter-count small",
+        ".count-grid .posterior small",
+        ".branch-paths .total small",
+        ".module-total small",
+        ".module-total strong",
+    ):
+        assert selector in css
+    assert ".architecture-visual,.autograd-graph" in css
+    assert ".architecture-layer,.autograd-node" in css
+    assert "min-width:0!important" in css
