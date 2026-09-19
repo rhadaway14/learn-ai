@@ -15,9 +15,10 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["jsonschema>=4.23,<5", "pytest>=8,<9"]
 engineering-lab-a = ["torch>=2.4,<3"]
+phase2-lab = ["fastapi>=0.115,<1", "httpx>=0.28,<1", "psycopg[binary]>=3.2,<4", "uvicorn>=0.34,<1"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests", "labs/engineering_lab_a"]
+testpaths = ["tests", "labs/engineering_lab_a", "labs/phase2/api"]
 addopts = "-q"
 
 [tool.setuptools]

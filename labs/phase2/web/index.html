@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Phase 2 Lab — Neural Delivery Risk</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to lab workspace</a>
+    <header>
+      <div><span class="eyebrow">NORTHSTAR · PHASE 2</span><strong>Neural Delivery Risk Lab</strong></div>
+      <p>API <span id="apiStatus" class="status neutral">checking</span></p>
+    </header>
+    <div class="app-shell">
+      <nav class="step-rail" aria-label="Lab walkthrough">
+        <h1>Build the neural model</h1>
+        <p>Each step leaves visible evidence. Complete the reasoning, not merely the buttons.</p>
+        <ol id="stepList">
+          <li data-step="1" class="current"><span>1</span><div><strong>Orient</strong><small>Verify the stack</small></div></li>
+          <li data-step="2"><span>2</span><div><strong>Import</strong><small>Phase 1 evidence</small></div></li>
+          <li data-step="3"><span>3</span><div><strong>Predict</strong><small>State expectations</small></div></li>
+          <li data-step="4"><span>4</span><div><strong>Build</strong><small>Train and observe</small></div></li>
+          <li data-step="5"><span>5</span><div><strong>Break</strong><small>Diagnose and recover</small></div></li>
+          <li data-step="6"><span>6</span><div><strong>Use</strong><small>Score a project</small></div></li>
+          <li data-step="7"><span>7</span><div><strong>Save</strong><small>Verify the artifact</small></div></li>
+        </ol>
+        <button id="resetView" class="secondary">Reset walkthrough view</button>
+      </nav>
+
+      <main id="workspace" tabindex="-1">
+        <section class="hero panel">
+          <div>
+            <p class="eyebrow">CUMULATIVE CAPSTONE INCREMENT</p>
+            <h2>Replace the Phase 1 baseline with a tested PyTorch model</h2>
+            <p>The same Northstar intake form, features, target, and sealed test boundary remain in place. Only the model capability changes.</p>
+          </div>
+          <div class="architecture" aria-label="Application architecture">
+            <span>Browser UI</span><b aria-hidden="true">→</b><span>FastAPI</span><b aria-hidden="true">→</b><span>PyTorch</span><b aria-hidden="true">↔</b><span>PostgreSQL</span>
+          </div>
+        </section>
+
+        <section class="panel" id="orient">
+          <p class="step-label">STEP 1 · ORIENT</p>
+          <h2>Confirm the runtime boundary</h2>
+          <p>Three containers should be healthy. Training occurs on CPU in the API service; the database stores evidence and run metadata; this UI renders the walkthrough.</p>
+          <div class="teaching-notice"><strong>Teaching data—not a production risk model</strong><p>The 2,400 project records are deterministic synthetic data. They make the mechanics reproducible; they do not establish validity, fairness, or safety for real delivery decisions.</p></div>
+          <div class="health-grid">
+            <article><small>WEB</small><strong id="webHealth">Ready</strong><span>Guided interface</span></article>
+            <article><small>API</small><strong id="apiHealth">Checking</strong><span>Training and inference</span></article>
+            <article><small>DATABASE</small><strong id="dbHealth">Checking</strong><span>Evidence and runs</span></article>
+          </div>
+          <button id="checkStack">Check stack</button>
+          <p id="stackFeedback" class="feedback" aria-live="polite"></p>
+        </section>
+
+        <section class="panel" id="import">
+          <p class="step-label">STEP 2 · IMPORT</p>
+          <h2>Carry forward the Phase 1 decision boundary</h2>
+          <p>Upload a passed Phase 1 artifact. For a first walkthrough, the verified sample uses the same schema and validation path.</p>
+          <div class="button-row">
+            <label class="file-button">Choose Phase 1 artifact<input id="phase1File" type="file" accept="application/json" /></label>
+            <button id="useSample" class="secondary">Use verified sample</button>
+          </div>
+          <p id="importFeedback" class="feedback" aria-live="polite"></p>
+        </section>
+
+        <section class="panel" id="predict-first">
+          <p class="step-label">STEP 3 · PREDICT</p>
+          <h2>Write the expected result before training</h2>
+          <label class="field">Prediction
+            <textarea id="trainingPrediction" minlength="20" placeholder="I expect the validation curve to… and the selected checkpoint to…"></textarea>
+          </label>
+          <div class="shape-flow" aria-label="Neural network shape flow">
+            <article><small>INPUT</small><strong>(batch, 5)</strong><span>Northstar features</span></article>
+            <b aria-hidden="true">→</b>
+            <article><small>HIDDEN</small><strong id="hiddenShape">(batch, 12)</strong><span>Learned representation</span></article>
+            <b aria-hidden="true">→</b>
+            <article><small>OUTPUT</small><strong>(batch, 1)</strong><span>Late-risk logit</span></article>
+          </div>
+        </section>
+
+        <section class="panel" id="train">
+          <p class="step-label">STEP 4 · BUILD AND OBSERVE</p>
+          <h2>Train from a reproducible configuration</h2>
+          <div class="controls">
+            <label>Epoch budget<input id="epochs" type="number" min="40" max="2000" value="300" /></label>
+            <label>Learning rate<input id="learningRate" type="number" min="0.0001" max="1000000" step="0.01" value="0.05" /></label>
+            <label>Hidden width<input id="hiddenWidth" type="number" min="2" max="128" value="12" /></label>
+            <label>Seed<input id="seed" type="number" value="17" /></label>
+          </div>
+          <button id="trainModel">Train known-good model</button>
+          <p id="trainFeedback" class="feedback" aria-live="polite"></p>
+          <div id="results" hidden>
+            <div class="metric-grid">
+              <article><small>BASELINE ACCURACY</small><strong id="baselineAccuracy">—</strong></article>
+              <article><small>NEURAL ACCURACY</small><strong id="modelAccuracy">—</strong></article>
+              <article><small>NEURAL PRECISION</small><strong id="modelPrecision">—</strong></article>
+              <article><small>NEURAL RECALL</small><strong id="modelRecall">—</strong></article>
+              <article><small>SELECTED EPOCH</small><strong id="selectedEpoch">—</strong></article>
+            </div>
+            <div class="chart-layout">
+              <div>
+                <h3>Training evidence</h3>
+                <canvas id="trainingChart" width="760" height="300" aria-label="Training and validation loss by epoch"></canvas>
+              </div>
+              <div>
+                <h3>Acceptance gate</h3>
+                <ul id="acceptanceChecks" class="check-list"></ul>
+              </div>
+            </div>
+            <details>
+              <summary>Open the accessible loss table</summary>
+              <div class="table-wrap"><table><thead><tr><th>Epoch</th><th>Training loss</th><th>Validation loss</th><th>Gradient norm</th></tr></thead><tbody id="historyTable"></tbody></table></div>
+            </details>
+          </div>
+        </section>
+
+        <section class="panel" id="break-recover">
+          <p class="step-label">STEP 5 · BREAK, DIAGNOSE, RECOVER</p>
+          <h2>Make the learning rate fail closed</h2>
+          <p>Predict the signal, trigger the controlled failure, then explain why restoring one variable makes the recovery interpretable.</p>
+          <button id="runFailure" class="danger">Run explosive learning rate</button>
+          <p id="failureSignal" class="feedback" aria-live="polite"></p>
+          <label class="field">Failure diagnosis<textarea id="failureDiagnosis" minlength="20" placeholder="The run failed because… The observable signal was…"></textarea></label>
+          <label class="field">Recovery explanation<textarea id="recovery" minlength="20" placeholder="I restored… while holding… constant, so…"></textarea></label>
+          <button id="recoverModel" class="secondary">Recover with known-good controls</button>
+        </section>
+
+        <section class="panel" id="use-model">
+          <p class="step-label">STEP 6 · USE</p>
+          <h2>Score a new project with the promoted checkpoint</h2>
+          <details class="feature-guide"><summary>What each prediction-time feature means</summary><div class="table-wrap"><table><thead><tr><th>Feature</th><th>Meaning at booking time</th><th>Why it is eligible</th></tr></thead><tbody><tr><td>Planned integrations</td><td>External systems in the approved scope</td><td>Known before delivery begins</td></tr><tr><td>Document count</td><td>Estimated source documents in scope</td><td>Known from discovery inventory</td></tr><tr><td>Deadline days</td><td>Days from booking to promised date</td><td>Derived from two booking-time dates</td></tr><tr><td>Customer tier</td><td>Existing commercial service tier, encoded 0–3</td><td>Available at booking, but requires fairness review</td></tr><tr><td>Prior projects</td><td>Count of earlier completed projects for the account</td><td>Historical aggregate created before this outcome; account ID itself is excluded</td></tr></tbody></table></div></details>
+          <form id="predictionForm" class="controls">
+            <label>Planned integrations<input name="planned_integrations" type="number" min="0" value="7" required /></label>
+            <label>Document count<input name="document_count" type="number" min="1" value="4500" required /></label>
+            <label>Deadline days<input name="deadline_days" type="number" min="1" value="45" required /></label>
+            <label>Customer tier<input name="customer_tier" type="number" min="0" max="3" value="2" required /></label>
+            <label>Prior projects<input name="prior_projects" type="number" min="0" value="4" required /></label>
+            <button type="submit">Predict delivery risk</button>
+          </form>
+          <div id="predictionResult" class="prediction-result" hidden aria-live="polite"></div>
+        </section>
+
+        <section class="panel" id="save">
+          <p class="step-label">STEP 7 · VERIFY AND SAVE</p>
+          <h2>Defend the promotion decision</h2>
+          <div class="reasoning-grid">
+            <label>Observed evidence<textarea id="observation" minlength="20"></textarea></label>
+            <label>Promotion rationale<textarea id="promotionRationale" minlength="20"></textarea></label>
+            <label>What these metrics do not establish<textarea id="limitation" minlength="20"></textarea></label>
+          </div>
+          <button id="createArtifact">Validate and create Phase 2 artifact</button>
+          <p id="artifactFeedback" class="feedback" aria-live="polite"></p>
+          <button id="downloadArtifact" class="secondary" disabled>Download evidence artifact</button>
+        </section>
+      </main>
+
+      <aside class="evidence-drawer" aria-label="Persistent evidence summary">
+        <h2>Evidence</h2>
+        <dl>
+          <div><dt>Phase 1</dt><dd id="evidencePhase1">Not imported</dd></div>
+          <div><dt>Prediction</dt><dd id="evidencePrediction">Not recorded</dd></div>
+          <div><dt>Known-good run</dt><dd id="evidenceRun">Not run</dd></div>
+          <div><dt>Failure</dt><dd id="evidenceFailure">Not run</dd></div>
+          <div><dt>Model use</dt><dd id="evidenceUse">Not run</dd></div>
+          <div><dt>Artifact</dt><dd id="evidenceArtifact">Not created</dd></div>
+        </dl>
+      </aside>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

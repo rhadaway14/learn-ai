@@ -19,8 +19,9 @@ Each lesson contributes evidence to a working project completed at the end of it
 ## Phase 2 — Reproducible Neural Model Training System
 
 **Lessons:** 6–10 plus [Engineering Lab A](labs/engineering_lab_a/README.md)
+
 **Outcome:** Specify, implement, train, diagnose, and evaluate a small neural model with reproducible evidence.  
-**Delivery:** [Project B — Image classifier](projects/PROJECT_B_IMAGE_CLASSIFIER.md), preceded by a domain-neutral model-training workbench.
+**Delivery:** Complete the guided [Phase 2 Cumulative Lab](labs/phase2/index.html) to turn the lesson specifications into a working three-service application. [Project B — Image classifier](projects/PROJECT_B_IMAGE_CLASSIFIER.md) remains an optional transfer exercise in a second domain.
 
 | Increment | Lesson contribution |
 |---|---|
@@ -30,6 +31,8 @@ Each lesson contributes evidence to a working project completed at the end of it
 | P2-I04 | Dataset boundary, training run, evaluation, and checkpoint selection |
 | P2-I05 | Generalization controls and model evidence card |
 | [P2-I06](phase-projects/phase2/P2-I06.json) | Tested reference implementation created during [Engineering Lab A](labs/engineering_lab_a/README.md) |
+
+The cumulative lab consumes the passed Phase 1 evidence contract, trains a real PyTorch model, stores runs in PostgreSQL, visualizes learning evidence, contains a deliberately unstable run, restores a valid checkpoint, scores new project inputs, and exports a schema-versioned evidence artifact. Its numeric and reasoning gates are defined in the [Phase 2 lab specification](labs/phase2/SPEC.md).
 
 ## Phase 3 — Small Language-Model Explorer
 

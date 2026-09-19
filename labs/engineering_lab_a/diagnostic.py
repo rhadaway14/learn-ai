@@ -23,7 +23,7 @@ def main() -> int:
     logits = model(features)
     loss = torch.nn.functional.binary_cross_entropy_with_logits(logits, torch.tensor([0.0, 1.0, 0.0, 1.0]))
     loss.backward()
-    print({"input_shape": tuple(features.shape), "logit_shape": tuple(logits.shape), "dtype": str(features.dtype), "device": str(features.device), "loss": float(loss)})
+    print({"input_shape": tuple(features.shape), "logit_shape": tuple(logits.shape), "dtype": str(features.dtype), "device": str(features.device), "loss": loss.detach().item()})
     for name, parameter in model.named_parameters():
         print({"parameter": name, "shape": tuple(parameter.shape), "gradient_shape": tuple(parameter.grad.shape)})
     return 0

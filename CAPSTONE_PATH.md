@@ -16,6 +16,7 @@ The learner will build an evidence-grounded AI delivery advisor with retrieval, 
 | 03–05 | Loss, optimization, probability, regression, classification, metrics | Baseline decision model and evaluation worksheet |
 | 06–10 | Neural networks, backpropagation, training, validation, regularization | Reproducible model-training specification and model evidence card |
 | Engineering Lab A | Python, environments, tests, and PyTorch readiness | Selected specification converted into a tested reference implementation |
+| Phase 2 cumulative lab | Containers, API/database boundaries, controlled failure, checkpoint promotion, and inference | Working neural-risk application plus a schema-versioned evidence artifact consumed by the next phase |
 | 11–12 | Tokenization and embeddings | Document representation and semantic-search prototype |
 | 13–16 | Attention, transformers, language modeling, inference | Small language-model experiment and inference decision record |
 | 17–18 | Context design, structured output, tool contracts | Versioned instructions, response schema, and validated tool interface |
@@ -55,6 +56,10 @@ The learner can explain learning and evaluation, establish a naive baseline, sel
 ### Engineering readiness gate — after Lesson 10
 
 Before programming labs, the learner can run Python in an isolated environment, read common errors, modify documented configuration, reason about tensor shapes, and run tests. Passing the diagnostic or the supported bridge exercises satisfies the same gate.
+
+### Phase 2 application gate — after Engineering Lab A
+
+The learner can launch the [Phase 2 Cumulative Lab](labs/phase2/index.html), import passed Phase 1 evidence, state a prediction before training, compare the neural model with the majority baseline, diagnose and recover from an unstable run, score a new project, and export the accepted artifact. The model must satisfy every numeric gate; prose alone cannot promote it.
 
 ### Gate B — Model mechanics complete (after Lesson 16)
 

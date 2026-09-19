@@ -40,5 +40,57 @@ services:
       retries: 10
       start_period: 3s
 
+  phase2-web:
+    build:
+      context: ./labs/phase2/web
+    profiles: ["phase2"]
+    ports:
+      - "8090:80"
+    depends_on:
+      phase2-api:
+        condition: service_healthy
+
+  phase2-api:
+    build:
+      context: .
+      dockerfile: labs/phase2/api/Dockerfile
+    profiles: ["phase2"]
+    environment:
+      PHASE2_DATABASE_URL: postgresql://learn_ai:learn_ai@phase2-db:5432/learn_ai
+      PHASE2_ARTIFACT_DIR: /artifacts/phase2
+    ports:
+      - "8091:8080"
+    volumes:
+      - phase2-artifacts:/artifacts
+    depends_on:
+      phase2-db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+
+  phase2-db:
+    image: postgres:16-alpine
+    profiles: ["phase2"]
+    environment:
+      POSTGRES_DB: learn_ai
+      POSTGRES_USER: learn_ai
+      POSTGRES_PASSWORD: learn_ai
+    volumes:
+      - phase2-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U learn_ai -d learn_ai"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+      start_period: 5s
+
 volumes:
   foundations-data:
+  phase2-data:
+    name: learn-ai-phase2-data
+  phase2-artifacts:
+    name: learn-ai-phase2-artifacts

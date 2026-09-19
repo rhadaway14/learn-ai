@@ -130,6 +130,22 @@ Notes:
 
 Notes:
 
+## Phase 2 Cumulative Lab — Neural Delivery Risk
+
+- [ ] Complete Engineering Lab A or the supported readiness bridge
+- [ ] Start the web, API, and PostgreSQL services
+- [ ] Import a passed Phase 1 evidence artifact
+- [ ] Predict the training outcome before running the model
+- [ ] Train the PyTorch model and interpret its loss curves
+- [ ] Compare recall and accuracy with the majority baseline
+- [ ] Trigger the controlled learning-rate failure and identify its signal
+- [ ] Recover with the known-good configuration and promote the validation checkpoint
+- [ ] Score a new project through the inference form
+- [ ] Explain one limitation and justify the promotion decision
+- [ ] Export the schema-versioned Phase 2 evidence artifact
+
+Notes:
+
 ## Lesson 11 — Tokenization
 
 - [ ] Read the lesson and predict the lab result

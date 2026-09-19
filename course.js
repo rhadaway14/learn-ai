@@ -143,7 +143,7 @@ function render() {
     if (phaseIndex === 1) {
       const bridge = document.createElement("section");
       bridge.className = "phase engineering-gate";
-      bridge.innerHTML = `<div class="phase-heading"><h2>Required engineering bridge</h2><span>After Lesson 10</span></div><div class="lesson-grid"><a class="lesson" href="labs/engineering_lab_a/index.html"><span class="number">ENGINEERING LAB A</span><h3>Python and PyTorch readiness</h3><small>Diagnostic, supported practice, and tested P2-I06 implementation</small></a></div>`;
+      bridge.innerHTML = `<div class="phase-heading"><h2>Required engineering bridge</h2><span>After Lesson 10</span></div><div class="lesson-grid"><a class="lesson" href="labs/engineering_lab_a/index.html"><span class="number">ENGINEERING LAB A</span><h3>Python and PyTorch readiness</h3><small>Diagnostic, supported practice, and tested P2-I06 implementation</small></a><a class="lesson" href="labs/phase2/index.html"><span class="number">PHASE 2 CUMULATIVE LAB</span><h3>Neural delivery-risk application</h3><small>Guided Compose walkthrough, numeric model gate, and working prediction UI</small></a></div>`;
       host.appendChild(bridge);
     }
   });

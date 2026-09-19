@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://learn-ai.local/schemas/phase2-lab-artifact.schema.json",
+  "title": "Phase 2 Neural Risk Lab Artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_type",
+    "attempt_number",
+    "completed_at",
+    "phase1_evidence_id",
+    "prediction",
+    "configuration",
+    "baseline",
+    "training",
+    "sealed_test",
+    "acceptance",
+    "reasoning"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "artifact_type": {"const": "phase2-neural-risk"},
+    "attempt_number": {"type": "integer", "minimum": 1},
+    "completed_at": {"type": "string", "format": "date-time"},
+    "phase1_evidence_id": {"type": "string", "minLength": 1},
+    "prediction": {"type": "string", "minLength": 20},
+    "configuration": {
+      "type": "object",
+      "required": ["seed", "epochs", "learning_rate", "hidden_width", "patience"],
+      "properties": {
+        "seed": {"type": "integer"},
+        "epochs": {"type": "integer", "minimum": 2},
+        "learning_rate": {"type": "number", "exclusiveMinimum": 0},
+        "hidden_width": {"type": "integer", "minimum": 2},
+        "patience": {"type": "integer", "minimum": 1},
+        "minimum_improvement": {"type": "number", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "baseline": {"$ref": "#/$defs/metrics"},
+    "training": {
+      "type": "object",
+      "required": ["selected_epoch", "epochs_completed", "finite_gradients", "history"],
+      "properties": {
+        "selected_epoch": {"type": "integer", "minimum": 1},
+        "epochs_completed": {"type": "integer", "minimum": 1},
+        "finite_gradients": {"type": "boolean"},
+        "history": {"type": "array", "minItems": 2, "items": {"type": "object"}}
+      },
+      "additionalProperties": true
+    },
+    "sealed_test": {
+      "allOf": [
+        {"$ref": "#/$defs/metrics"},
+        {
+          "type": "object",
+          "required": ["evaluations"],
+          "properties": {"evaluations": {"const": 1}}
+        }
+      ]
+    },
+    "acceptance": {
+      "type": "object",
+      "required": ["passed", "checks"],
+      "properties": {
+        "passed": {"type": "boolean"},
+        "checks": {"type": "object", "minProperties": 5, "additionalProperties": {"type": "boolean"}}
+      },
+      "additionalProperties": false
+    },
+    "reasoning": {
+      "type": "object",
+      "required": ["observation", "failure_diagnosis", "recovery", "promotion_rationale", "limitation"],
+      "properties": {
+        "observation": {"type": "string", "minLength": 20},
+        "failure_diagnosis": {"type": "string", "minLength": 20},
+        "recovery": {"type": "string", "minLength": 20},
+        "promotion_rationale": {"type": "string", "minLength": 20},
+        "limitation": {"type": "string", "minLength": 20}
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "metrics": {
+      "type": "object",
+      "required": ["accuracy", "precision", "recall"],
+      "properties": {
+        "accuracy": {"type": "number", "minimum": 0, "maximum": 1},
+        "precision": {"type": "number", "minimum": 0, "maximum": 1},
+        "recall": {"type": "number", "minimum": 0, "maximum": 1}
+      },
+      "additionalProperties": true
+    }
+  }
+}

@@ -9,3 +9,4 @@ core.*
 .idea/
 .vscode/
 lessons/*/outputs/*.png
+artifacts/

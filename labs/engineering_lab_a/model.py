@@ -77,8 +77,9 @@ def train(config: RunConfig) -> tuple[DeliveryRiskNet, dict[str, object]]:
         optimizer.zero_grad()
         train_logits = model(splits["train"][0])
         train_loss = loss_function(train_logits, splits["train"][1])
-        if not torch.isfinite(train_loss) or float(train_loss) > 100:
-            raise RuntimeError(f"unstable training at epoch {epoch}: loss={float(train_loss)}")
+        train_value = train_loss.detach().item()
+        if not torch.isfinite(train_loss) or train_value > 100:
+            raise RuntimeError(f"unstable training at epoch {epoch}: loss={train_value}")
         train_loss.backward()
         if any(parameter.grad is None or not torch.isfinite(parameter.grad).all() for parameter in model.parameters()):
             raise RuntimeError(f"invalid gradient at epoch {epoch}")
@@ -86,7 +87,11 @@ def train(config: RunConfig) -> tuple[DeliveryRiskNet, dict[str, object]]:
         model.eval()
         with torch.no_grad():
             validation_loss = loss_function(model(splits["validation"][0]), splits["validation"][1])
-        record = {"epoch": epoch, "train_loss": float(train_loss), "validation_loss": float(validation_loss)}
+        record = {
+            "epoch": epoch,
+            "train_loss": train_value,
+            "validation_loss": validation_loss.item(),
+        }
         history.append(record)
         if record["validation_loss"] < best_loss:
             best_loss = record["validation_loss"]
