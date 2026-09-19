@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Engineering Lab A — Python and PyTorch Readiness</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="../../lessons/accessibility.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a href="../../course.html">← Course progress</a>
+      <span>Required engineering bridge · After Lesson 10</span>
+    </header>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">ENGINEERING LAB A</p>
+        <h1>Turn model reasoning into a tested PyTorch system</h1>
+        <p class="lede">
+          You already know what training, validation, gradients, and
+          generalization mean. This bridge teaches enough Python and PyTorch to
+          make those ideas observable in a real implementation—without assuming
+          prior Python experience.
+        </p>
+        <div class="facts" aria-label="Lab summary">
+          <article><strong>6–10 hours</strong><span>supported route</span></article>
+          <article><strong>60–90 minutes</strong><span>experienced route</span></article>
+          <article><strong>No GPU</strong><span>cloud account, or paid API</span></article>
+        </div>
+      </section>
+
+      <section class="panel" id="outcomes">
+        <p class="eyebrow">OUTCOMES</p>
+        <h2>What you will prove</h2>
+        <p>
+          By the end, you will be able to create an isolated environment, read
+          a useful error, inspect tensor and gradient state, train and evaluate
+          a small neural network, preserve the best validation checkpoint, and
+          reproduce the resulting evidence.
+        </p>
+        <ul class="checklist">
+          <li>Explain what each Python block owns and returns.</li>
+          <li>Verify tensor shape, data type, device, and gradient state.</li>
+          <li>Separate training, validation, and final-test evidence.</li>
+          <li>Recognize an unstable run and recover with one controlled change.</li>
+          <li>Produce the tested P2-I06 reference implementation.</li>
+        </ul>
+      </section>
+
+      <section class="panel" id="routes">
+        <p class="eyebrow">CHOOSE YOUR ROUTE</p>
+        <h2>Choose your route</h2>
+        <div class="routes">
+          <article>
+            <h3>Supported route</h3>
+            <p>
+              Choose this if Python or model-training code is new. Complete all
+              six stages in order, compare your output with the expected
+              evidence, and use each recovery note when something differs.
+            </p>
+            <a class="button" href="#path">See the six-stage path</a>
+          </article>
+          <article>
+            <h3>Experienced Python route</h3>
+            <p>
+              Run the diagnostic and automated tests first. If both pass and
+              you can explain every reported shape and gradient, continue
+              directly to the implementation gate.
+            </p>
+            <a class="button secondary" href="README.md#experienced-python-route">Open experienced instructions</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="path">
+        <p class="eyebrow">LAB MAP</p>
+        <h2>Six-stage path</h2>
+        <ol class="stages">
+          <li><strong>Read an error</strong><span>Locate the failed operation, compare expected and received shapes, and propose the smallest correction.</span></li>
+          <li><strong>Map syntax to responsibility</strong><span>Connect values, collections, functions, loops, and classes to the model contract.</span></li>
+          <li><strong>Inspect tensor and autograd state</strong><span>Predict shapes first, then verify shape, dtype, device, and gradients.</span></li>
+          <li><strong>Run the known-good system</strong><span>Train deterministically, select with validation evidence, and evaluate the sealed test once.</span></li>
+          <li><strong>Cause and recover from failure</strong><span>Observe an explosive learning rate, then change only that variable for a controlled comparison.</span></li>
+          <li><strong>Verify and accept P2-I06</strong><span>Run the tests, complete the evidence record, and confirm another learner can reproduce it.</span></li>
+        </ol>
+      </section>
+
+      <section class="start" id="start">
+        <div>
+          <p class="eyebrow">READY</p>
+          <h2>Start the lab</h2>
+          <p>
+            The complete guide includes Windows, macOS, and Linux setup,
+            commands, expected results, recovery steps, and acceptance criteria.
+          </p>
+        </div>
+        <a class="button" href="README.md#setup">Open setup and Stage 1</a>
+      </section>
+    </main>
+    <footer>
+      <a href="../../course.html">Course progress</a>
+      <a href="README.md">Complete lab reference</a>
+    </footer>
+  </body>
+</html>

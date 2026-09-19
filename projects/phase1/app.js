@@ -96,9 +96,17 @@ form.addEventListener("submit", (event) => {
   showDecisionFeedback(evaluation.results);
   Object.entries(evaluation.evidenceResults).forEach(([key, item]) => {
     const status = form.querySelector(`[data-evidence-status="${key}"]`);
+    const needs = [];
+    if (item.distinctWords < item.minimumWords)
+      needs.push(`${item.minimumWords} distinct words`);
+    if (item.sentenceCount < 2) needs.push("two substantive sentences");
+    if (!item.hasCaseContext) needs.push("the Northstar case name");
+    if (!item.hasReasoning) needs.push("a because/when/so explanation");
+    if (item.missingGroups.length)
+      needs.push(`these ideas: ${item.missingGroups.join(", ")}`);
     status.textContent = item.complete
       ? "Evidence requirement met."
-      : `Add detail: use at least ${item.minimumWords} distinct words and connect the answer to a named case concept.`;
+      : `Revise this note. Add ${needs.join("; ")}.`;
     status.className = `evidence-status ${item.complete ? "correct" : "incorrect"}`;
   });
   latestArtifact = {

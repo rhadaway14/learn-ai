@@ -140,6 +140,12 @@ function render() {
       grid.appendChild(project);
     }
     host.appendChild(section);
+    if (phaseIndex === 1) {
+      const bridge = document.createElement("section");
+      bridge.className = "phase engineering-gate";
+      bridge.innerHTML = `<div class="phase-heading"><h2>Required engineering bridge</h2><span>After Lesson 10</span></div><div class="lesson-grid"><a class="lesson" href="labs/engineering_lab_a/index.html"><span class="number">ENGINEERING LAB A</span><h3>Python and PyTorch readiness</h3><small>Diagnostic, supported practice, and tested P2-I06 implementation</small></a></div>`;
+      host.appendChild(bridge);
+    }
   });
   const count = completed.size,
     percent = Math.round((count / 35) * 100);

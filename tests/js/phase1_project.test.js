@@ -11,9 +11,9 @@ const questions = Array.from({ length: 9 }, (_, index) => ({
   feedback: { right: "supported", wrong: "reconsider" }
 }));
 const evidence = {
-  normal_case: "A project with high predicted risk enters operations review before its promised delivery date, enabling a useful action.",
-  failure_case: "A false negative misses a late project, increases customer cost, and appears when recall falls for that subgroup.",
-  limitations: "The enterprise sample may not represent the smaller customer population, causing calibration shift and greater uncertainty after launch."
+  normal_case: "Northstar predicts high delivery risk for a project, so operations sends it to review before the promised date. This action helps the team intervene early and avoid a late delivery for the customer.",
+  failure_case: "Northstar produces a false negative when it misses a project that later arrives late. The customer bears the delay cost, so the team monitors recall by subgroup to reveal this failure.",
+  limitations: "Northstar learned from an enterprise sample that may not represent the smaller customer population. The team should monitor calibration by subgroup because customer shift could increase uncertainty after launch."
 };
 
 test("Phase 1 passes only with score, critical decisions, and evidence", () => {
@@ -38,6 +38,34 @@ test("Phase 1 rejects long filler and repeated words", () => {
   const filler = { normal_case: "x".repeat(200), failure_case: "failure ".repeat(30), limitations: "...............!!!!!!!!" };
   const results = assessEvidence(filler);
   assert.equal(Object.values(results).some((item) => item.complete), false);
+});
+
+test("Phase 1 rejects deliberately gamed keyword text", () => {
+  const gamed = {
+    normal_case: "Northstar project prediction risk review action operations late alpha beta gamma delta epsilon zeta eta theta iota kappa lambda.",
+    failure_case: "Northstar false miss alert failure late review cost signal alpha beta gamma delta epsilon zeta eta theta iota kappa lambda.",
+    limitations: "Northstar sample population customer calibration uncertainty subgroup shift enterprise small alpha beta gamma delta epsilon zeta eta theta."
+  };
+  const results = assessEvidence(gamed);
+  assert.equal(Object.values(results).every((item) => item.complete === false), true);
+});
+
+test("Phase 1 requires every evidence category, case context, and reasoning", () => {
+  const incomplete = {
+    ...evidence,
+    normal_case: "Northstar predicts project risk before the deadline because the score is high. The team records many additional distinct observations about schedules, owners, dates, customers, estimates, and planning."
+  };
+  const result = assessEvidence(incomplete).normal_case;
+  assert.equal(result.complete, false);
+  assert.deepEqual(result.missingGroups, ["response", "benefit"]);
+});
+
+test("Phase 1 accepts ordinary inflections instead of requiring magic keywords", () => {
+  const natural = {
+    ...evidence,
+    normal_case: "Northstar's prediction marks a project as high risk, so operations reviews it before the promised date. That response helps the team intervene and avoid delivering late to the customer."
+  };
+  assert.equal(assessEvidence(natural).normal_case.complete, true);
 });
 
 test("formative checking returns feedback without evaluating evidence", () => {

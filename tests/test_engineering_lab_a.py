@@ -42,11 +42,20 @@ def test_p2_i06_closes_the_phase_two_dependency_chain():
 
 
 def test_lab_is_linked_from_course_and_lesson_ten():
-    course = (ROOT / "course.html").read_text(encoding="utf-8")
+    course = (ROOT / "course.js").read_text(encoding="utf-8")
     lesson = (ROOT / "lessons/10_regularization_and_generalization/index.html").read_text(encoding="utf-8")
-    target = "labs/engineering_lab_a/README.md"
+    target = "labs/engineering_lab_a/index.html"
     assert target in course
-    assert f"../../{target}" in lesson
+    assert "../../labs/engineering_lab_a/README.md" in lesson
+
+
+def test_lab_card_follows_lesson_ten_and_opens_a_learner_page():
+    course = (ROOT / "course.js").read_text(encoding="utf-8")
+    page = (LAB / "index.html").read_text(encoding="utf-8")
+    assert "phaseIndex === 1" in course
+    assert course.index("host.appendChild(section)") < course.index('href="labs/engineering_lab_a/index.html"')
+    for learner_need in ("Choose your route", "What you will prove", "Six-stage path", "Start the lab"):
+        assert learner_need in page
 
 
 def test_pytorch_is_an_explicit_optional_dependency():

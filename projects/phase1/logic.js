@@ -4,17 +4,47 @@
   root.PhaseOneAssessment = api;
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   const evidenceRules = {
-    normal_case: { minimumWords: 12, concepts: ["project", "prediction", "risk", "review", "action", "operations", "late"] },
-    failure_case: { minimumWords: 12, concepts: ["false", "miss", "alert", "failure", "late", "review", "cost", "signal"] },
-    limitations: { minimumWords: 12, concepts: ["sample", "population", "customer", "calibration", "uncertainty", "subgroup", "shift", "enterprise", "small"] }
+    normal_case: {
+      minimumWords: 18,
+      requiredGroups: {
+        prediction: ["predict", "predicted", "prediction", "probability", "score", "risk"],
+        response: ["action", "escalate", "investigate", "prioritize", "review"],
+        benefit: ["avoid", "benefit", "deliver", "delivery", "help", "intervene", "late", "operations"]
+      }
+    },
+    failure_case: {
+      minimumWords: 18,
+      requiredGroups: {
+        error: ["false", "miss", "missed", "negative", "positive"],
+        impact: ["cost", "customer", "delay", "late", "overload", "waste"],
+        signal: ["alert", "metric", "monitor", "precision", "rate", "recall", "signal"]
+      }
+    },
+    limitations: {
+      minimumWords: 18,
+      requiredGroups: {
+        evidence: ["customer", "enterprise", "population", "sample", "subgroup"],
+        uncertainty: ["calibration", "confidence", "drift", "representative", "shift", "uncertainty"],
+        response: ["collect", "compare", "monitor", "recalibrate", "review", "segment", "validate"]
+      }
+    }
   };
+  const reasoningWords = new Set(["because", "causing", "could", "if", "may", "means", "reveals", "so", "therefore", "when", "which", "while", "would"]);
   function words(value) { return String(value || "").toLowerCase().match(/[a-z0-9]+(?:[-'][a-z0-9]+)*/g) || []; }
+  function substantiveSentences(value) {
+    return String(value || "").split(/[.!?]+/).map((part) => words(part)).filter((tokens) => tokens.length >= 5).length;
+  }
   function assessEvidence(evidence) {
     return Object.fromEntries(Object.entries(evidenceRules).map(([key, rule]) => {
       const tokens = words(evidence[key]);
       const unique = new Set(tokens);
-      const conceptHits = rule.concepts.filter((concept) => unique.has(concept));
-      return [key, { complete: unique.size >= rule.minimumWords && conceptHits.length >= 1, distinctWords: unique.size, minimumWords: rule.minimumWords, conceptHits }];
+      const groupHits = Object.fromEntries(Object.entries(rule.requiredGroups).map(([group, concepts]) => [group, concepts.filter((concept) => tokens.some((token) => token === concept || (concept.length >= 5 && token.startsWith(concept))))]));
+      const missingGroups = Object.entries(groupHits).filter(([, hits]) => hits.length === 0).map(([group]) => group);
+      const sentenceCount = substantiveSentences(evidence[key]);
+      const hasCaseContext = tokens.some((token) => token === "northstar" || token.startsWith("northstar'"));
+      const hasReasoning = tokens.some((token) => reasoningWords.has(token));
+      const complete = unique.size >= rule.minimumWords && sentenceCount >= 2 && hasCaseContext && hasReasoning && missingGroups.length === 0;
+      return [key, { complete, distinctWords: unique.size, minimumWords: rule.minimumWords, sentenceCount, hasCaseContext, hasReasoning, groupHits, missingGroups }];
     }));
   }
   function evaluate(answers, evidence, questions) {
