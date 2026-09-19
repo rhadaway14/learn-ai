@@ -9,6 +9,11 @@ import pytest
 ROOT = Path(__file__).parents[1]
 
 
+def test_ci_syntax_checks_all_learner_and_assessment_javascript():
+    workflow = (ROOT / ".github/workflows/tests.yml").read_text(encoding="utf-8")
+    assert "find lessons projects labs tests/js -name '*.js'" in workflow
+
+
 @pytest.mark.parametrize("artifact", sorted((ROOT / "activities").glob("L*-A*.json")))
 def test_activity_artifacts_validate_against_schema(artifact: Path):
     schema = json.loads((ROOT / "schemas/lesson-activity.schema.json").read_text(encoding="utf-8"))

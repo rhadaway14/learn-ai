@@ -93,6 +93,15 @@ def test_lesson_08_capstone_prepares_lesson_09_implementation() -> None:
     assert "Validation gates" in exercises
 
 
+def test_autograd_flow_stacks_without_horizontal_overflow_on_mobile() -> None:
+    css = (LESSON / "styles.css").read_text(encoding="utf-8")
+    mobile = css[css.index("@media(max-width:720px)") :]
+    assert ".autograd-flow{display:grid" in mobile
+    assert "grid-template-columns:minmax(0,1fr)" in mobile
+    assert ".autograd-flow article{min-width:0;width:100%}" in mobile
+    assert ".autograd-flow i{text-align:center;transform:rotate(90deg)}" in mobile
+
+
 def test_course_dashboard_opens_lesson_08_interactively() -> None:
     script = (ROOT / "course.js").read_text(encoding="utf-8")
     assert "number<=10" in script
