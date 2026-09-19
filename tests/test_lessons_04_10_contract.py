@@ -50,6 +50,24 @@ def test_activity_and_increment_records_are_connected():
         assert len(increment["acceptance_criteria"]) >= 3
 
 
+def test_decision_heavy_activities_require_a_prediction_before_interaction():
+    expected_prompts = {
+        5: "Predict before you test",
+        7: "Predict before you trace",
+        9: "Predict before you train",
+        10: "Predict before you intervene",
+    }
+    for lesson, prompt in expected_prompts.items():
+        directory = LESSONS[lesson][0]
+        html = (ROOT / "lessons" / directory / "index.html").read_text(encoding="utf-8")
+        activity_start = html.index(f'data-activity-id="L{lesson:02d}-A1"')
+        increment_start = html.index('class="phase-increment"', activity_start)
+        activity = html[activity_start:increment_start]
+        assert 'class="prediction-prompt"' in activity
+        assert prompt in activity
+        assert "Before" in activity or "before" in activity
+
+
 def test_phase_one_project_is_browser_first_and_assesses_release_reasoning():
     html = (ROOT / "projects/phase1/index.html").read_text(encoding="utf-8")
     app = (ROOT / "projects/phase1/app.js").read_text(encoding="utf-8")

@@ -80,6 +80,7 @@ def test_known_contrast_and_mobile_overflow_regressions_are_covered():
     css = (ROOT / "lessons/accessibility.css").read_text(encoding="utf-8")
     for selector in (
         ".hero-card .cycle-arrow",
+        ".split-visual .test-block",
         ".token-flow b",
         ".parameter-count small",
         ".count-grid .posterior small",
@@ -88,6 +89,7 @@ def test_known_contrast_and_mobile_overflow_regressions_are_covered():
         ".module-total strong",
     ):
         assert selector in css
+    assert ".split-visual .test-block{background:#087064!important}" in css
     assert ".architecture-visual,.autograd-graph" in css
     assert ".architecture-layer,.autograd-node" in css
     assert "min-width:0!important" in css

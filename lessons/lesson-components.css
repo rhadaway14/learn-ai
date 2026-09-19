@@ -16,6 +16,8 @@
 .activity-levels li{padding:1rem;border:1px solid #dce5ef;border-radius:12px;background:#f8fafc}
 .activity-levels li:before{counter-increment:activity-level;content:counter(activity-level);display:grid;place-items:center;width:1.8rem;height:1.8rem;margin-bottom:.6rem;border-radius:50%;background:#2864dc;color:#fff;font-weight:800}
 .activity-levels li[data-level="extension"]{border-style:dashed;background:#faf8ff}
+.prediction-prompt{margin:1rem 0;padding:1rem 1.1rem;border:1px solid #9bb9f5;border-left:4px solid #2864dc;border-radius:10px;background:#eef4ff;color:#263a58}
+.prediction-prompt strong{display:block;color:#174fae}.prediction-prompt p{margin:.35rem 0 0}
 .activity-artifact{padding:1rem;border-radius:10px;background:#eef8f5;border-left:4px solid #0f9384}
 .phase-increment{border-color:#efc15b;background:linear-gradient(135deg,#fffaf0,#fff)}
 .acceptance-criteria li{margin:.45rem 0}
