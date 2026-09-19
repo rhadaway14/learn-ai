@@ -1,4 +1,5 @@
 const STORAGE_KEY = "learn-ai-phase1-project-v1";
+const ATTEMPT_KEY = "learn-ai-phase1-project-attempt-v1";
 const questions = Array.from(document.querySelectorAll("[data-question]")).map(
   (card) => ({
     id: card.dataset.question,
@@ -18,6 +19,7 @@ const download = document.querySelector("#downloadArtifact");
 const checkDecisions = document.querySelector("#checkDecisions");
 const storageWarning = document.querySelector("#storageWarning");
 let latestArtifact = null;
+let attemptNumber = 0;
 
 function showStorageWarning(
   message = "Your draft cannot be saved in this browser. Keep this page open and download your evidence artifact before leaving.",
@@ -42,7 +44,10 @@ function readState() {
 
 function saveDraft() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(readState()));
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(PhaseOneArtifacts.createDraft(readState())),
+    );
   } catch (_) {
     showStorageWarning();
   }
@@ -51,6 +56,13 @@ function restoreDraft() {
   try {
     const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
     if (!state) return;
+    const validation = PhaseOneArtifacts.validateDraft(state);
+    if (!validation.valid) {
+      showStorageWarning(
+        `The saved draft was not loaded because it uses ${validation.reason}. Start a new draft and download its evidence artifact before leaving.`,
+      );
+      return;
+    }
     Object.entries(state.answers || {}).forEach(([key, value]) => {
       const input = form.querySelector(
         `input[name="${key}"][value="${value}"]`,
@@ -65,6 +77,29 @@ function restoreDraft() {
       "The saved draft could not be read. A new draft is active; download your evidence artifact before leaving.",
     );
   }
+}
+
+function restoreAttemptNumber() {
+  try {
+    attemptNumber = PhaseOneArtifacts.normalizeAttemptNumber(
+      localStorage.getItem(ATTEMPT_KEY),
+    );
+  } catch (_) {
+    attemptNumber = 0;
+    showStorageWarning();
+  }
+}
+
+function beginAttempt() {
+  attemptNumber = PhaseOneArtifacts.nextAttemptNumber(attemptNumber);
+  try {
+    localStorage.setItem(ATTEMPT_KEY, String(attemptNumber));
+  } catch (_) {
+    showStorageWarning(
+      "This attempt is numbered for the current page, but its number cannot be saved in this browser. Download the artifact before leaving.",
+    );
+  }
+  return attemptNumber;
 }
 
 form.addEventListener("input", saveDraft);
@@ -109,17 +144,15 @@ form.addEventListener("submit", (event) => {
       : `Revise this note. Add ${needs.join("; ")}.`;
     status.className = `evidence-status ${item.complete ? "correct" : "incorrect"}`;
   });
-  latestArtifact = {
-    schema_version: "1.0",
-    project_id: "phase1-model-investigation",
-    completed_at: new Date().toISOString(),
-    ...state,
+  latestArtifact = PhaseOneArtifacts.createArtifact(
+    state,
     evaluation,
-  };
+    beginAttempt(),
+  );
   if (evaluation.passed) CourseProgress.completeMilestone("phase1");
   result.hidden = false;
   result.className = evaluation.passed ? "result passed" : "result needs-work";
-  result.innerHTML = `<h2>${evaluation.passed ? "Phase 1 gate passed" : "Evidence needs another pass"}</h2><p><strong>${evaluation.score} of ${evaluation.total}</strong> decisions correct. Critical checks: ${evaluation.criticalPassed ? "passed" : "not yet"}. Evidence notes: ${evaluation.evidenceComplete ? "complete" : "need additional case-specific reasoning"}.</p><p>${evaluation.passed ? "Download the artifact and carry the accepted decision into Phase 2." : "Use the feedback beside each decision, revise, and assess again."}</p>`;
+  result.innerHTML = `<h2>${evaluation.passed ? "Phase 1 gate passed" : "Evidence needs another pass"}</h2><p><strong>Attempt ${latestArtifact.attempt_number}:</strong> ${evaluation.score} of ${evaluation.total} decisions correct. Critical checks: ${evaluation.criticalPassed ? "passed" : "not yet"}. Evidence notes: ${evaluation.evidenceComplete ? "complete" : "need additional case-specific reasoning"}.</p><p>${evaluation.passed ? "Download the artifact and carry the accepted decision into Phase 2." : "Use the feedback beside each decision, revise, and assess again."}</p>`;
   download.disabled = false;
   result.scrollIntoView({ behavior: "smooth", block: "center" });
 });
@@ -131,10 +164,13 @@ download.addEventListener("click", () => {
   });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = "phase1-model-investigation.json";
+  link.download = PhaseOneArtifacts.artifactFilename(
+    latestArtifact.attempt_number,
+  );
   link.click();
   URL.revokeObjectURL(link.href);
 });
+restoreAttemptNumber();
 restoreDraft();
 window.addEventListener("course-storage-error", (event) =>
   showStorageWarning(event.detail?.message),

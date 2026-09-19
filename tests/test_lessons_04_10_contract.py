@@ -79,5 +79,7 @@ def test_phase_one_project_is_browser_first_and_assesses_release_reasoning():
     assert "no coding required" in html.lower()
     assert "PhaseOneAssessment.evaluate" in app
     assert "PhaseOneAssessment.checkAnswers" in app
-    assert "phase1-model-investigation.json" in app
+    assert "PhaseOneArtifacts.createArtifact" in app
+    assert "PhaseOneArtifacts.artifactFilename" in app
+    assert 'src="artifact.js"' in html
     assert "localStorage" in app

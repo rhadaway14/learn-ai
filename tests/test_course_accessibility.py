@@ -65,6 +65,17 @@ def test_phase_one_milestone_is_navigable_and_persisted():
     assert "completeMilestone" in progress and "isMilestoneComplete" in progress
 
 
+def test_phase_one_artifacts_are_versioned_and_attempt_numbered():
+    project = (ROOT / "projects/phase1/index.html").read_text(encoding="utf-8")
+    app = (ROOT / "projects/phase1/app.js").read_text(encoding="utf-8")
+    artifact = (ROOT / "projects/phase1/artifact.js").read_text(encoding="utf-8")
+    assert 'src="artifact.js"' in project
+    assert "validateDraft(state)" in app
+    assert "attempt_number" in artifact
+    assert "validateArtifact" in artifact
+    assert "-attempt-${String(attempt).padStart(2, \"0\")}.json" in artifact
+
+
 def test_storage_failures_have_visible_recovery_guidance():
     course_html = (ROOT / "course.html").read_text(encoding="utf-8")
     project_html = (ROOT / "projects/phase1/index.html").read_text(encoding="utf-8")
