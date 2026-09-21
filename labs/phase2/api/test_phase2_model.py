@@ -6,6 +6,7 @@ torch = pytest.importorskip("torch")
 
 from labs.phase2.api.model import (
     FEATURE_ORDER,
+    LABEL_NOISE_STD,
     TrainingConfig,
     make_dataset,
     predict,
@@ -36,6 +37,9 @@ def test_known_good_run_passes_the_numeric_gate(known_good):
     assert evidence["training"]["selected_epoch"] < evidence["configuration"]["epochs"]
     assert evidence["training"]["finite_gradients"] is True
     assert evidence["sealed_test"]["evaluations"] == 1
+    assert evidence["dataset"]["label_noise_std"] == LABEL_NOISE_STD == 0.6
+    assert 0.55 <= evidence["sealed_test"]["precision"] <= 0.85
+    assert evidence["sealed_test"]["accuracy"] < 0.98
 
 
 def test_same_configuration_reproduces_selected_model(known_good):
@@ -60,5 +64,6 @@ def test_promoted_model_scores_a_project(known_good):
             "prior_projects": 4,
         },
     )
-    assert 0 <= result["probability"] <= 1
+    assert 0 <= result["score"] <= 1
     assert result["decision"] in {"high risk", "standard review"}
+    assert result["calibrated_probability"] is False

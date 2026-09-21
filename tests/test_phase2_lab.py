@@ -21,6 +21,9 @@ def test_phase2_spec_has_bounded_contract_and_numeric_gate():
         "Reasoning gate",
         "Accessibility contract",
         "Out of scope for the pilot",
+        "seeded Gaussian noise (`σ = 0.6`)",
+        "at least 18 distinct words",
+        "uncalibrated model risk `score`",
     ):
         assert requirement in spec
 
@@ -63,9 +66,13 @@ def test_phase2_ui_exposes_the_complete_guided_loop_and_accessible_evidence():
     ):
         assert f'id="{identifier}"' in html
     assert 'aria-live="polite"' in html
+    assert 'role="img"' in html
+    assert html.count("<caption>") >= 2
     assert "prefers-reduced-motion" in css
+    assert "header .eyebrow{color:#d6e2ff}" in css
     assert "Phase 1 evidence" in html
     assert "drawHistory" in script and "acceptanceChecks" in script
+    assert "model risk score" in script and "real-world probability" in script
 
 
 def test_phase2_lifecycle_and_generated_artifacts_are_explicit():

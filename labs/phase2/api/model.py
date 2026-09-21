@@ -17,6 +17,7 @@ FEATURE_ORDER = (
     "customer_tier",
     "prior_projects",
 )
+LABEL_NOISE_STD = 0.6
 
 
 @dataclass(frozen=True)
@@ -92,6 +93,7 @@ def make_dataset(seed: int = 17, rows: int = 2_400) -> tuple[torch.Tensor, torch
         + 0.45 * standardized[:, 3]
         - 0.35 * standardized[:, 4]
         + 0.30 * standardized[:, 0] * standardized[:, 1]
+        + LABEL_NOISE_STD * torch.randn(rows, generator=generator)
     )
     cutoff = torch.quantile(risk, 0.88)
     labels = (risk >= cutoff).float()
@@ -237,6 +239,7 @@ def train_model(config: TrainingConfig) -> TrainedModel:
             "validation_rows": 400,
             "test_rows": 400,
             "positive_rate": float(splits["test"][1].mean().item()),
+            "label_noise_std": LABEL_NOISE_STD,
         },
         "configuration": asdict(config),
         "architecture": [5, config.hidden_width, max(4, config.hidden_width // 2), 1],
@@ -263,7 +266,8 @@ def predict(trained: TrainedModel, values: dict[str, float]) -> dict[str, float 
     with torch.no_grad():
         probability = torch.sigmoid(trained.model(normalized)).item()
     return {
-        "probability": probability,
+        "score": probability,
         "decision": "high risk" if probability >= 0.5 else "standard review",
         "threshold": 0.5,
+        "calibrated_probability": False,
     }

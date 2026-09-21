@@ -191,7 +191,7 @@ $("#predictionForm").addEventListener("submit", async (event) => {
   try {
     const result = await request("/api/phase2/predict", { method: "POST", body: JSON.stringify(Object.fromEntries(Object.entries(values).map(([key, value]) => [key, Number(value)]))) });
     $("#predictionResult").hidden = false;
-    $("#predictionResult").innerHTML = `<strong>${percent(result.probability)} late-delivery risk</strong><p>Decision: ${result.decision} at threshold ${result.threshold.toFixed(2)}.</p>`;
+    $("#predictionResult").innerHTML = `<strong>${percent(result.score)} model risk score</strong><p>Decision: ${result.decision} at threshold ${result.threshold.toFixed(2)}.</p><p>This weighted classifier score has not been calibrated as a real-world probability.</p>`;
     evidence("#evidenceUse", "New project scored"); completeStep(6);
   } catch (error) { $("#predictionResult").hidden = false; $("#predictionResult").textContent = error.message; }
 });

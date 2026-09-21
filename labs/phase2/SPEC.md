@@ -19,6 +19,8 @@ The learner starts three services, opens one browser URL, trains and diagnoses a
 - the Phase 2 lesson increments P2-I01 through P2-I05;
 - a seeded dataset with a stable sealed test partition.
 
+The teaching dataset includes seeded Gaussian noise (`σ = 0.6`) in the latent risk process. Runs remain reproducible, but labels are not a perfectly recoverable function of the visible features. This preserves the course's irreducible-error, threshold, and generalization lessons.
+
 ### Outputs
 
 - a selected PyTorch checkpoint;
@@ -69,6 +71,10 @@ The known-good run passes only when all conditions hold:
 ## Reasoning gate
 
 Automated success is necessary but insufficient. The artifact must also include the learner's prediction, observed evidence, failure diagnosis, recovery explanation, promotion rationale, and one limitation that the reported metrics do not establish.
+
+Each reasoning response must contain at least 18 distinct words across two substantive sentences, name the Northstar case, express a causal or conditional relationship, and use concepts specific to that prompt. Repeated characters, generic filler, and keyword-only text fail closed.
+
+The inference endpoint returns an uncalibrated model risk `score`. The UI must not label this value as a probability unless a later lesson adds and verifies calibration.
 
 ## Accessibility contract
 

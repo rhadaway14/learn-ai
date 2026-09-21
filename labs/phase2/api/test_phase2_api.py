@@ -25,6 +25,16 @@ def passed_phase1() -> dict:
     }
 
 
+def valid_reasoning() -> dict[str, str]:
+    return {
+        "observation": "Northstar validation loss reached its minimum before the final epoch because the selected checkpoint preserved stronger evidence. Test recall and accuracy also exceeded the recorded majority baseline gate.",
+        "failure_diagnosis": "Northstar training became unstable because the excessive learning rate made loss explode before a safe checkpoint could be promoted. The visible failure signal stopped the run and protected the previous model.",
+        "recovery": "Northstar recovered because I restored the learning rate while holding the seed and architecture constant. The stable controlled run reproduced the selected checkpoint and passed every acceptance gate.",
+        "promotion_rationale": "I would promote the Northstar checkpoint because recall and accuracy passed their release gates against the majority baseline. Validation selected an earlier epoch while sealed test evidence remained protected.",
+        "limitation": "Northstar uses synthetic samples, so these metrics may not generalize to real customer populations or shifted subgroups. We should collect representative projects, validate calibration and fairness, then monitor drift.",
+    }
+
+
 def test_health_status_and_phase1_import(tmp_path):
     app = create_app(MemoryStore(), tmp_path)
     with TestClient(app) as client:
@@ -49,13 +59,7 @@ def test_phase1_import_rejects_incompatible_or_failed_evidence(tmp_path):
 def test_full_walkthrough_requires_failure_and_emits_a_valid_artifact(tmp_path):
     store = MemoryStore()
     app = create_app(store, tmp_path)
-    reasoning = {
-        "observation": "Validation selected a checkpoint before the final configured epoch.",
-        "failure_diagnosis": "The oversized learning rate made the loss cross the stability boundary.",
-        "recovery": "I restored only the learning rate and held the seed and architecture fixed.",
-        "promotion_rationale": "The model passed recall, baseline, gradient, checkpoint, and test gates.",
-        "limitation": "Synthetic test performance does not establish behavior on real customer projects.",
-    }
+    reasoning = valid_reasoning()
     with TestClient(app) as client:
         assert client.post("/api/phase2/phase1", json=passed_phase1()).status_code == 200
         trained = client.post(
@@ -119,6 +123,27 @@ def test_full_walkthrough_requires_failure_and_emits_a_valid_artifact(tmp_path):
         (ROOT / "schemas/phase2-lab-artifact.schema.json").read_text(encoding="utf-8")
     )
     jsonschema.Draft202012Validator(schema).validate(body["artifact"])
+
+
+def test_reasoning_gate_rejects_repeated_or_semantically_empty_text():
+    from labs.phase2.api.contract import validate_reasoning
+
+    repeated = {field: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" for field in valid_reasoning()}
+    with pytest.raises(ValueError, match="distinct words"):
+        validate_reasoning(repeated)
+
+    filler = {
+        field: "Northstar alpha beta gamma delta epsilon because zeta eta theta iota. Kappa lambda mu nu xi omicron pi rho sigma tau upsilon."
+        for field in valid_reasoning()
+    }
+    with pytest.raises(ValueError, match="concepts for"):
+        validate_reasoning(filler)
+
+
+def test_reasoning_gate_accepts_case_specific_explanations():
+    from labs.phase2.api.contract import validate_reasoning
+
+    assert validate_reasoning(valid_reasoning()) == valid_reasoning()
 
 
 def test_checkpoint_is_restored_after_an_api_restart(tmp_path):

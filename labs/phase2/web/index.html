@@ -102,7 +102,7 @@
             <div class="chart-layout">
               <div>
                 <h3>Training evidence</h3>
-                <canvas id="trainingChart" width="760" height="300" aria-label="Training and validation loss by epoch"></canvas>
+                <canvas id="trainingChart" width="760" height="300" role="img" aria-label="Training and validation loss by epoch; the following table contains the same evidence"></canvas>
               </div>
               <div>
                 <h3>Acceptance gate</h3>
@@ -111,7 +111,7 @@
             </div>
             <details>
               <summary>Open the accessible loss table</summary>
-              <div class="table-wrap"><table><thead><tr><th>Epoch</th><th>Training loss</th><th>Validation loss</th><th>Gradient norm</th></tr></thead><tbody id="historyTable"></tbody></table></div>
+              <div class="table-wrap"><table><caption>Training and validation evidence by sampled epoch</caption><thead><tr><th>Epoch</th><th>Training loss</th><th>Validation loss</th><th>Gradient norm</th></tr></thead><tbody id="historyTable"></tbody></table></div>
             </details>
           </div>
         </section>
@@ -130,7 +130,7 @@
         <section class="panel" id="use-model">
           <p class="step-label">STEP 6 · USE</p>
           <h2>Score a new project with the promoted checkpoint</h2>
-          <details class="feature-guide"><summary>What each prediction-time feature means</summary><div class="table-wrap"><table><thead><tr><th>Feature</th><th>Meaning at booking time</th><th>Why it is eligible</th></tr></thead><tbody><tr><td>Planned integrations</td><td>External systems in the approved scope</td><td>Known before delivery begins</td></tr><tr><td>Document count</td><td>Estimated source documents in scope</td><td>Known from discovery inventory</td></tr><tr><td>Deadline days</td><td>Days from booking to promised date</td><td>Derived from two booking-time dates</td></tr><tr><td>Customer tier</td><td>Existing commercial service tier, encoded 0–3</td><td>Available at booking, but requires fairness review</td></tr><tr><td>Prior projects</td><td>Count of earlier completed projects for the account</td><td>Historical aggregate created before this outcome; account ID itself is excluded</td></tr></tbody></table></div></details>
+          <details class="feature-guide"><summary>What each prediction-time feature means</summary><div class="table-wrap"><table><caption>Northstar model features and their prediction-time eligibility</caption><thead><tr><th>Feature</th><th>Meaning at booking time</th><th>Why it is eligible</th></tr></thead><tbody><tr><td>Planned integrations</td><td>External systems in the approved scope</td><td>Known before delivery begins</td></tr><tr><td>Document count</td><td>Estimated source documents in scope</td><td>Known from discovery inventory</td></tr><tr><td>Deadline days</td><td>Days from booking to promised date</td><td>Derived from two booking-time dates</td></tr><tr><td>Customer tier</td><td>Existing commercial service tier, encoded 0–3</td><td>Available at booking, but requires fairness review</td></tr><tr><td>Prior projects</td><td>Count of earlier completed projects for the account</td><td>Historical aggregate created before this outcome; account ID itself is excluded</td></tr></tbody></table></div></details>
           <form id="predictionForm" class="controls">
             <label>Planned integrations<input name="planned_integrations" type="number" min="0" value="7" required /></label>
             <label>Document count<input name="document_count" type="number" min="1" value="4500" required /></label>
@@ -145,6 +145,7 @@
         <section class="panel" id="save">
           <p class="step-label">STEP 7 · VERIFY AND SAVE</p>
           <h2>Defend the promotion decision</h2>
+          <p>Each response needs at least two substantive sentences and 18 distinct words. Name the Northstar case, connect cause to evidence, and address the concepts requested by the field.</p>
           <div class="reasoning-grid">
             <label>Observed evidence<textarea id="observation" minlength="20"></textarea></label>
             <label>Promotion rationale<textarea id="promotionRationale" minlength="20"></textarea></label>

@@ -117,7 +117,7 @@ Before running it, predict the input, logits, and gradient shapes. Confirm the o
 ## Stage 4 — Run the known-good training system
 
 ```bash
-python labs/engineering_lab_a/run_lab.py --epochs 80 --learning-rate 0.03 --seed 17
+python labs/engineering_lab_a/run_lab.py --epochs 300 --learning-rate 0.03 --seed 17
 ```
 
 The command writes `artifacts/engineering-lab-a/evidence.json` and the best validation checkpoint. The final test is evaluated once, after checkpoint selection.
@@ -125,19 +125,28 @@ The command writes `artifacts/engineering-lab-a/evidence.json` and the best vali
 Expected evidence:
 
 - finite training and validation losses;
-- a selected epoch between 1 and 80;
+- a selected epoch before the configured epoch budget, demonstrating that validation rather than the final epoch selected the checkpoint;
+- non-zero recall and accuracy above the majority-class baseline;
 - checkpoint metadata containing feature order, seed, architecture, and selection rule;
 - test metrics calculated from the reloaded selected checkpoint.
+
+Three mechanics make this a defensible reference rather than an accuracy illusion:
+
+- **Training-only standardization** calculates feature means and scales from the training split, then reuses them for validation and test data. The protected splits never influence preprocessing.
+- **Positive-class weighting** makes missed late projects matter during training even though only about 12% of projects are late. This improves recall, but the resulting sigmoid value is a model score—not automatically a calibrated probability.
+- **Patience-based early stopping** preserves the best validation state and stops after validation has failed to improve meaningfully for 30 epochs. The selected checkpoint must therefore precede the full 300-epoch budget.
+
+The acceptance gate refuses to write a checkpoint when recall is zero, accuracy fails to beat the majority-class baseline, gradients are invalid, or the final epoch is selected by default.
 
 ## Stage 5 — Run a controlled failure and recover
 
 Predict what will happen, then run:
 
 ```bash
-python labs/engineering_lab_a/run_lab.py --epochs 20 --learning-rate 1000000 --seed 17 --expect-failure
+python labs/engineering_lab_a/run_lab.py --epochs 20 --patience 10 --learning-rate 1000000 --seed 17 --expect-failure
 ```
 
-The run must stop on nonfinite or explosive loss and report the failure without promoting a checkpoint. Recover by restoring `--learning-rate 0.03` and the same seed. Changing both rate and seed would make the comparison ambiguous.
+The run must stop on nonfinite or explosive loss and report the failure without promoting a checkpoint. Recover by restoring `--learning-rate 0.03`, `--epochs 300`, `--patience 30`, and the same seed. Changing both rate and seed would make the comparison ambiguous.
 
 ## Stage 6 — Verify and accept P2-I06
 
@@ -152,6 +161,7 @@ Create `P2-I06-tested-reference-implementation.md` from [the evidence template](
 - every trainable parameter receives a finite gradient, satisfying P2-I02;
 - lifecycle and checkpoint contents satisfy P2-I03;
 - validation selects the checkpoint and test remains sealed until selection, satisfying P2-I04;
+- recall is non-zero and accuracy beats the majority-class baseline;
 - the failure experiment and recovery satisfy P2-I05;
 - another learner can reproduce the evidence from the documented commands.
 

@@ -22,6 +22,9 @@
 
 - Command:
 - Selected epoch:
+- Epochs completed:
+- Majority-baseline accuracy:
+- Model accuracy:
 - Test loss:
 - Precision:
 - Recall:

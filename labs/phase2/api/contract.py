@@ -1,12 +1,49 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+import re
 from typing import Any
 
 
 SCHEMA_VERSION = "1.0"
 ARTIFACT_TYPE = "phase2-neural-risk"
 PHASE1_PROJECT_ID = "phase1-model-investigation"
+MINIMUM_DISTINCT_WORDS = 18
+REASONING_WORDS = {
+    "because", "causing", "could", "if", "may", "means", "reveals",
+    "so", "therefore", "when", "which", "while", "would",
+}
+REASONING_RULES = {
+    "observation": {
+        "evidence": {"accuracy", "checkpoint", "curve", "epoch", "loss", "metric", "recall", "validation"},
+        "comparison": {"baseline", "compare", "exceeded", "test", "training"},
+    },
+    "failure_diagnosis": {
+        "cause": {"excessive", "exploded", "gradient", "learning", "loss", "rate", "unstable"},
+        "signal": {"checkpoint", "failed", "failure", "protected", "signal", "stopped"},
+    },
+    "recovery": {
+        "control": {"constant", "controlled", "held", "same", "seed", "while"},
+        "recovery_evidence": {"checkpoint", "passed", "recovered", "reproduced", "stable"},
+    },
+    "promotion_rationale": {
+        "gate": {"accuracy", "baseline", "checkpoint", "gate", "passed", "recall", "validation"},
+        "decision": {"accept", "promote", "promotion", "release"},
+    },
+    "limitation": {
+        "population": {"customer", "population", "real", "sample", "subgroup", "synthetic"},
+        "uncertainty": {"calibration", "drift", "fairness", "generalize", "shift", "uncertainty"},
+        "response": {"collect", "compare", "monitor", "recalibrate", "review", "segment", "validate"},
+    },
+}
+
+
+def _words(value: str) -> list[str]:
+    return re.findall(r"[a-z0-9]+(?:[-'][a-z0-9]+)*", value.lower())
+
+
+def _matches_concept(token: str, concept: str) -> bool:
+    return token == concept or (len(concept) >= 5 and token.startswith(concept))
 
 
 def validate_phase1_artifact(value: Any) -> dict[str, Any]:
@@ -26,20 +63,38 @@ def validate_phase1_artifact(value: Any) -> dict[str, Any]:
 
 
 def validate_reasoning(value: Any) -> dict[str, str]:
-    fields = (
-        "observation",
-        "failure_diagnosis",
-        "recovery",
-        "promotion_rationale",
-        "limitation",
-    )
     if not isinstance(value, dict):
         raise ValueError("reasoning must be an object")
     result: dict[str, str] = {}
-    for field in fields:
+    for field, required_groups in REASONING_RULES.items():
         text = str(value.get(field, "")).strip()
-        if len(text) < 20:
-            raise ValueError(f"reasoning.{field} must contain at least 20 characters")
+        tokens = _words(text)
+        distinct_words = len(set(tokens))
+        sentence_count = sum(
+            len(_words(sentence)) >= 5 for sentence in re.split(r"[.!?]+", text)
+        )
+        missing_groups = [
+            group
+            for group, concepts in required_groups.items()
+            if not any(
+                _matches_concept(token, concept)
+                for token in tokens
+                for concept in concepts
+            )
+        ]
+        problems = []
+        if distinct_words < MINIMUM_DISTINCT_WORDS:
+            problems.append(f"at least {MINIMUM_DISTINCT_WORDS} distinct words")
+        if sentence_count < 2:
+            problems.append("two substantive sentences")
+        if "northstar" not in tokens:
+            problems.append("Northstar case context")
+        if not any(token in REASONING_WORDS for token in tokens):
+            problems.append("a causal or conditional reasoning word")
+        if missing_groups:
+            problems.append("concepts for " + ", ".join(missing_groups))
+        if problems:
+            raise ValueError(f"reasoning.{field} requires " + "; ".join(problems))
         result[field] = text
     return result
 

@@ -24,14 +24,17 @@ def test_splits_are_disjoint_and_have_expected_sizes():
 
 
 def test_training_is_reproducible_and_selects_validation_checkpoint():
-    config = RunConfig(epochs=12)
+    config = RunConfig()
     _, first = train(config)
     _, second = train(config)
     assert first["selected_epoch"] == second["selected_epoch"]
     assert first["history"] == second["history"]
-    assert 1 <= first["selected_epoch"] <= config.epochs
+    assert 1 <= first["selected_epoch"] < config.epochs
+    assert first["test_metrics"]["recall"] > 0
+    assert first["test_metrics"]["accuracy"] > first["baseline_metrics"]["accuracy"]
+    assert first["acceptance"]["passed"] is True
 
 
 def test_explosive_learning_rate_fails_closed():
     with pytest.raises(RuntimeError, match="unstable training"):
-        train(RunConfig(epochs=20, learning_rate=1_000_000))
+        train(RunConfig(epochs=20, learning_rate=1_000_000, patience=10))
