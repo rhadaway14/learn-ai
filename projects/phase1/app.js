@@ -20,6 +20,28 @@ const checkDecisions = document.querySelector("#checkDecisions");
 const storageWarning = document.querySelector("#storageWarning");
 let latestArtifact = null;
 let attemptNumber = 0;
+let guidedQuestion = 0;
+
+function selectedValue(name) {
+  return form.querySelector(`input[name="${name}"]:checked`)?.value || "";
+}
+
+function buildGuidedEvidence() {
+  const normal = [selectedValue("normal_scenario"), selectedValue("normal_action"), selectedValue("normal_benefit")];
+  const failure = [selectedValue("failure_error"), selectedValue("failure_impact"), selectedValue("failure_signal")];
+  const limitations = [selectedValue("limitation_evidence"), selectedValue("limitation_uncertainty"), selectedValue("limitation_response")];
+  const notes = {
+    normal_case: normal.every(Boolean) ? `Northstar predicts ${normal[0]} because the available intake evidence indicates elevated delivery risk. Operations ${normal[1]} the project, so the team can ${normal[2]} and protect the customer promise.` : "",
+    failure_case: failure.every(Boolean) ? `Northstar can produce a ${failure[0]} when the model makes the wrong delivery decision. The resulting ${failure[1]} should be visible through ${failure[2]}, so the team can investigate and reduce repeated failures.` : "",
+    limitations: limitations.every(Boolean) ? `Northstar learned from a ${limitations[0]} that may not represent the next customer population. This creates ${limitations[1]}, so the team should ${limitations[2]} before expanding the recommendation.` : "",
+  };
+  Object.entries(notes).forEach(([key, text]) => {
+    const preview = document.querySelector(`[data-generated-note="${key}"]`);
+    if (preview) preview.textContent = text || "Choose one card in each row to build this note.";
+    if (form.elements[key]) form.elements[key].value = text;
+  });
+  return notes;
+}
 
 function showStorageWarning(
   message = "Your draft cannot be saved in this browser. Keep this page open and download your evidence artifact before leaving.",
@@ -33,13 +55,9 @@ function readState() {
   new FormData(form).forEach((value, key) => {
     if (key.startsWith("q")) answers[key] = value;
   });
-  const evidence = Object.fromEntries(
-    ["normal_case", "failure_case", "limitations"].map((key) => [
-      key,
-      form.elements[key].value,
-    ]),
-  );
-  return { answers, evidence };
+  const guided = Object.fromEntries(Array.from(form.querySelectorAll("input[type=radio][name^=normal_], input[type=radio][name^=failure_], input[type=radio][name^=limitation_]")).filter((input) => input.checked).map((input) => [input.name, input.value]));
+  const evidence = buildGuidedEvidence();
+  return { answers, guided, evidence };
 }
 
 function saveDraft() {
@@ -69,9 +87,11 @@ function restoreDraft() {
       );
       if (input) input.checked = true;
     });
-    Object.entries(state.evidence || {}).forEach(([key, value]) => {
-      if (form.elements[key]) form.elements[key].value = value;
+    Object.entries(state.guided || {}).forEach(([key, value]) => {
+      const input = form.querySelector(`input[name="${key}"][value="${CSS.escape(value)}"]`);
+      if (input) input.checked = true;
     });
+    buildGuidedEvidence();
   } catch (_) {
     showStorageWarning(
       "The saved draft could not be read. A new draft is active; download your evidence artifact before leaving.",
@@ -102,7 +122,43 @@ function beginAttempt() {
   return attemptNumber;
 }
 
-form.addEventListener("input", saveDraft);
+form.addEventListener("input", () => { buildGuidedEvidence(); saveDraft(); });
+
+function setupGuidedRail() {
+  const cards = Array.from(document.querySelectorAll("[data-question]"));
+  cards.forEach((card, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "continue-decision";
+    button.textContent = index === cards.length - 1 ? "Continue to guided evidence" : "Continue to next decision";
+    button.disabled = true;
+    button.addEventListener("click", () => {
+      cards[index].classList.remove("guided-current");
+      if (cards[index + 1]) {
+        guidedQuestion = index + 1;
+        cards[index + 1].classList.add("guided-current");
+        cards[index + 1].scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        document.querySelector(".guided-evidence")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+    card.append(button);
+    card.querySelectorAll("input").forEach((input) => input.addEventListener("change", () => {
+      button.disabled = false;
+      card.classList.add("guided-answered");
+      const feedback = card.querySelector(".feedback");
+      feedback.textContent = `${input.value === card.dataset.answer ? "Strong choice." : "This is a useful contrast."} ${input.dataset.feedback}`;
+      feedback.className = `feedback ${input.value === card.dataset.answer ? "correct" : "incorrect"}`;
+    }));
+    const restored = card.querySelector("input:checked");
+    if (restored) {
+      button.disabled = false;
+      card.classList.add("guided-answered");
+    }
+    if (index > 0) card.classList.add("guided-hidden");
+  });
+  cards[0]?.classList.add("guided-current");
+}
 function showDecisionFeedback(results) {
   results.forEach((item) => {
     const card = form.querySelector(`[data-question="${item.id}"]`);
@@ -172,6 +228,8 @@ download.addEventListener("click", () => {
 });
 restoreAttemptNumber();
 restoreDraft();
+setupGuidedRail();
+buildGuidedEvidence();
 window.addEventListener("course-storage-error", (event) =>
   showStorageWarning(event.detail?.message),
 );

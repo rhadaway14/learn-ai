@@ -49,7 +49,8 @@ main {
 .question,
 .evidence,
 .rubric,
-.result {
+.result,
+.guided-lab {
   background: #fff;
   border: 1px solid #d9e1eb;
   border-radius: 16px;
@@ -57,6 +58,7 @@ main {
   margin: 1rem 0;
   box-shadow: 0 8px 24px rgba(25, 42, 70, 0.06);
 }
+.guided-heading{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start}.guided-badge{padding:.45rem .7rem;border-radius:999px;background:#eaf8f1;color:#126342;font-weight:800;white-space:nowrap}.model-visual{display:grid;grid-template-columns:1.3fr .8fr;gap:1rem;align-items:stretch;margin:1.2rem 0}.model-inputs{display:grid;gap:.8rem}.model-inputs label{display:grid;gap:.25rem;font-weight:750}.model-inputs output{float:right;color:#2864dc}.model-inputs input{width:100%;accent-color:#2864dc}.model-output{display:grid;place-items:center;align-content:center;gap:.35rem;padding:1rem;border-radius:14px;background:#eef4ff;text-align:center}.model-output strong{font-size:2.3rem;color:#12213d}.model-output small{color:#526178}.risk-gauge{width:100%;height:1rem;border-radius:999px;background:#d9e1eb;overflow:hidden}.risk-gauge span{display:block;width:0;height:100%;background:linear-gradient(90deg,#159166,#d6871f,#a33);transition:width .2s ease}.guided-flow{display:flex;align-items:center;justify-content:center;gap:.55rem;flex-wrap:wrap;font-weight:800;color:#526178}.guided-flow span{padding:.45rem .7rem;border-radius:999px;background:#eef1f6}.guided-flow .active{background:#2864dc;color:#fff}.question.guided-hidden{display:none}.question.guided-current{outline:3px solid #8fb1f5;outline-offset:2px}.continue-decision{margin-top:.8rem}.guided-answered{border-left-color:#159166}.evidence-builder{padding:1rem 0;border-top:1px solid #d9e1eb}.evidence-builder h3{margin-bottom:.15rem}.choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem;margin:.6rem 0}.choice-grid label{margin:0;padding:.75rem;border:1px solid #d9e1eb;border-radius:10px;font-weight:600;cursor:pointer}.choice-grid label:has(input:checked){border-color:#2864dc;background:#eef4ff;box-shadow:0 0 0 2px #b8cdf8}.choice-grid input{margin-right:.45rem}.generated-note{padding:.8rem;border-left:4px solid #2864dc;background:#f4f7fb}.evidence-status{display:block;margin-top:.45rem;font-weight:750}
 .facts {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -177,4 +179,5 @@ button[disabled] {
     gap: 1rem;
     flex-direction: column;
   }
+  .model-visual,.choice-grid{grid-template-columns:1fr}.guided-heading{display:block}.guided-badge{display:inline-block;margin-top:.5rem}.guided-flow b{display:none}
 }

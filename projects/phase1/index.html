@@ -63,6 +63,32 @@
           enterprise customers; the next launch expands to smaller customers.
         </p>
       </section>
+      <section class="guided-lab" aria-labelledby="guidedLabTitle">
+        <div class="guided-heading">
+          <div>
+            <p class="tag">GUIDED MODEL WALKTHROUGH</p>
+            <h2 id="guidedLabTitle">See the prediction before you defend it</h2>
+            <p>Move the project inputs and watch a teaching-only risk score change. Then follow the decision rail below. Each choice reveals the reason before you continue.</p>
+          </div>
+          <span class="guided-badge">No coding · on rails</span>
+        </div>
+        <div class="model-visual" aria-live="polite">
+          <div class="model-inputs">
+            <label>Planned integrations <output id="simIntegrationsValue">6</output><input id="simIntegrations" type="range" min="0" max="15" value="6" /></label>
+            <label>Documents in scope <output id="simDocumentsValue">2400</output><input id="simDocuments" type="range" min="200" max="10000" step="100" value="2400" /></label>
+            <label>Days to deadline <output id="simDeadlineValue">45</output><input id="simDeadline" type="range" min="5" max="120" value="45" /></label>
+          </div>
+          <div class="model-output">
+            <div class="risk-gauge"><span id="riskFill"></span></div>
+            <strong id="riskScore">—</strong>
+            <span id="riskDecision">Move the controls to score a project</span>
+            <small>This is a visual teaching model, not the final trained model.</small>
+          </div>
+        </div>
+        <div class="guided-flow" aria-label="Phase 1 workflow">
+          <span class="active">1 · Define</span><b>→</b><span>2 · Inspect data</span><b>→</b><span>3 · Evaluate</span><b>→</b><span>4 · Defend</span>
+        </div>
+      </section>
       <section class="rubric">
         <h2>Your release gate</h2>
         <ul>
@@ -380,47 +406,31 @@
           >
           <p class="feedback" aria-live="polite"></p>
         </fieldset>
-        <section class="evidence">
+        <section class="evidence guided-evidence">
           <p class="tag">EVIDENCE NOTES</p>
           <h2>Explain what the numbers cannot say alone</h2>
-          <p>
-            Each note needs two substantive sentences and at least 18 distinct
-            words. Name Northstar, connect every part of the prompt, and explain
-            why the evidence supports your conclusion. Keyword lists and
-            repeated filler do not count.
-          </p>
-          <label
-            >Normal case<small
-              >Describe a project, its predicted risk, the operations review
-              action, and why that action helps.</small
-            ><textarea name="normal_case" required></textarea
-            ><span
-              class="evidence-status"
-              data-evidence-status="normal_case"
-              aria-live="polite"
-            ></span></label
-          ><label
-            >Failure case<small
-              >Describe a false alert or missed late project, its cost, and a
-              signal that would reveal the failure.</small
-            ><textarea name="failure_case" required></textarea
-            ><span
-              class="evidence-status"
-              data-evidence-status="failure_case"
-              aria-live="polite"
-            ></span></label
-          ><label
-            >Limitations and uncertainty<small
-              >Name a sample, population, calibration, subgroup, or
-              customer-shift limitation that must accompany the
-              recommendation.</small
-            ><textarea name="limitations" required></textarea
-            ><span
-              class="evidence-status"
-              data-evidence-status="limitations"
-              aria-live="polite"
-            ></span
-          ></label>
+          <p>Choose one card in each row. The workbench will assemble a case-specific evidence note and show you exactly which idea it covers. You can optionally edit the generated note later, but editing is not required.</p>
+          <div class="evidence-builder" data-evidence-key="normal_case">
+            <h3>Normal project</h3><p>What should happen when the model sees a high-risk project?</p>
+            <div class="choice-grid"><label><input type="radio" name="normal_scenario" value="a high delivery-risk project with many integrations" />Many integrations make delivery risk higher</label><label><input type="radio" name="normal_scenario" value="a project whose deadline leaves little recovery time" />A short deadline leaves little recovery time</label></div>
+            <div class="choice-grid"><label><input type="radio" name="normal_action" value="reviews" />Operations reviews it</label><label><input type="radio" name="normal_action" value="prioritizes" />Operations prioritizes it</label></div>
+            <div class="choice-grid"><label><input type="radio" name="normal_benefit" value="intervene early and avoid a late delivery" />The team can intervene early</label><label><input type="radio" name="normal_benefit" value="protect the customer promise" />The customer promise is protected</label></div>
+            <p class="generated-note" data-generated-note="normal_case" aria-live="polite">Choose one card in each row to build this note.</p><textarea name="normal_case" hidden aria-hidden="true"></textarea><span class="evidence-status" data-evidence-status="normal_case" aria-live="polite"></span>
+          </div>
+          <div class="evidence-builder" data-evidence-key="failure_case">
+            <h3>Failure project</h3><p>What failure matters, who pays for it, and how would you notice?</p>
+            <div class="choice-grid"><label><input type="radio" name="failure_error" value="false negative" />A late project is missed</label><label><input type="radio" name="failure_error" value="false positive" />An on-time project is unnecessarily flagged</label></div>
+            <div class="choice-grid"><label><input type="radio" name="failure_impact" value="customer delay cost" />The customer bears delay cost</label><label><input type="radio" name="failure_impact" value="review overload" />The operations queue becomes overloaded</label></div>
+            <div class="choice-grid"><label><input type="radio" name="failure_signal" value="recall and review volume" />Monitor recall and review volume</label><label><input type="radio" name="failure_signal" value="precision and alert rate" />Monitor precision and alert rate</label></div>
+            <p class="generated-note" data-generated-note="failure_case" aria-live="polite">Choose one card in each row to build this note.</p><textarea name="failure_case" hidden aria-hidden="true"></textarea><span class="evidence-status" data-evidence-status="failure_case" aria-live="polite"></span>
+          </div>
+          <div class="evidence-builder" data-evidence-key="limitations">
+            <h3>Limitations and uncertainty</h3><p>What might change after launch, and what should the team do?</p>
+            <div class="choice-grid"><label><input type="radio" name="limitation_evidence" value="enterprise sample" />The training sample is mostly enterprise customers</label><label><input type="radio" name="limitation_evidence" value="small customer population" />The next population includes smaller customers</label></div>
+            <div class="choice-grid"><label><input type="radio" name="limitation_uncertainty" value="population shift and calibration drift" />Population shift may change calibration</label><label><input type="radio" name="limitation_uncertainty" value="subgroup fairness uncertainty" />Subgroup behavior may differ</label></div>
+            <div class="choice-grid"><label><input type="radio" name="limitation_response" value="monitor and validate by subgroup" />Monitor and validate by subgroup</label><label><input type="radio" name="limitation_response" value="collect representative data before expansion" />Collect representative data before expansion</label></div>
+            <p class="generated-note" data-generated-note="limitations" aria-live="polite">Choose one card in each row to build this note.</p><textarea name="limitations" hidden aria-hidden="true"></textarea><span class="evidence-status" data-evidence-status="limitations" aria-live="polite"></span>
+          </div>
         </section>
         <div class="actions">
           <button type="button" id="checkDecisions">Check my decisions</button

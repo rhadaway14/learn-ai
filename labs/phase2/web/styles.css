@@ -2,3 +2,4 @@
 
 .teaching-notice{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--amber);background:#fff7df}.teaching-notice p{margin:.25rem 0}.feature-guide{margin:.8rem 0}.feature-guide th,.feature-guide td{text-align:left;vertical-align:top}
 header .eyebrow{color:#d6e2ff}caption{padding:.65rem;text-align:left;font-weight:800;color:var(--navy)}
+ .guided-prompts{display:grid;gap:.55rem;margin:.7rem 0;padding:.8rem;border:1px solid #b8cdf8;border-radius:10px;background:#f3f7ff}.guided-prompts-heading{margin:0;font-weight:850;color:#13213c}.guided-prompt-option{background:#fff;color:#17233b;border:1px solid #9bb9f5;text-align:left}.guided-prompt-option.selected{background:#dce9ff;border-color:#255fd0;box-shadow:0 0 0 2px #9bb9f5}.guided-prompt-feedback{margin:0;color:#075c52;font-weight:750}.advanced-response{margin:.5rem 0}.advanced-response summary{cursor:pointer;color:#255fd0;font-weight:750}

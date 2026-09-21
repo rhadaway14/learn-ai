@@ -14,6 +14,73 @@ let latestRun = null;
 let latestArtifact = null;
 let failureObserved = false;
 
+const guidedPrompts = {
+  trainingPrediction: [
+    ["Validation should select an earlier checkpoint", "I expect validation loss to reach its minimum before the final epoch, with the selected checkpoint preserved for the sealed test."],
+    ["The neural model should beat the baseline", "I expect the trained model to improve recall and accuracy over the majority-class baseline while keeping the test evidence sealed."],
+  ],
+  failureDiagnosis: [
+    ["Learning rate caused the failure", "Northstar training failed because the excessive learning rate made the loss and gradients explode. The failure signal stopped the run before an unsafe checkpoint could be promoted."],
+    ["The run was numerically unstable", "The explosive configuration produced non-finite or rapidly growing loss instead of a trustworthy checkpoint. The runtime failed closed so the previous model remained protected."],
+  ],
+  recovery: [
+    ["Change one control and reproduce", "I restored the known-good learning rate while holding the seed and architecture constant. The recovered run reproduced a stable checkpoint and passed the acceptance gates."],
+    ["Compare the recovery with the failure", "The recovery is interpretable because the dataset and model shape stayed fixed while the unstable learning rate changed. The validation curve and acceptance checks provide the comparison evidence."],
+  ],
+  observation: [
+    ["Use the visible curve and metrics", "Northstar validation loss reached its minimum before the final epoch, while test recall and accuracy exceeded the recorded majority baseline. The selected checkpoint therefore represents a measured tradeoff rather than the last training state."],
+    ["Describe generalization evidence", "The training curve and validation curve separate as the run continues, so checkpoint selection matters. Northstar retains the earlier validation winner and evaluates the sealed test exactly once."],
+  ],
+  promotionRationale: [
+    ["Promote only after every gate", "I would promote the Northstar checkpoint because recall and accuracy passed their release gates against the majority baseline. Validation selected an earlier epoch while the sealed test remained protected."],
+    ["Treat promotion as a contract", "The model is eligible for promotion only when its evidence beats the baseline, has finite gradients, and preserves checkpoint selection. Northstar therefore has a reviewable release decision rather than an accuracy claim alone."],
+  ],
+  limitation: [
+    ["Name population and monitoring limits", "Northstar uses synthetic samples, so these metrics may not generalize to real customer populations or shifted subgroups. The team should collect representative projects, validate calibration and fairness, then monitor drift."],
+    ["Separate score from probability", "The weighted classifier score is not a calibrated real-world probability, and customer populations may shift after launch. The team should validate calibration by subgroup and define a safe review policy before relying on the score."],
+  ],
+};
+
+function installGuidedPrompts() {
+  Object.entries(guidedPrompts).forEach(([targetId, options]) => {
+    const target = $(`#${targetId}`);
+    if (!target) return;
+    const panel = document.createElement("div");
+    panel.className = "guided-prompts";
+    const heading = document.createElement("p");
+    heading.className = "guided-prompts-heading";
+    heading.textContent = "Choose a guided explanation";
+    panel.append(heading);
+    options.forEach(([label, text], index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "guided-prompt-option secondary";
+      button.textContent = label;
+      button.addEventListener("click", () => {
+        target.value = text;
+        target.dispatchEvent(new Event("input", { bubbles: true }));
+        panel.querySelectorAll("button").forEach((item) => item.classList.remove("selected"));
+        button.classList.add("selected");
+        const feedback = panel.querySelector(".guided-prompt-feedback");
+        feedback.textContent = index === 0 ? "Good choice. Notice which evidence makes this explanation defensible." : "This is also defensible. Compare it with the first explanation and identify the tradeoff.";
+      });
+      panel.append(button);
+    });
+    const feedback = document.createElement("p");
+    feedback.className = "guided-prompt-feedback";
+    feedback.setAttribute("aria-live", "polite");
+    panel.append(feedback);
+    target.before(panel);
+    target.hidden = true;
+    const advanced = document.createElement("details");
+    advanced.className = "advanced-response";
+    advanced.innerHTML = "<summary>Edit the response directly (optional)</summary>";
+    advanced.addEventListener("toggle", () => { target.hidden = !advanced.open; });
+    target.parentElement.insertBefore(advanced, target);
+    advanced.append(target);
+  });
+}
+
 function setFeedback(selector, message, ok) {
   const target = $(selector);
   target.textContent = message;
@@ -218,3 +285,4 @@ $("#downloadArtifact").addEventListener("click", () => {
 });
 $("#resetView").addEventListener("click", () => location.reload());
 checkStack();
+installGuidedPrompts();
