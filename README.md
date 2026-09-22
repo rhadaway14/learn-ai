@@ -8,6 +8,8 @@ The governing rules are simple: **learn the primitive before using the framework
 
 Every lesson follows the [reusable lesson contract](LESSON_CONTRACT.md): an approachable core path, an optional engineer deep dive, a visible connection to the larger AI story, a scaffolded hands-on activity, and an artifact that advances the current phase project.
 
+The approved migration to one cumulative retail semantic-search application is defined in the [retail semantic-search implementation specification](RETAIL_SEMANTIC_SEARCH_IMPLEMENTATION.md). That document is the build contract for the seven-phase redesign; the current delivery-risk labs remain available until their retail replacements pass the migration gates.
+
 ## Implemented curriculum
 
 | Phase | Lessons | Major outcome |
