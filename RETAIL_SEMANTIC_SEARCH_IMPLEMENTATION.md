@@ -10,19 +10,21 @@ The completed course must teach AI development through one coherent application:
 
 The application begins with numeric features and models built from primitives. It evolves into neural ranking, dense and hybrid retrieval, RAG, tools, agents, MCP, multimodal retrieval, production operations, and an enterprise architecture defense.
 
-This is not a collection of disconnected demos using retail-themed labels. Every lesson and phase lab must change, inspect, test, or explain a real component of the same application.
+This is not a collection of disconnected demos using retail-themed labels. Every lesson and phase integration checkpoint must change, inspect, test, or explain a real component of the same application.
+
+**Learner-experience amendment:** [INTEGRATED_COURSE_EXPERIENCE.md](INTEGRATED_COURSE_EXPERIENCE.md) is normative for delivery. The lesson and the project interaction are now one seamless course UI. References in this specification to a phase “lab” mean a phase integration checkpoint unless they explicitly discuss legacy routes or implementation packages.
 
 ## 2. Approved decisions
 
 These decisions are already approved and are not open implementation questions:
 
 1. The course has **seven phases of five lessons each**.
-2. Every phase ends with a cumulative hands-on lab.
+2. Every lesson teaches through the cumulative application, and every phase ends with an integration checkpoint that assembles already-taught capabilities.
 3. The capstone is a retail website semantic-search platform.
 4. The required dataset is bundled, deterministic, synthetic, versioned, and legally redistributable.
 5. A public retail dataset may be offered only as an optional extension.
 6. Search encoders and vector retrieval are taught before GPT-style generation.
-7. The required core path is browser-guided and does not require blank free-text answers.
+7. The required core path is browser-guided in one persistent course UI and does not require blank free-text answers.
 8. An optional engineer path exposes implementation code, tests, performance, and architecture tradeoffs.
 9. The shared stack is React, TypeScript, FastAPI, PostgreSQL with pgvector, PyTorch, and Docker Compose.
 10. No required paid API, cloud account, GPU, or proprietary dataset is permitted.
@@ -34,8 +36,8 @@ These decisions are already approved and are not open implementation questions:
 The project is finished only when a new learner can:
 
 1. clone or download the repository;
-2. launch each phase using one documented command;
-3. complete a guided, on-rails browser walkthrough;
+2. launch one canonical course experience using one documented command;
+3. learn and apply every required concept through a guided, on-rails browser walkthrough without opening a separate lesson or lab guide;
 4. see the data and model state change at each important boundary;
 5. trigger and recover from a controlled failure;
 6. compare the current phase capability with the previous accepted capability;
@@ -321,7 +323,9 @@ An optional extension may download a public retail-search dataset only when it i
 
 ## 6. Learner experience contract
 
-Every cumulative lab uses the same step model:
+The concept-level experience is governed by [INTEGRATED_COURSE_EXPERIENCE.md](INTEGRATED_COURSE_EXPERIENCE.md). Each lesson interleaves explanation and project interaction through **learn → locate → predict → manipulate → observe → interpret → apply** loops.
+
+At the end of each phase, the integration checkpoint uses this macro step model:
 
 1. **Goal** — preview the capability being added.
 2. **Import** — validate the previous phase artifact.
@@ -349,10 +353,16 @@ Every cumulative lab uses the same step model:
 - A learner can reset only the current experiment or the whole phase explicitly.
 - Progress and attempts persist locally and, when the stack is running, in the lab database.
 - The interface always shows the current phase, step, accepted predecessor, and unsaved evidence.
+- The interface also shows the current lesson, concept, and highlighted retail-project component.
+- Required explanations appear in the course UI immediately before the interaction that uses them.
+- Phase checkpoints introduce no concept or interaction pattern that the preceding five lessons did not teach.
+- Artifact transition is automatic on the normal same-session path; manual import/export remains available for provenance and recovery instruction.
 
 ### 6.2 Visual evidence requirements
 
 Use a visual only when it teaches a mechanism or comparison. Every chart requires a table equivalent.
+
+Every visual must state the question it answers, map learner controls to changed marks, annotate the current state, and include a plain-language “What this shows” interpretation. Visually distinguish fixture data, learner choices, learned parameters, derived evidence, and acceptance decisions.
 
 | Concept | Required visual evidence |
 |---|---|
@@ -384,6 +394,8 @@ The core path uses the browser and documented controls. The engineer path may ex
 - tests, profiling, failure injection, and architecture tradeoffs.
 
 Code syntax must never become an accidental prerequisite for understanding the concept.
+
+Both paths live in the same course shell and share project state. The Engineer drawer may deepen the current visual with code, requests, tensors, schemas, tests, and architecture details; it must not repair missing teaching in the core path.
 
 ## 7. Shared architecture
 
@@ -671,6 +683,8 @@ Thresholds must be established empirically from the deterministic fixture and th
 
 ## 13. Testing and CI
 
+In addition to the tests below, validate the integrated content contract: stable concept identifiers, concept-to-project traceability, explanation-before-interaction ordering, authored feedback, visual data equivalents, concept-level resume, automatic phase transition, and absence of required content that exists only in Markdown.
+
 ### 13.1 Fast required checks
 
 Run on every change:
@@ -875,7 +889,9 @@ The first complete course release does not require:
 
 Before declaring the migration complete, verify:
 
-- [ ] Seven phases and seven labs appear in the dashboard.
+- [ ] Seven phases and seven integration checkpoints appear in the course rail.
+- [ ] One persistent course UI teaches and applies all required lesson content.
+- [ ] Phase-ending labs are presented as integration checkpoints and introduce no untaught workflow.
 - [ ] Lessons 1–35 tell one retail semantic-search story.
 - [ ] Every lab imports the previous accepted artifact.
 - [ ] Every lab has a guided core path and optional engineer path.
@@ -883,6 +899,8 @@ Before declaring the migration complete, verify:
 - [ ] Dataset generation and splits are deterministic and tested.
 - [ ] Search baselines, neural ranking, vector retrieval, RAG, agents, MCP, evaluation, multimodal retrieval, security, operations, and architecture are all demonstrated in the live application.
 - [ ] Every phase includes prediction, visible evidence, controlled failure, recovery, comparison, promotion, and export.
+- [ ] Every major concept is visibly mapped to its input, operation, output, and downstream use in the retail project.
+- [ ] Manual novice-engineer and experienced-engineer reviews approve Phase 1 and Phase 2 before the pattern is copied to later phases.
 - [ ] The core path requires no paid service or GPU.
 - [ ] Accessibility and small-screen checks pass.
 - [ ] CI covers syntax, unit, contracts, schemas, browser flows, containers, and artifact transitions.
@@ -890,30 +908,6 @@ Before declaring the migration complete, verify:
 - [ ] The final manifest links seven accepted phase artifacts.
 - [ ] Legacy delivery-risk navigation and references are removed or explicitly archived.
 
-## Appendix A — Claude kickoff prompt
+## Appendix A — Claude redesign prompt
 
-Use the following prompt to begin implementation. It deliberately starts with WP0 and prevents an unsafe whole-repository rewrite.
-
-```text
-You are implementing the approved retail semantic-search redesign in this repository.
-
-Before editing, read these files completely:
-- AGENTS.md
-- COURSE_DESIGN.md
-- LESSON_CONTRACT.md
-- RETAIL_SEMANTIC_SEARCH_IMPLEMENTATION.md
-
-Treat RETAIL_SEMANTIC_SEARCH_IMPLEMENTATION.md as the normative build contract. Preserve unrelated changes and do not delete or redirect the existing delivery-risk labs yet.
-
-Implement only WP0 — Baseline and migration guardrails.
-
-First:
-1. inspect the repository and current test configuration;
-2. record the clean baseline test results;
-3. identify every current document, route, schema, test, and progress key tied to the delivery-risk capstone;
-4. present the exact WP0 acceptance criteria and proposed file changes.
-
-Then implement WP0 with tests. Do not begin WP1. Run all required checks, make one atomic commit, and report learner-visible outcome, architecture changes, files changed, exact test results, limitations, next package, and commit SHA.
-
-Stop and ask before changing an approved decision or when a dependency, dataset, model license, or migration step conflicts with the specification.
-```
+The original implementation prompt is complete and has been superseded for learner-experience work. Use [CLAUDE_UNIFIED_COURSE_REDESIGN_PROMPT.md](CLAUDE_UNIFIED_COURSE_REDESIGN_PROMPT.md) to implement the integrated course and project experience. It preserves the technical requirements in this specification, rebuilds Phase 1 and Phase 2 as the pattern-setting pilot, and requires manual approval before that pattern is generalized to later phases.

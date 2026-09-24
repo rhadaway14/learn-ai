@@ -2,13 +2,13 @@
 
 A hands-on curriculum that starts with machine-learning fundamentals and builds toward production AI systems, transformers, RAG, agents, evaluation, security, and advanced model architecture.
 
-The complete path covers **35 lessons, five milestone projects, and one production-grade capstone**. See [CURRICULUM.md](CURRICULUM.md) for the phase-by-phase syllabus and estimated time commitment.
+The complete path covers **35 lessons, seven phase integration checkpoints, and one production-grade capstone**. See [CURRICULUM.md](CURRICULUM.md) for the phase-by-phase syllabus and estimated time commitment.
 
 The governing rules are simple: **learn the primitive before using the framework that automates it**, and never require knowledge the course has not taught. See the [course teaching standard](COURSE_DESIGN.md) and [cumulative capstone path](CAPSTONE_PATH.md).
 
-Every lesson follows the [reusable lesson contract](LESSON_CONTRACT.md): an approachable core path, an optional engineer deep dive, a visible connection to the larger AI story, a scaffolded hands-on activity, and an artifact that advances the current phase project.
+Every lesson follows the [reusable lesson contract](LESSON_CONTRACT.md) inside one [integrated course experience](INTEGRATED_COURSE_EXPERIENCE.md): the learner reads a short explanation, locates the concept in the retail project, predicts, manipulates, observes, interprets, and applies it without leaving the course UI. Every five lessons end in an integration checkpoint rather than a separate lab.
 
-The approved migration to one cumulative retail semantic-search application is defined in the [retail semantic-search implementation specification](RETAIL_SEMANTIC_SEARCH_IMPLEMENTATION.md). That document is the build contract for the seven-phase redesign; the current delivery-risk labs remain available until their retail replacements pass the migration gates.
+The cumulative retail semantic-search application is defined in the [retail semantic-search implementation specification](RETAIL_SEMANTIC_SEARCH_IMPLEMENTATION.md). [ADR 0002](docs/adr/0002-integrated-course-experience.md) records the approved decision to teach all lesson and project content through one seamless UI.
 
 ## Implemented curriculum
 
@@ -79,12 +79,13 @@ The course introduces programming only after teaching the required code literacy
 
 ## How to use each lesson
 
-1. Launch the lesson from `course.html`.
-2. Read each explanation and predict an interaction's result before changing its controls.
-3. Complete the guided examples, experiments, and knowledge checks.
-4. Produce the lesson's capstone increment.
-5. Mark the lesson complete in the course interface.
-6. When a later lesson explicitly introduces programming, run its documented lab and tests.
+1. Launch the canonical course UI.
+2. Follow the course rail to the next lesson and concept.
+3. Read the explanation beside the highlighted retail-project component.
+4. Predict the result, change the bounded control, and observe the visual evidence.
+5. Interpret the result with authored feedback and apply the decision to the project.
+6. After five lessons, complete the integration checkpoint using only concepts already taught.
+7. When a later lesson explicitly introduces programming, open the Engineer drawer for code, tests, and implementation exercises tied to the same state.
 
 ## Repository map
 

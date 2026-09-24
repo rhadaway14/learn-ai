@@ -2,6 +2,8 @@
 
 Every student-ready lesson uses one structure while supporting two depths of study. The core path must stand alone. The advanced path may deepen the same topic, but it may not repair missing explanations in the core path.
 
+This structure is delivered inside the persistent course UI described in [INTEGRATED_COURSE_EXPERIENCE.md](INTEGRATED_COURSE_EXPERIENCE.md). The table below describes required content, not separate pages. Content and project interaction are interleaved in concept-sized learning loops.
+
 ## Required learner journey
 
 | Component | Purpose | Required evidence |
@@ -14,6 +16,20 @@ Every student-ready lesson uses one structure while supporting two depths of stu
 | Hands-on activity | Progress through guided, challenge, and engineer-extension work | Saved activity artifact with hypothesis, evidence, and reflection |
 | Phase-project increment | Add one accepted capability to the current phase project | Versioned artifact that is explicitly reused later |
 | Assessment and completion | Check recall, interpretation, prediction, and application | Feedback, remediation, and an explicit definition of done |
+
+## Required concept loop
+
+Every major concept uses the following sequence when each beat is meaningful:
+
+1. **Learn** — problem, intuition, vocabulary, and layered math.
+2. **Locate** — highlight the real project component, input, and output.
+3. **Predict** — choose the expected result before it is revealed.
+4. **Manipulate** — change one bounded causal control.
+5. **Observe** — see the real state and evidence change.
+6. **Interpret** — select the explanation supported by the evidence and receive specific feedback.
+7. **Apply** — save a decision or capability used by the cumulative project.
+
+The required path must not send the learner to a different lesson page or lab guide between these steps.
 
 ## Two-depth rule
 
@@ -89,9 +105,13 @@ Every required activity declares:
 
 Infrastructure is introduced only when it teaches something. Browser-only activities remain browser-only. Docker Compose is reserved for labs that genuinely need persistent data, a runtime service, a model server, a database, or multi-service observability.
 
+The hands-on activity is part of the lesson's concept loop, not a detached exercise at the bottom of a reading page. Its controls, evidence, interpretation, and saved project state must remain visible from the same course shell.
+
 ## Phase-project increment contract
 
 Every increment records the capability added, its upstream lesson evidence, inputs and outputs, interfaces, acceptance criteria, failure behavior, verification steps, and the later increment that consumes it. Replacing an earlier design preserves the decision record explaining why.
+
+After five lesson increments, a phase integration checkpoint combines them in the same UI. It may recap, compare, fail, recover, verify, promote, and export. It may not teach a missing prerequisite or introduce a second navigation model.
 
 ## Author review gate
 
@@ -101,5 +121,8 @@ Every increment records the capability added, its upstream lesson evidence, inpu
 - [ ] Activity support fades from guided to challenge.
 - [ ] Activity produces a saved artifact with reproducible evidence.
 - [ ] Phase increment has observable acceptance criteria and a named downstream consumer.
+- [ ] Every major concept is visibly located in the cumulative project.
+- [ ] Teaching, interaction, evidence, and interpretation occur in one continuous UI sequence.
+- [ ] Each meaningful visual exposes cause and effect and has an accessible data equivalent.
 - [ ] Environment requirements are no larger than the lesson needs.
 - [ ] Completion can be verified without relying on learner confidence alone.

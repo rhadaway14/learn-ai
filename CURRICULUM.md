@@ -8,14 +8,15 @@ The full path is approximately **135–185 hours**. For Lessons 1–10, the esti
 
 Every lesson follows the same loop:
 
-1. **Concept** — understand the primitive and why it exists.
-2. **Derivation** — work through the relevant math at an engineering level.
-3. **Application** — use a guided interaction or specification to apply it; implement it only after the code-readiness bridge.
-4. **Experiment** — change assumptions and observe failure modes.
-5. **Connection** — locate the primitive inside modern AI systems.
-6. **Checkpoint** — explain it and pass executable tests.
+1. **Learn** — understand the problem, primitive, vocabulary, and relevant math.
+2. **Locate** — highlight the primitive inside the cumulative retail semantic-search project.
+3. **Predict** — choose what should happen before the evidence is revealed.
+4. **Manipulate** — change one bounded, meaningful input or decision.
+5. **Observe** — see the mechanism and project state change visually.
+6. **Interpret** — explain the evidence through an authored check with specific feedback.
+7. **Apply** — save the capability or decision into the cumulative project.
 
-Frameworks are introduced only after the underlying operation is visible.
+All seven beats occur in one persistent course UI. Frameworks are introduced only after the underlying operation is visible. Every five lessons end in an integration checkpoint that connects and verifies work the learner has already completed; it is not a separate lab with a new workflow.
 
 ## Phase 1 — Mathematical and ML foundations (11–14 hours)
 

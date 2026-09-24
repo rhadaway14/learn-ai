@@ -4,6 +4,8 @@
 
 This repository is a cumulative, hands-on AI engineering curriculum. Preserve the progression from primitives to frameworks.
 
+The required learner experience is governed by [INTEGRATED_COURSE_EXPERIENCE.md](INTEGRATED_COURSE_EXPERIENCE.md). Lessons and project work are taught through one persistent course UI; phase boundaries are integration checkpoints, not separate labs that introduce a second workflow.
+
 ## Lesson standard
 
 Follow [COURSE_DESIGN.md](COURSE_DESIGN.md). A lesson is not student-ready merely because its files and lab exist.
@@ -20,6 +22,8 @@ Every implemented lesson should contain:
 - deterministic automated tests where practical;
 - no required paid service unless a local or free alternative is documented.
 
+For learner-facing delivery, these elements must be interleaved with the project interaction rather than presented as a standalone document followed by a separate lab. A learner must be able to complete the required path without opening the lesson `README.md`.
+
 ## Engineering rules
 
 - Support Python 3.11–3.13 unless a documented ML dependency prevents it.
@@ -32,6 +36,9 @@ Every implemented lesson should contain:
 - Never make code syntax the accidental subject of a conceptual exercise.
 - Introduce every equation in words and with actual numbers before symbolic notation.
 - Ground every major concept in a realistic example and use clearly bounded metaphors where they improve understanding.
+- Tie every major concept to a named component, input, output, metric, or decision in the cumulative retail project.
+- Require meaningful visuals to show cause and effect, with a persistent table or textual equivalent.
+- Keep required lesson content in a structured, testable source of truth rather than scattered through UI component literals.
 - Keep tests fast; mark expensive or GPU-specific tests explicitly.
 
 ## Before committing

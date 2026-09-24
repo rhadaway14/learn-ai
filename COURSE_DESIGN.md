@@ -4,6 +4,8 @@ This curriculum is designed for engineers with uneven backgrounds. A learner may
 
 The course must teach the knowledge needed for its examples and capstone. Prior exposure may accelerate a learner, but it must not be required silently.
 
+The required delivery model is defined in [INTEGRATED_COURSE_EXPERIENCE.md](INTEGRATED_COURSE_EXPERIENCE.md): lesson content and cumulative project work are one browser experience. A phase checkpoint assembles already-taught capabilities; it is not a separate lab in which the learner must infer how the lessons apply.
+
 ## The no-surprise rule
 
 A graded exercise, lab, project, or capstone requirement may use a concept only after the course has:
@@ -21,6 +23,8 @@ If a lesson needs knowledge that the course has not taught, the lesson must prov
 The normative component and artifact structure is defined in [LESSON_CONTRACT.md](LESSON_CONTRACT.md). This document governs teaching quality; the contract governs how that quality appears consistently in every lesson.
 
 Every student-ready lesson follows this sequence.
+
+In the course UI, this sequence is delivered in short concept loops rather than as one long reading followed by a lab. Each major concept proceeds through **learn → locate → predict → manipulate → observe → interpret → apply**. “Locate” means showing the actual place where the concept changes or explains the retail semantic-search project.
 
 ### 1. Purpose before terminology
 
@@ -62,6 +66,8 @@ An equation must compress an idea the learner already understands. It must not b
 
 Demonstrate one complete example and explain why each action exists, what should happen, and how to interpret the result.
 
+The example must use the same project data, component, and evidence the learner will manipulate next. A thematically similar toy example does not establish the project connection by itself.
+
 ### 7. Scaffolded practice
 
 Practice progresses through four levels:
@@ -85,6 +91,8 @@ Include recall, interpretation, prediction, and application questions. A learner
 
 State which capstone capability the lesson unlocks. The learner adds or improves a small capstone artifact before moving on.
 
+The increment is performed in the same course UI and saved as part of the learner's project state. At the end of five lessons, the phase integration checkpoint verifies these increments together and introduces no untaught concept.
+
 ### 11. Two depths, one lesson
 
 The required core path remains approachable to a learner with only the stated prerequisites. Each topic also provides an optional **Engineer deep dive** covering derivation, implementation mechanics, performance, production failure modes, and architecture tradeoffs. Advanced material must deepen the topic without becoming a hidden prerequisite for the required activity.
@@ -96,10 +104,14 @@ Every lesson identifies the capability available before the lesson, the capabili
 ## Accessibility and ease-of-use standard
 
 - The primary learning path must be obvious from the repository landing page.
+- The required path must use one canonical course URL and a persistent navigation model.
+- A learner must be able to complete the required path without opening a lesson README or a separate lab guide.
 - Setup appears only when it becomes necessary.
 - Commands must be copyable and include Windows, macOS, and Linux differences where relevant.
 - Learners should change documented controls before editing implementation code.
 - Interfaces must label outputs and explain what a successful result means.
+- Every meaningful interaction must show what changed, why it changed, how to tell, where it appears in the project, and how the mechanism is used in modern AI.
+- Visuals must expose cause and effect, respond visibly to learner controls, and include a persistent table or textual equivalent.
 - Mathematical notation must render in GitHub and remain understandable as nearby prose.
 - Every lab must include expected behavior and a recovery path for common errors.
 - Required paid APIs, cloud accounts, and GPUs are prohibited unless a free/local path is provided.
@@ -139,9 +151,13 @@ A lesson is student-ready only when all answers are yes.
 | Assessment | Do checks require explanation and application? |
 | Continuity | Does the lesson identify prior dependencies and the next capability? |
 | Capstone | Does the learner produce a small artifact reused later? |
+| Integration | Is the concept taught and applied to the cumulative project in the same UI sequence? |
+| Visualization | Does the interaction make cause and effect visible and explain the evidence? |
 | Operations | Does the lab run through a documented, affordable path? |
 
 “Implemented” means materials exist. “Student-ready” means the lesson passes this gate. Those statuses must not be conflated.
+
+Automated checks alone cannot establish student readiness. Phase 1 and Phase 2 require recorded novice-engineer and experienced-engineer walkthroughs after the integrated redesign because manual review found the previous separated experience confusing.
 
 ## Instructor review questions
 
